@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "https://github.com/bantic/ember-json-viewer",
   "license": "MIT",
   "author": "",
   "directories": {
