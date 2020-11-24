@@ -59,13 +59,17 @@ export default class ApplicationController extends Controller {
   @tracked
   json = DEFAULT_JSON;
 
+  @tracked
+  isJSONVAlid = true;
+
   @action updateJSON(evt) {
     try {
       let v = JSON.parse(evt.target.value);
       this.json = v;
+      this.isJSONVAlid = true;
     } catch (e) {
-      console.error(e);
       // ignore unparseable json
+      this.isJSONVAlid = false;
     }
   }
 }

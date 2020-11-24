@@ -38,6 +38,15 @@ main .input-wrapper {
 .input-wrapper textarea {
   margin-top: 1em;
   width: 30vw;
-  height: 50vh;
+  height: 70vh;
   white-space: pre;
+  background: #222;
+  color: #ccc;
+  transition: background 0.2s linear;
+  font-size: 14px;
+  padding: 1em;
+}
+
+.input-wrapper.invalid textarea {
+  background: rgb(120, 0, 0);
 }
