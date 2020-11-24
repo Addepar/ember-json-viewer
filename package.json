@@ -1,7 +1,7 @@
 {
   "name": "ember-json-viewer",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "A JSON-viewer addon for Ember apps",
   "keywords": [
     "ember-addon"
   ],
