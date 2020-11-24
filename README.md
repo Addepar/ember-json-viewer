@@ -1,38 +1,26 @@
-ember-json-viewer
-==============================================================================
+# ember-json-viewer
 
-[Short description of the addon.]
+Ember addon that exposes a component `<JsonViewer>`.
+Pass it a JSON object (not string) as `value`: `<JsonViewer @value={{this.jsonValue}} />`.
 
+Demo: http://bantic.github.io/ember-json-viewer
 
-Compatibility
-------------------------------------------------------------------------------
+## Compatibility
 
-* Ember.js v3.16 or above
-* Ember CLI v2.13 or above
-* Node.js v10 or above
+- Ember.js v3.16 or above
+- Ember CLI v2.13 or above
+- Node.js v10 or above
 
-
-Installation
-------------------------------------------------------------------------------
+## Installation
 
 ```
 ember install ember-json-viewer
 ```
 
-
-Usage
-------------------------------------------------------------------------------
-
-[Longer description of how to use the addon in apps.]
-
-
-Contributing
-------------------------------------------------------------------------------
+## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
-
-License
-------------------------------------------------------------------------------
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).
