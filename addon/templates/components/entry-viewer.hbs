@@ -1,6 +1,6 @@
 <li class="entry">
   {{#if this.isToggleable}}
-    <span class="key is-toggleable" {{on "click" this.toggleExpanded}}>
+    <span class="key is-toggleable" {{on "click" (action "toggleExpanded")}}>
       <span class="key-expansion-state">
         {{#if this.isExpanded}}
         +
@@ -8,14 +8,14 @@
         -
         {{/if}}
       </span>
-      {{@key}}:
+      {{this.key}}:
     </span>
   {{else}}
     <span class="key">
-      {{@key}}:
+      {{this.key}}:
     </span>
   {{/if}}
-  <ValueViewer @value={{@value}} @showSummary={{not this.isExpanded}} @depth={{inc @depth}} @showInline={{this.showInline}}/>
+  {{value-viewer value=value showSummary=(not this.isExpanded) depth=(inc depth) showInline=this.showInline}}
   <span class="entry-delimiter">
     ,
   </span>

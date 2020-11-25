@@ -1,7 +1,7 @@
 # ember-json-viewer
 
 Ember addon that exposes a component `<JsonViewer>`.
-Pass it a JSON object (not string) as `value`: `<JsonViewer @value={{this.jsonValue}} />`.
+Pass it a JSON object (not string) as `json`: `<JsonViewer @json={{this.jsonValue}} />`.
 
 Demo: http://bantic.github.io/ember-json-viewer
 
