@@ -21,6 +21,10 @@ ember install ember-json-viewer
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
+## Deploy Demo to Github Pages
+
+`npm run deploy`
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
