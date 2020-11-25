@@ -5,6 +5,8 @@ Pass it a JSON object (not string) as `value`: `<JsonViewer @value={{this.jsonVa
 
 Demo: http://bantic.github.io/ember-json-viewer
 
+![Demo Gif](./demo.gif)
+
 ## Compatibility
 
 - Ember.js v3.16 or above
