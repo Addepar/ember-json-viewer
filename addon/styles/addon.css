@@ -11,13 +11,13 @@
 
 .entries {
   list-style: none;
-  padding-inline: 1.25em;
+  padding-inline-start: 1.25em;
   margin: 0;
 }
 
 .entries.entries-inline,
 .entries.entries-inline li {
-  padding-inline: 0;
+  padding-inline-start: 0;
   display: inline-block;
 }
 
@@ -25,9 +25,11 @@
   margin-left: -8px;
 }
 
-.entries > .entry:last-child .entry-delimiter {
+/* Hide the delimiter after the last item. It is
+   vald to have a trailing comma in a JavaScript object/array,
+   but not in JSON. */
+.entries > .entry:last-child > .entry-delimiter {
   display: none;
-  font-weight: bold;
 }
 
 .entries-summary {
