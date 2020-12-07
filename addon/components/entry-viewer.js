@@ -16,11 +16,25 @@ const DEPTH_WIDTH = 5;
 export default Component.extend({
   tagName: "",
   layout,
-  isExpanded: true,
+  isExpanded: computed("depth", "collapseDepth", "showInline", function () {
+    if (this.get("showInline")) {
+      return true;
+    }
+    let depth = this.get("depth");
+    let collapseDepth = this.get("collapseDepth");
+    if (collapseDepth === null) {
+      return true;
+    } else {
+      return depth < collapseDepth;
+    }
+  }),
 
   // passed-in
+  collapseDepth: null, // when not specified, all entries are expanded
   value: null,
   depth: 0,
+  expandedIcon: null,
+  collapsedIcon: null,
 
   isToggleable: computed("showInline", "value", function () {
     if (this.get("showInline")) {

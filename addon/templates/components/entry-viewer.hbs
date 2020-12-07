@@ -3,9 +3,9 @@
     <span class="key is-toggleable" {{action "toggleExpanded"}}>
       <span class="key-expansion-state">
         {{#if this.isExpanded}}
-        +
+          {{{this.expandedIcon}}}
         {{else}}
-        -
+          {{{this.collapsedIcon}}}
         {{/if}}
       </span>
       {{this.key}}:
@@ -15,7 +15,14 @@
       {{this.key}}:
     </span>
   {{/if}}
-  {{value-viewer value=value showSummary=(not this.isExpanded) depth=(inc depth) showInline=this.showInline}}
+  {{value-viewer
+    value=value showSummary=(not this.isExpanded)
+    depth=(inc depth)
+    showInline=this.showInline
+    expandedIcon=this.expandedIcon
+    collapsedIcon=this.collapsedIcon
+    collapseDepth=this.collapseDepth
+  }}
   <span class="entry-delimiter">
     ,
   </span>
