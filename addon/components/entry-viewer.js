@@ -1,6 +1,6 @@
-import Component from "@glimmer/component";
-import { action } from "@ember/object";
-import { tracked } from "@glimmer/tracking";
+import Component from "@ember/component";
+import { computed } from "@ember/object";
+import layout from "../templates/components/entry-viewer";
 
 function isArray(v) {
   return Array.isArray(v);
@@ -13,36 +13,57 @@ function isPrimitive(v) {
 const MAX_WIDTH_CHARS = 60;
 const DEPTH_WIDTH = 5;
 
-export default class EntryViewerComponent extends Component {
-  @tracked
-  isExpanded = true;
+export default Component.extend({
+  tagName: "",
+  layout,
+  isExpanded: computed("depth", "collapseDepth", "showInline", function () {
+    if (this.get("showInline")) {
+      return true;
+    }
+    let depth = this.get("depth");
+    let collapseDepth = this.get("collapseDepth");
+    if (collapseDepth === null) {
+      return true;
+    } else {
+      return depth < collapseDepth;
+    }
+  }),
 
-  get isToggleable() {
-    if (this.showInline) {
+  // passed-in
+  collapseDepth: null, // when not specified, all entries are expanded
+  value: null,
+  depth: 0,
+  expandedIcon: null,
+  collapsedIcon: null,
+
+  isToggleable: computed("showInline", "value", function () {
+    if (this.get("showInline")) {
       return false;
     }
-    let v = this.args.value;
+    let v = this.get("value");
     return typeof v === "object";
-  }
+  }),
 
-  get showInline() {
-    if (!isArray(this.args.value)) {
+  showInline: computed("value", function () {
+    let v = this.get("value");
+    if (!isArray(v)) {
       return false;
     }
-    let allPrims = this.args.value.every((v) => isPrimitive(v));
+    let allPrims = v.every((_v) => isPrimitive(_v));
     if (!allPrims) {
       return false;
     }
-    let width = JSON.stringify(this.args.value).length;
-    width += this.args.depth * DEPTH_WIDTH;
+    let width = JSON.stringify(v).length;
+    width += this.get("depth") * DEPTH_WIDTH;
     return width < MAX_WIDTH_CHARS;
-  }
+  }),
 
-  @action
-  toggleExpanded() {
-    if (!this.isToggleable) {
-      return;
-    }
-    this.isExpanded = !this.isExpanded;
-  }
-}
+  actions: {
+    toggleExpanded() {
+      if (!this.get("isToggleable")) {
+        return;
+      }
+      this.set("isExpanded", !this.get("isExpanded"));
+    },
+  },
+});

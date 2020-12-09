@@ -1,0 +1,49 @@
+{{#if this.isPrimitive}}
+  <span class="value primitive">
+    {{simple-value value=this.value}}
+  </span>
+{{else}}
+  <span class="prefix">
+    {{this.prefix}}
+  </span>
+
+  {{#if this.showSummary}}
+    <span class="entries-summary">
+      {{this.valueSummary}}
+    </span>
+  {{else}}
+    <ul class="entries depth-{{depth}} {{if this.showInline "entries-inline"}}">
+      {{#if this.isObj}}
+        {{#each-in value as |key value|}}
+          {{entry-viewer
+            key=key
+            value=value
+            depth=depth
+            expandedIcon=this.expandedIcon
+            collapsedIcon=this.collapsedIcon
+            collapseDepth=this.collapseDepth
+          }}
+        {{/each-in}}
+      {{else}}
+        {{#each value as |value|}}
+          <li class="entry">
+            {{value-viewer
+              value=value
+              depth=depth
+              expandedIcon=this.expandedIcon
+              collapsedIcon=this.collapsedIcon
+              collapseDepth=this.collapseDepth
+            }}
+            <span class="entry-delimiter">
+              ,
+            </span>
+          </li>
+        {{/each}}
+      {{/if}}
+    </ul>
+  {{/if}}
+
+  <span class="suffix">
+    {{this.suffix}}
+  </span>
+{{/if}}
