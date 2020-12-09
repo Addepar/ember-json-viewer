@@ -5,7 +5,7 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/bantic/ember-json-viewer",
+  "repository": "https://github.com/Addepar/ember-json-viewer",
   "license": "MIT",
   "author": "",
   "directories": {
@@ -67,6 +67,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://bantic.github.io/ember-json-viewer"
+    "demoURL": "http://addepar.github.io/ember-json-viewer"
   }
 }
