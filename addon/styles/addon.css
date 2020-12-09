@@ -38,13 +38,16 @@
 
 .key.is-toggleable {
   cursor: pointer;
-  user-select: none;
   position: relative;
 }
 
 .key.is-toggleable .key-expansion-state {
   position: absolute;
   left: -15px;
+}
+
+.key-expansion-state {
+  user-select: none;
 }
 
 .syntax-key {

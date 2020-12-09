@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
 import layout from "../templates/components/entry-viewer";
+import { readOnly } from "@ember/object/computed";
 
 function isArray(v) {
   return Array.isArray(v);
@@ -22,19 +23,37 @@ export default Component.extend({
     }
     let depth = this.get("depth");
     let collapseDepth = this.get("collapseDepth");
-    if (collapseDepth === null) {
-      return true;
-    } else {
+    if (Number.isInteger(collapseDepth)) {
       return depth < collapseDepth;
+    } else {
+      return true;
     }
   }),
 
   // passed-in
-  collapseDepth: null, // when not specified, all entries are expanded
   value: null,
   depth: 0,
-  expandedIcon: null,
-  collapsedIcon: null,
+
+  collapseDepth: readOnly("displayOptions.collapseDepth"),
+  expandedIcon: readOnly("displayOptions.expandedIcon"),
+  collapsedIcon: readOnly("displayOptions.collapsedIcon"),
+  quoteKeys: readOnly("displayOptions.quoteKeys"),
+
+  keyPrefix: computed("quoteKeys", function () {
+    if (this.get("quoteKeys")) {
+      return '"';
+    } else {
+      return "";
+    }
+  }),
+
+  keySuffix: computed("quoteKeys", function () {
+    if (this.get("quoteKeys")) {
+      return '"';
+    } else {
+      return "";
+    }
+  }),
 
   isToggleable: computed("showInline", "value", function () {
     if (this.get("showInline")) {
