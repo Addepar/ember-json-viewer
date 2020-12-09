@@ -12,6 +12,8 @@ export default Component.extend({
 
   // passed-in
   value: null,
+  showSummary: false,
+  showInline: false,
 
   isPrimitive: computed("value", function () {
     return isPrimitive(this.get("value"));

@@ -8,20 +8,19 @@
           {{{this.collapsedIcon}}}
         {{/if}}
       </span>
-      {{this.key}}:
+      {{this.keyPrefix}}{{this.key}}{{this.keySuffix}}:
     </span>
   {{else}}
     <span class="key">
-      {{this.key}}:
+      {{this.keyPrefix}}{{this.key}}{{this.keySuffix}}:
     </span>
   {{/if}}
   {{value-viewer
-    value=value showSummary=(not this.isExpanded)
-    depth=(inc depth)
+    value=this.value
+    showSummary=(not this.isExpanded)
+    depth=(inc this.depth)
     showInline=this.showInline
-    expandedIcon=this.expandedIcon
-    collapsedIcon=this.collapsedIcon
-    collapseDepth=this.collapseDepth
+    displayOptions=this.displayOptions
   }}
   <span class="entry-delimiter">
     ,

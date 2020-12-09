@@ -18,10 +18,8 @@
           {{entry-viewer
             key=key
             value=value
-            depth=depth
-            expandedIcon=this.expandedIcon
-            collapsedIcon=this.collapsedIcon
-            collapseDepth=this.collapseDepth
+            depth=this.depth
+            displayOptions=this.displayOptions
           }}
         {{/each-in}}
       {{else}}
@@ -29,10 +27,8 @@
           <li class="entry">
             {{value-viewer
               value=value
-              depth=depth
-              expandedIcon=this.expandedIcon
-              collapsedIcon=this.collapsedIcon
-              collapseDepth=this.collapseDepth
+              depth=this.depth
+              displayOptions=this.displayOptions
             }}
             <span class="entry-delimiter">
               ,
