@@ -10,9 +10,10 @@
 }
 
 .entries {
-  list-style: none;
-  padding-inline-start: 1.25em;
+  /*list-style: none;*/
+  /*padding-inline-start: 1.25em;*/
   margin: 0;
+  display: block;
 }
 
 .entries.entries-inline,
@@ -36,6 +37,10 @@
   color: #666;
 }
 
+.entry-body {
+  display:inline;
+}
+
 .key.is-toggleable {
   cursor: pointer;
   position: relative;
@@ -44,6 +49,7 @@
 .key.is-toggleable .key-expansion-state {
   position: absolute;
   left: -15px;
+  top: 0px;
 }
 
 .key-expansion-state {
@@ -69,4 +75,22 @@
 .syntax-unknown {
   color: red;
   font-size: large;
+}
+
+.closing-bracket {
+  display: inline-block;
+}
+
+pre {
+  display: inline;
+  padding: 0px;
+  margin: 0 0 0 0px;
+  font-size: inherit;
+  line-height: inherit;
+  word-break: inherit;
+  word-wrap: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  border-radius: inherit;
 }

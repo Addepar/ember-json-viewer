@@ -46,4 +46,20 @@ export default Component.extend({
 
     return count;
   }),
+
+  indentation: computed("depth", function() {
+    let ret = "";
+    for (let i = 0; i <= this.get("depth"); ++i) {
+      ret += "  ";
+    }
+    return ret;
+  }),
+
+  suffixIndentation: computed("depth", function() {
+    let ret = "";
+    for (let i = 0; i < this.get("depth"); ++i) {
+      ret += "  ";
+    }
+    return ret;
+  })
 });

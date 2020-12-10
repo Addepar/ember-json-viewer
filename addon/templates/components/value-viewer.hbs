@@ -12,34 +12,40 @@
       {{this.valueSummary}}
     </span>
   {{else}}
-    <ul class="entries depth-{{depth}} {{if this.showInline "entries-inline"}}">
+    <div class="entries">
       {{#if this.isObj}}
         {{#each-in value as |key value|}}
-          {{entry-viewer
-            key=key
-            value=value
-            depth=this.depth
-            displayOptions=this.displayOptions
-          }}
-        {{/each-in}}
-      {{else}}
-        {{#each value as |value|}}
-          <li class="entry">
-            {{value-viewer
+          <div class="entry">
+            <pre><span>{{this.indentation}}</span></pre>
+            {{entry-viewer
+              key=key
               value=value
               depth=this.depth
               displayOptions=this.displayOptions
-            }}
-            <span class="entry-delimiter">
-              ,
-            </span>
-          </li>
+            }}<span class="entry-delimiter"> , </span>
+          </div>
+        {{/each-in}}
+      {{else}}
+        {{#each value as |value|}}
+          <div class="entry">
+            <pre><span>{{this.indentation}}</span></pre>
+            {{value-viewer
+              value=value
+              depth=(inc this.depth)
+              displayOptions=this.displayOptions
+            }}<span class="entry-delimiter"> , </span>
+          </div>
         {{/each}}
       {{/if}}
-    </ul>
+    </div>
   {{/if}}
 
-  <span class="suffix">
-    {{this.suffix}}
-  </span>
+  <div class="closing-bracket">
+    {{#unless this.showSummary}}
+      <pre><span>{{this.suffixIndentation}}</span></pre>
+    {{/unless}}
+    <span class="suffix">
+      {{this.suffix}}
+    </span>
+  </div>
 {{/if}}
