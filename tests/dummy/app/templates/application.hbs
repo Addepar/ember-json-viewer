@@ -2,7 +2,7 @@
   <h2 id="title">Ember-JSON-Viewer</h2>
 
   <div class="viewer-wrapper">
-    <JsonViewer @json={{this.json}} @options={{hash expandedIcon=">" collapsedIcon="<" collapseDepth=5 quoteKeys=true}} />
+    <JsonViewer @json={{this.json}} @options={{hash expandedIcon=">" collapsedIcon="<" collapseDepth=15 quoteKeys=true}} />
   </div>
   <div class="input-wrapper {{if this.isJSONVAlid "valid" "invalid"}}">
     <h2>Paste JSON below:</h2>

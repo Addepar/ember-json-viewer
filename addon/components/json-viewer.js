@@ -10,8 +10,8 @@ const ALLOWED_OPTIONS = [
 ];
 
 export default Component.extend({
-  tagName: "",
   layout,
+  classNames: ["json-viewer"],
 
   init() {
     this._super(...arguments);
@@ -23,5 +23,21 @@ export default Component.extend({
     );
 
     this.set("displayOptions", options);
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.element.setAttribute("tabindex", "-1");
+    this.element.addEventListener("copy", (evt) => {
+      console.log(evt);
+      try {
+        let json = document.getSelection().toString().replaceAll(">", "");
+        let formatted = JSON.stringify(JSON.parse(json), null, 2);
+        evt.clipboardData.setData("text/plain", formatted);
+        evt.preventDefault();
+      } catch (e) {
+        console.error(e);
+      }
+    });
   },
 });
