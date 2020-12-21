@@ -48,18 +48,10 @@ export default Component.extend({
   }),
 
   indentation: computed("depth", function() {
-    let ret = "";
-    for (let i = 0; i <= this.get("depth"); ++i) {
-      ret += "  ";
-    }
-    return ret;
+    return "".padStart((this.get('depth') + 1) * 2 , " ");
   }),
 
   suffixIndentation: computed("depth", function() {
-    let ret = "";
-    for (let i = 0; i < this.get("depth"); ++i) {
-      ret += "  ";
-    }
-    return ret;
+    return "".padStart(this.get('depth') * 2, " ");
   })
 });
