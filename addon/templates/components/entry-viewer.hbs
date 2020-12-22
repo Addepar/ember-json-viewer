@@ -1,25 +1,19 @@
 <div class="entry-body">
-  {{#if this.isToggleable}}
-    <span class="key is-toggleable" {{action "toggleExpanded"}}>
-      <span class="key-expansion-state">
-        {{#if this.isExpanded}}
-          {{{this.expandedIcon}}}
-        {{else}}
-          {{{this.collapsedIcon}}}
-        {{/if}}
-      </span>
-      {{this.keyPrefix}}{{this.key}}{{this.keySuffix}}:
-    </span>
-  {{else}}
-    <span class="key">
-      {{this.keyPrefix}}{{this.key}}{{this.keySuffix}}:
-    </span>
-  {{/if}}
+  {{~#if this.isToggleable~}}
+    <span class="key is-toggleable" {{action "toggleExpanded"}}><span class="key-expansion-state">
+      {{#if this.isExpanded}}
+        {{{this.expandedIcon}}}
+      {{else}}
+        {{{this.collapsedIcon}}}
+      {{/if}}</span>{{this.keyPrefix}}{{this.key}}{{this.keySuffix}}: </span>
+  {{~else~}}
+    <span class="key">{{this.keyPrefix}}{{this.key}}{{this.keySuffix}}: </span>
+  {{~/if}}
   {{value-viewer
-    value=this.value
-    showSummary=(not this.isExpanded)
-    depth=(inc this.depth)
-    showInline=this.showInline
-    displayOptions=this.displayOptions
-  }}
+          value=this.value
+          showSummary=(not this.isExpanded)
+          depth=(inc this.depth)
+          showInline=this.showInline
+          displayOptions=this.displayOptions
+  ~}}
 </div>

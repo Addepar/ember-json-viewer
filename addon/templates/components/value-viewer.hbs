@@ -1,51 +1,41 @@
-{{#if this.isPrimitive}}
-  <span class="value primitive">
-    {{simple-value value=this.value}}
-  </span>
-{{else}}
-  <span class="prefix">
-    {{this.prefix}}
-  </span>
-
-  {{#if this.showSummary}}
-    <span class="entries-summary">
-      {{this.valueSummary}}
-    </span>
-  {{else}}
+{{#if this.isPrimitive~}}
+  <span class="value primitive">{{simple-value value=this.value}}</span>
+{{~else~}}
+  <span class="prefix">{{this.prefix}}</span>
+  {{~# if this.showSummary~}}
+    <span class="entries-summary">{{this.valueSummary}}</span>
+  {{~else}}
     <div class="entries">
       {{#if this.isObj}}
-        {{#each-in value as |key value|}}
+        {{#each-in value as |key value|~}}
           <div class="entry">
             <pre><span>{{this.indentation}}</span></pre>
-            {{entry-viewer
-              key=key
-              value=value
-              depth=this.depth
-              displayOptions=this.displayOptions
-            }}<span class="entry-delimiter"> , </span>
+            {{~entry-viewer
+                    key=key
+                    value=value
+                    depth=this.depth
+                    displayOptions=this.displayOptions
+            ~}}
+            <span class="entry-delimiter">, </span>
           </div>
-        {{/each-in}}
-      {{else}}
-        {{#each value as |value|}}
+        {{~/each-in}}
+      {{~ else ~}}
+        {{#each value as |value| ~}}
           <div class="entry">
             <pre><span>{{this.indentation}}</span></pre>
-            {{value-viewer
-              value=value
-              depth=(inc this.depth)
-              displayOptions=this.displayOptions
-            }}<span class="entry-delimiter"> , </span>
-          </div>
-        {{/each}}
-      {{/if}}
+            {{~value-viewer
+                    value=value
+                    depth=(inc this.depth)
+                    displayOptions=this.displayOptions
+            ~}}
+            <span class="entry-delimiter">, </span>
+          </div>{{/each}}
+      {{~/if}}
     </div>
-  {{/if}}
-
+  {{~/if ~}}
   <div class="closing-bracket">
-    {{#unless this.showSummary}}
+    {{~#unless this.showSummary ~}}
       <pre><span>{{this.suffixIndentation}}</span></pre>
-    {{/unless}}
-    <span class="suffix">
-      {{this.suffix}}
-    </span>
-  </div>
-{{/if}}
+    {{~/unless~}}
+    <span class="suffix">{{this.suffix}}</span></div>
+{{~/if~}}

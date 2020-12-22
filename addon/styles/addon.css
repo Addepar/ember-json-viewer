@@ -22,10 +22,6 @@
   display: inline-block;
 }
 
-.entry-delimiter {
-  margin-left: -8px;
-}
-
 /* Hide the delimiter after the last item. It is
    vald to have a trailing comma in a JavaScript object/array,
    but not in JSON. */
