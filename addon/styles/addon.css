@@ -10,8 +10,6 @@
 }
 
 .entries {
-  /*list-style: none;*/
-  /*padding-inline-start: 1.25em;*/
   margin: 0;
   display: block;
 }
@@ -45,7 +43,6 @@
 .key.is-toggleable .key-expansion-state {
   position: absolute;
   left: -15px;
-  top: 0px;
 }
 
 .key-expansion-state {
