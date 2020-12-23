@@ -1,10 +1,12 @@
 <div class="entry-body">
   {{~#if this.isToggleable~}}
     <span class="key is-toggleable" {{action "toggleExpanded"}}><span class="key-expansion-state">
-      {{#if this.isExpanded}}
-        {{{this.expandedIcon}}}
-      {{else}}
-        {{{this.collapsedIcon}}}
+      {{# if this.showIcons}}
+        {{#if this.isExpanded}}
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        {{else}}
+          <i class="fa fa-caret-right" aria-hidden="true"></i>
+        {{/if}}
       {{/if}}</span>{{this.keyPrefix}}{{this.key}}{{this.keySuffix}}: </span>
   {{~else~}}
     <span class="key">{{this.keyPrefix}}{{this.key}}{{this.keySuffix}}: </span>

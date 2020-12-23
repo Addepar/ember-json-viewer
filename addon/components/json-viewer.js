@@ -6,6 +6,7 @@ const ALLOWED_OPTIONS = [
   "expandedIcon",
   "collapsedIcon",
   "collapseDepth",
+  "showIcons",
   "quoteKeys",
 ];
 

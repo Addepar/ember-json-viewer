@@ -37,6 +37,7 @@ export default Component.extend({
   collapseDepth: readOnly("displayOptions.collapseDepth"),
   expandedIcon: readOnly("displayOptions.expandedIcon"),
   collapsedIcon: readOnly("displayOptions.collapsedIcon"),
+  showIcons: readOnly("displayOptions.showIcons"),
   quoteKeys: readOnly("displayOptions.quoteKeys"),
 
   keyPrefix: computed("quoteKeys", function () {
