@@ -42,6 +42,7 @@
 
 .key.is-toggleable .key-expansion-state {
   position: absolute;
+  line-height: 28px;
   left: -15px;
 }
 
