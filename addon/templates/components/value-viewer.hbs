@@ -1,10 +1,9 @@
 {{#if this.isPrimitive}}
-  <span class="value primitive" title="{{concat this.path "@"}}">
-    {{simple-value value=this.value}}
+  <span class="value primitive">
+    {{simple-value value=this.value path=(concat this.path "@")}}
   </span>
 {{else}}
-  <span title={{this.path}}>
-  <span class="prefix">
+  <span class="prefix" data-path={{concat this.path "<"}}>
     {{this.prefix}}
   </span>
 
@@ -13,37 +12,38 @@
       {{this.valueSummary}}
     </span>
   {{else}}
-    <ul class="entries depth-{{depth}} {{if this.showInline "entries-inline"}}">
+    <ul class="entries depth-{{depth}}">
       {{#if this.isObj}}
-        {{#each-in value as |key value|}}
+        {{#each-in value as |key innerValue|}}
           {{entry-viewer
             key=key
-            value=value
+            value=innerValue
             depth=this.depth
             path=(concat this.path "." key)
             displayOptions=this.displayOptions
+            isLast=(is-last value key)
           }}
         {{/each-in}}
       {{else}}
-        {{#each value as |value index|}}
+        {{#each value as |innerValue index|}}
           <li class="entry">
             {{value-viewer
-              value=value
+              value=innerValue
               depth=this.depth
               path=(concat this.path "[" index "]")
               displayOptions=this.displayOptions
             }}
-            <span class="entry-delimiter">
-              ,
-            </span>
+            {{#unless (is-last value index)}}
+              {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
+              <span class="entry-delimiter" data-path={{concat this.path "[" index "]" "@" ","}}>,</span>
+            {{/unless}}
           </li>
         {{/each}}
       {{/if}}
     </ul>
   {{/if}}
 
-  <span class="suffix">
+  <span class="suffix" data-path={{concat this.path ">"}}>
     {{this.suffix}}
-  </span>
   </span>
 {{/if}}

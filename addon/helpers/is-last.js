@@ -1,0 +1,30 @@
+import { helper } from "@ember/component/helper";
+import { assert } from "@ember/debug";
+
+function isArray(v) {
+  return Array.isArray(v);
+}
+
+function isObject(v) {
+  return !isArray(v) && typeof v === "object";
+}
+
+/**
+ * Checks whether the given second argument (a key name or index)
+ * is the last key/index in the given object-or-array
+ *
+ * @param {object|array} objOrArray
+ * @param {string|number} keyOrIndex Must be a string if first arg is an object,
+ * and number if first arg is an array
+ * @returns {Boolean}
+ */
+export default helper(function isLast([objOrArray, keyOrIndex] /*, hash*/) {
+  if (isObject(objOrArray)) {
+    let keys = Object.keys(objOrArray);
+    return keys.indexOf(keyOrIndex) === keys.length - 1;
+  } else if (isArray(objOrArray)) {
+    return keyOrIndex === objOrArray.length - 1;
+  } else {
+    assert(`Unexpected args to is-last ${objOrArray}, ${keyOrIndex}`, false);
+  }
+});

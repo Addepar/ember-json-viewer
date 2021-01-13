@@ -10,6 +10,37 @@ function isObject(v) {
   return !isArray(v) && typeof v === "object";
 }
 
+/**
+ * Paths:
+ * $: the root
+ * $.propName: The property key
+ * $.propName[idx]: The property at index idx in the array $.propName
+ * $.propName@: The value at property key propName
+ * $.propName<: The opening brace/bracket for the object/array propName
+ * $.propName>: Closing brace/bracket
+ * $.propName@,: The entry delimiter (comma) following propName's value
+ *
+ * Examples:
+ * Assume the following JSON, where the numbers indicate positions
+ * immediately following them
+ * rather than actual values/properties (i.e., ignore the numbers to interpret at JSON):
+ *
+ * {1
+ *   "2foo": "3bar"4,
+ *   "arr": 5["abc", 6true, false7, 8]9,
+ * }
+ *
+ * 1: $
+ * 2: $.foo
+ * 3: $.foo@
+ * 4: $.foo@,
+ * 5: $.arr<
+ * 6: $.arr[1]@
+ * 7: $.arr[2]@,
+ * 8: $.arr>
+ * 9: $.arr@,
+ */
+
 const ROOT = "$";
 const PAD = "->";
 const FROM_MARKER = "<FROM|";
@@ -133,8 +164,25 @@ function stringifyObjectEntries(object, locs, path, depth) {
       key = key.slice(0, locs.to.index) + TO_MARKER + key.slice(locs.to.index);
     }
     str += `${padding(depth)}${key}${_jsonStringify(v, locs, keyPath, depth)}`;
+
     if (!isLast) {
-      str += `,\n`;
+      let entryDelimiter = ",";
+      let entryDelimiterPath = keyPath + "@" + ",";
+      console.log("EDP", entryDelimiterPath);
+      if (locs.from.path === entryDelimiterPath) {
+        entryDelimiter =
+          entryDelimiter.slice(0, locs.from.index) +
+          FROM_MARKER +
+          entryDelimiter.slice(locs.from.index);
+      }
+      if (locs.to.path === entryDelimiterPath) {
+        entryDelimiter =
+          entryDelimiter.slice(0, locs.to.index) +
+          TO_MARKER +
+          entryDelimiter.slice(locs.to.index);
+      }
+
+      str += entryDelimiter + "\n";
     }
   }
   return str;
@@ -154,7 +202,23 @@ function stringifyArrayEntries(arr, locs, path, depth) {
     }
     str += `${padding(depth)}${_jsonStringify(v, locs, keyPath, depth)}`;
     if (!isLast) {
-      str += `,\n`;
+      let entryDelimiter = ",";
+      let entryDelimiterPath = keyPath + "@" + ",";
+      console.log("EDP", entryDelimiterPath);
+      if (locs.from.path === entryDelimiterPath) {
+        entryDelimiter =
+          entryDelimiter.slice(0, locs.from.index) +
+          FROM_MARKER +
+          entryDelimiter.slice(locs.from.index);
+      }
+      if (locs.to.path === entryDelimiterPath) {
+        entryDelimiter =
+          entryDelimiter.slice(0, locs.to.index) +
+          TO_MARKER +
+          entryDelimiter.slice(locs.to.index);
+      }
+
+      str += entryDelimiter + "\n";
     }
   }
   return str;

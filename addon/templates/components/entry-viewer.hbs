@@ -1,4 +1,4 @@
-<li class="entry" title="{{this.path}}">
+<li class="entry">
   {{#if this.isToggleable}}
     <span class="key is-toggleable" {{action "toggleExpanded"}}>
       <span class="key-expansion-state">
@@ -8,22 +8,30 @@
           {{{this.collapsedIcon}}}
         {{/if}}
       </span>
-      {{this.keyPrefix}}{{this.key}}{{this.keySuffix}}:
+      <span data-path={{this.path}}>
+        {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
+          must be a single text node
+        }}
+        {{quotedKey}}
+      </span>
     </span>
   {{else}}
-    <span class="key">
-      {{this.keyPrefix}}{{this.key}}{{this.keySuffix}}:
+    <span class="key" data-path={{this.path}}>
+      {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
+        must be a single text node
+      }}
+      {{quotedKey}}
     </span>
   {{/if}}
   {{value-viewer
     value=this.value
     showSummary=(not this.isExpanded)
     depth=(inc this.depth)
-    showInline=this.showInline
     displayOptions=this.displayOptions
     path=this.path
   }}
-  <span class="entry-delimiter">
-    ,
-  </span>
+  {{#unless this.isLast}}
+    {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
+    <span class="entry-delimiter" data-path={{concat this.path "@" ","}}>,</span>
+  {{/unless}}
 </li>
