@@ -1,8 +1,9 @@
 {{#if this.isPrimitive}}
-  <span class="value primitive">
+  <span class="value primitive" title="{{concat this.path "@"}}">
     {{simple-value value=this.value}}
   </span>
 {{else}}
+  <span title={{this.path}}>
   <span class="prefix">
     {{this.prefix}}
   </span>
@@ -19,15 +20,17 @@
             key=key
             value=value
             depth=this.depth
+            path=(concat this.path "." key)
             displayOptions=this.displayOptions
           }}
         {{/each-in}}
       {{else}}
-        {{#each value as |value|}}
+        {{#each value as |value index|}}
           <li class="entry">
             {{value-viewer
               value=value
               depth=this.depth
+              path=(concat this.path "[" index "]")
               displayOptions=this.displayOptions
             }}
             <span class="entry-delimiter">
@@ -41,5 +44,6 @@
 
   <span class="suffix">
     {{this.suffix}}
+  </span>
   </span>
 {{/if}}

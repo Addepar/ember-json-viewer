@@ -1,4 +1,4 @@
-<li class="entry">
+<li class="entry" title="{{this.path}}">
   {{#if this.isToggleable}}
     <span class="key is-toggleable" {{action "toggleExpanded"}}>
       <span class="key-expansion-state">
@@ -21,6 +21,7 @@
     depth=(inc this.depth)
     showInline=this.showInline
     displayOptions=this.displayOptions
+    path=this.path
   }}
   <span class="entry-delimiter">
     ,

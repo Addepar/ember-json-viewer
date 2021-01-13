@@ -63,7 +63,7 @@ export default Component.extend({
     return typeof v === "object";
   }),
 
-  showInline: computed("value", function () {
+  showInline: computed("value", "depth", function () {
     let v = this.get("value");
     if (!isArray(v)) {
       return false;
