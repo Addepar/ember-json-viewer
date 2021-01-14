@@ -7,6 +7,11 @@
   font-size: 16px;
   overflow: scroll;
   height: 100%;
+  user-select: none;
+}
+
+.json-viewer [data-path] {
+  user-select: text;
 }
 
 .entries {
