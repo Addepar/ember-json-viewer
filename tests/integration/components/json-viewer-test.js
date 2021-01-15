@@ -1,6 +1,6 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render } from "@ember/test-helpers";
+import { render, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 
 module("Integration | Component | json-viewer", function (hooks) {
@@ -90,5 +90,37 @@ module("Integration | Component | json-viewer", function (hooks) {
     assert.dom('[data-path="$.zero.one"]').exists("collapse 3");
     assert.dom('[data-path="$.zero.one.two"]').exists("collapse 3");
     assert.dom('[data-path="$.zero.one.two.three"]').exists("collapse 3");
+  });
+
+  test("shows entry summary", async function (assert) {
+    let json = { zero: { one: { two: { three: 3 } } } };
+
+    this.set("json", json);
+    this.set("collapseDepth", 0);
+
+    await render(
+      hbs`<JsonViewer @json={{this.json}} @options={{hash collapseDepth=this.collapseDepth}}/>`
+    );
+
+    assert.dom('[data-path="$.zero"]').exists();
+    assert.dom('[data-path="$.zero.one"]').doesNotExist();
+    assert
+      .dom('[data-test-entry-summary="$.zero"]')
+      .exists("shows entry summary");
+    assert.dom('[data-test-entry-summary="$.zero"]').containsText("1");
+
+    await click('[data-test-toggle="$.zero"]');
+    assert
+      .dom('[data-test-entry-summary="$.zero"]')
+      .doesNotExist("does not show entry summary after toggle to open");
+    assert.dom('[data-path="$.zero.one"]').exists("shows zero.one after open");
+
+    await click('[data-test-toggle="$.zero"]');
+    assert
+      .dom('[data-test-entry-summary="$.zero"]')
+      .exists("shows summary again after toggle closed");
+    assert
+      .dom('[data-path="$.zero.one"]')
+      .doesNotExist("hides zero.one after toggle close");
   });
 });

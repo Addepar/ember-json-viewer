@@ -8,7 +8,7 @@
   </span>
 
   {{#if this.showSummary}}
-    <span class="entries-summary">
+    <span class="entries-summary" data-test-entry-summary={{this.path}}>
       {{this.valueSummary}}
     </span>
   {{else}}
