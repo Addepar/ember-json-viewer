@@ -2,6 +2,7 @@ import Component from "@ember/component";
 import layout from "../templates/components/json-viewer";
 import { assert } from "@ember/debug";
 import jsonStringify from "../utils/json-stringify";
+import { computed } from "@ember/object";
 
 const ALLOWED_OPTIONS = ["expandedIcon", "collapsedIcon", "collapseDepth"];
 
@@ -46,17 +47,14 @@ export default Component.extend({
   // passed-in
   json: null,
 
-  init() {
-    this._super(...arguments);
-
+  displayOptions: computed("options", function () {
     let options = this.get("options") || {};
     assert(
       `Only allowed options are: ${ALLOWED_OPTIONS}`,
       Object.keys(options).every((key) => ALLOWED_OPTIONS.includes(key))
     );
-
-    this.set("displayOptions", options);
-  },
+    return options;
+  }),
 
   didInsertElement() {
     this._super(...arguments);
