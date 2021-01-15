@@ -123,4 +123,29 @@ module("Integration | Component | json-viewer", function (hooks) {
       .dom('[data-path="$.zero.one"]')
       .doesNotExist("hides zero.one after toggle close");
   });
+
+  test("only data-path elements are user-selectable", async function (assert) {
+    this.set("json", {
+      foo: "bar",
+      obj: { foo: "bar" },
+      arr: [1, true, "tree"],
+    });
+
+    await render(
+      hbs`<JsonViewer data-test-json-viewer-outer @json={{this.json}} />`
+    );
+    let outerEl = document.querySelector("[data-test-json-viewer-outer]");
+    let els = outerEl.querySelectorAll("*");
+    for (let el of Array.from(els)) {
+      let isSelectable = el.hasAttribute("data-path");
+      let userSelectStyle = window
+        .getComputedStyle(el)
+        .getPropertyValue("user-select");
+      if (isSelectable) {
+        assert.equal(userSelectStyle, "text");
+      } else {
+        assert.equal(userSelectStyle, "none");
+      }
+    }
+  });
 });
