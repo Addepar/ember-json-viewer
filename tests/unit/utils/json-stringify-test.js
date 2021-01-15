@@ -38,6 +38,9 @@ function nativeJsonStringify(json) {
   return JSON.stringify(json, null, "  ");
 }
 
+// Takes an expected string and replaces the depth-indicators ("->") with
+// 2-spaces each, and cuts the string between the position indicators « and »
+// (The "expected" string is sort of a DSL for legibility in the tests)
 function format(expected) {
   expected = expected.replaceAll(/^\s+/gm, "").replaceAll("->", "  ");
   return expected.slice(expected.indexOf("«") + 1, expected.indexOf("»"));
