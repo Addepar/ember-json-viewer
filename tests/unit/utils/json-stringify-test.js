@@ -1,10 +1,757 @@
 import jsonStringify from "dummy/utils/json-stringify";
 import { module, test } from "qunit";
+import { MARKER } from "ember-json-viewer/utils/json-stringify";
+
+const JSONS = {
+  simple: { foo: true },
+  no_nesting_prims: { foo: true, bar: false, one: 1.01, str: "string" },
+  no_nesting_array: {
+    foo: [1, 2, 3],
+    bar: [4, 5, 6],
+  },
+  // TODO: jsonStringfy adds a newline for the empty object,
+  // doesn't match native JSON stringify
+  // no_nesting_obj: {
+  //   foo: {},
+  //   bar: {},
+  // },
+  nested: {
+    foo: { bar: { baz: "qux" } },
+  },
+  // Allows testing the comma paths $.foo.one@, and $.foo>,
+  nested_two: {
+    foo: { one: 1, two: 2 },
+    bar: { three: 3 },
+  },
+  complex: {
+    foo: {
+      bar: [1, 2, { baz: "quz" }, "three", { inner: "string" }],
+      true: true,
+      false: {
+        1: [2, 3],
+      },
+    },
+  },
+};
+
+function nativeJsonStringify(json) {
+  return JSON.stringify(json, null, "  ");
+}
+
+function format(expected) {
+  expected = expected.replaceAll(/^\s+/gm, "").replaceAll("->", "  ");
+  return expected.slice(expected.indexOf("«") + 1, expected.indexOf("»"));
+}
 
 module("Unit | Utility | json-stringify", function () {
-  test("it works", function (assert) {
-    debugger;
-    let result = jsonStringify({ foo: true });
-    assert.ok(result);
+  test("it returns full JSON by default, mostly-matches native JSON.stringify", function (assert) {
+    for (let [name, json] of Object.entries(JSONS)) {
+      assert.equal(
+        jsonStringify(json),
+        nativeJsonStringify(json),
+        `correct for ${name}`
+      );
+    }
+  });
+
+  test("JSONS.simple: it cuts JSON string at range start/end", function (assert) {
+    let expected = `{
+    ->«"foo": true»
+    }`;
+    let range = {
+      start: { path: "$.foo", index: 0 },
+      end: { path: "$.foo@", index: 4 },
+    };
+
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"«foo": true»
+    }`;
+    range.start.index = 1;
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo«": true»
+    }`;
+    range.start.index = 4;
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo"«: true»
+    }`;
+    range.start.index = 5;
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo":« true»
+    }`;
+    range.start.index = 6;
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «true»
+    }`;
+    range.start = { path: "$.foo@", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": t«rue»
+    }`;
+    range.start = { path: "$.foo@", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"f«o»o": true
+    }`;
+    range = {
+      start: { path: "$.foo", index: 2 },
+      end: { path: "$.foo", index: 3 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo"«:» true
+    }`;
+    range = {
+      start: { path: "$.foo", index: 5 },
+      end: { path: "$.foo", index: 6 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.simple, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+  });
+
+  test("JSONS.no_nesting_prims cuts JSON at start/end", function (assert) {
+    let expected = `{
+    ->«"foo": true»,
+    ->"bar": false,
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+
+    let range = {
+      start: { path: "$.foo", index: 0 },
+      end: { path: "$.foo@,", index: 0 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,»
+    ->"bar": false,
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+    range.end.index = 1;
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"»bar": false,
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+    range.end = { path: "$.bar", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar»": false,
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+    range.end = { path: "$.bar", index: 4 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar"»: false,
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+    range.end = { path: "$.bar", index: 5 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": »false,
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+    range.end = { path: "$.bar@", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false»,
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+    range.end = { path: "$.bar@,", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false,»
+    ->"one": 1.01,
+    ->"str": "string"
+    }`;
+    range.end = { path: "$.bar@,", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false,
+    ->"one": 1».01,
+    ->"str": "string"
+    }`;
+    range.end = { path: "$.one@", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false,
+    ->"one": 1.01,
+    ->"str": "»string"
+    }`;
+    range.end = { path: "$.str@", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false,
+    ->"one": 1.01,
+    ->"str": "string»"
+    }`;
+    range.end = { path: "$.str@", index: 7 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false,
+    ->"one": 1.01,
+    ->"str": "string"»
+    }`;
+    range.end = { path: "$.str@", index: 8 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false,
+    ->"one": 1.01,
+    ->"str": "string"
+    »}`;
+    range.end = { path: "$>", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"foo": true,
+    ->"bar": false,
+    ->"one": 1.01,
+    ->"str": "string"
+    }»`;
+    range.end = { path: "$>", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_prims, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+  });
+
+  test("JSONS.no_nesting_array cuts JSON at start/end", function (assert) {
+    let expected = `{
+    ->"foo": «[
+    ->->»1, 2, 3
+    ->],
+    ->"bar": [
+    ->->4, 5, 6
+    ->]
+    }`;
+
+    let range = {
+      start: { path: "$.foo<", index: 0 },
+      end: { path: "$.foo[0]@", index: 0 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1», 2, 3
+    ->],
+    ->"bar": [
+    ->->4, 5, 6
+    ->]
+    }`;
+    range.end = { path: "$.foo[0]@", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,» 2, 3
+    ->],
+    ->"bar": [
+    ->->4, 5, 6
+    ->]
+    }`;
+    range.end = { path: "$.foo[0]@,", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,
+    ->->»2,
+    ->->3
+    ->],
+    ->"bar": [
+    ->->4,
+    ->->5,
+    ->->6
+    ->]
+    }`;
+    range.end = { path: "$.foo[1]@", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,
+    ->->2»,
+    ->->3
+    ->],
+    ->"bar": [
+    ->->4,
+    ->->5,
+    ->->6
+    ->]
+    }`;
+    range.end = { path: "$.foo[1]@", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,
+    ->->2,»
+    ->->3
+    ->],
+    ->"bar": [
+    ->->4,
+    ->->5,
+    ->->6
+    ->]
+    }`;
+    range.end = { path: "$.foo[1]@,", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,
+    ->->2,
+    ->->3»
+    ->],
+    ->"bar": [
+    ->->4,
+    ->->5,
+    ->->6
+    ->]
+    }`;
+    range.end = { path: "$.foo[2]@", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,
+    ->->2,
+    ->->3
+    ->»],
+    ->"bar": [
+    ->->4,
+    ->->5,
+    ->->6
+    ->]
+    }`;
+    range.end = { path: "$.foo>", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,
+    ->->2,
+    ->->3
+    ->]»,
+    ->"bar": [
+    ->->4,
+    ->->5,
+    ->->6
+    ->]
+    }`;
+    range.end = { path: "$.foo>", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «[
+    ->->1,
+    ->->2,
+    ->->3
+    ->],»
+    ->"bar": [
+    ->->4,
+    ->->5,
+    ->->6
+    ->]
+    }`;
+    range.end = { path: "$.foo@,", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.no_nesting_array, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+  });
+
+  test("JSONS.nested cuts JSON at start/end", function (assert) {
+    let expected = `«{
+    ->"foo": {
+    ->->"bar": {
+    ->->->"baz": "qux"
+    ->->}
+    ->}
+    }»`;
+
+    let range = {
+      start: { path: "$<", index: 0 },
+      end: { path: "$>", index: 1 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.nested, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «{»
+    ->->"bar": {
+    ->->->"baz": "qux"
+    ->->}
+    ->}
+    }`;
+
+    range = {
+      start: { path: "$.foo<", index: 0 },
+      end: { path: "$.foo<", index: 1 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.nested, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «{
+    ->->"bar": »{
+    ->->->"baz": "qux"
+    ->->}
+    ->}
+    }`;
+
+    range.end = { path: "$.foo.bar<", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.nested, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «{
+    ->->"bar": {»
+    ->->->"baz": "qux"
+    ->->}
+    ->}
+    }`;
+
+    range.end = { path: "$.foo.bar<", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.nested, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «{
+    ->->"bar": {
+    ->->->»"baz": "qux"
+    ->->}
+    ->}
+    }`;
+
+    range.end = { path: "$.foo.bar.baz", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.nested, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «{
+    ->->"bar": {
+    ->->->"baz": "qux"
+    ->->»}
+    ->}
+    }`;
+
+    range.end = { path: "$.foo.bar>", index: 0 };
+    assert.equal(
+      jsonStringify(JSONS.nested, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": «{
+    ->->"bar": {
+    ->->->"baz": "qux"
+    ->->}»
+    ->}
+    }`;
+
+    range.end = { path: "$.foo.bar>", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.nested, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+  });
+
+  test("JSONS.nested_two cuts JSON at start/end", function (assert) {
+    let expected = `«{
+    ->"foo": {
+    ->->"one": 1,
+    ->->"two": 2
+    ->},
+    ->"bar": {
+    ->->"three": 3
+    ->}
+    }»`;
+
+    let range = {
+      start: { path: "$<", index: 0 },
+      end: { path: "$>", index: 1 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.nested_two, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": {
+    ->->"on«e": 1»,
+    ->->"two": 2
+    ->},
+    ->"bar": {
+    ->->"three": 3
+    ->}
+    }`;
+
+    range = {
+      start: { path: "$.foo.one", index: 3 },
+      end: { path: "$.foo.one@,", index: 0 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.nested_two, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": {
+    ->->"on«e": 1,»
+    ->->"two": 2
+    ->},
+    ->"bar": {
+    ->->"three": 3
+    ->}
+    }`;
+
+    range = {
+      start: { path: "$.foo.one", index: 3 },
+      end: { path: "$.foo.one@,", index: 1 },
+    };
+    assert.equal(
+      jsonStringify(JSONS.nested_two, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": {
+    ->->"on«e": 1,
+    ->->"two": 2
+    ->}»,
+    ->"bar": {
+    ->->"three": 3
+    ->}
+    }`;
+
+    range.end = { path: "$.foo>", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.nested_two, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->"foo": {
+    ->->"on«e": 1,
+    ->->"two": 2
+    ->},»
+    ->"bar": {
+    ->->"three": 3
+    ->}
+    }`;
+
+    range.end = { path: "$.foo@,", index: 1 };
+    assert.equal(
+      jsonStringify(JSONS.nested_two, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+  });
+
+  test("use of special MARKER constant still works", function (assert) {
+    assert.ok(!!MARKER, "marker is defined");
+    let json = { foo: `abc${MARKER}`, bar: 2 };
+    let expected = `{
+    ->"foo": "abc${MARKER}",
+    ->«"bar": 2»
+    }`;
+    let range = {
+      start: { path: "$.bar", index: 0 },
+      end: { path: "$.bar@", index: 1 },
+    };
+    assert.equal(
+      jsonStringify(json, range),
+      format(expected),
+      `when JSON includes MARKER constant`
+    );
   });
 });

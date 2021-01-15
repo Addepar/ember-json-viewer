@@ -42,36 +42,81 @@ function isObject(v) {
  */
 
 const ROOT = "$";
-const PAD = "->";
-const FROM_MARKER = "<FROM|";
-const TO_MARKER = "|TO>";
+const PAD = "  ";
 
+// Used to mark the place in the stringified JSON that matches
+// the target position
+export const MARKER = "<MARKER>";
+
+/**
+ * Creates a string by concat-ing the `pad` `depth` times
+ * @param {number} depth
+ * @param {string} [pad=PAD]
+ * @returns {string}
+ */
 function padding(depth, pad = PAD) {
   return new Array(depth).fill(pad).join("");
 }
 
+// Start-end delimiters for objects and arrays
 const OBJECT_DELIMS = ["{", "}"];
 const ARRAY_DELIMS = ["[", "]"];
 
-export default function jsonStringify(json, locs) {
-  let str = _jsonStringify(json, locs);
-  let fromIndex = str.indexOf(FROM_MARKER) + FROM_MARKER.length;
-  let toIndex = str.indexOf(TO_MARKER);
-  console.log(str, fromIndex, toIndex);
-  return str.slice(fromIndex, toIndex);
+// Default range is from the very start to very end
+const FULL_RANGE = {
+  start: { path: ROOT + "<", index: 0 },
+  end: { path: ROOT + ">", index: 1 },
+};
+
+/**
+ * Creates a unique marker string that can be used to
+ * mark start/end spot in the output JSON.
+ * Makes sure that return value never occurs in the stringified
+ * json object.
+ *
+ * @param {object} json
+ * @param {string} [marker=MARKER]
+ * @returns {string}
+ */
+function createUniqueMarker(json, marker = MARKER) {
+  let jsonString = JSON.stringify(json);
+  let possibleMarker = marker;
+  while (jsonString.includes(possibleMarker)) {
+    possibleMarker = marker + Math.random();
+  }
+  return possibleMarker;
 }
 
-function _jsonStringify(
-  json,
-  locs = {
-    from: { path: null, index: 0 },
-    to: { path: null, index: 0 },
-  },
-  path = ROOT,
-  depth = 0
-) {
+/**
+ * Returns part of the stringified json that is between the start and end positions in the range
+ * @param {object} json
+ * @param {{start:{path:string,index:number}},{end:{path:string,index:number}}} range An object with `start` and `end` keys that are
+ * each a "position"
+ * @returns {string}
+ */
+export default function jsonStringify(json, range = FULL_RANGE) {
+  let options = {
+    marker: createUniqueMarker(json),
+  };
+
+  // Create strings with the given marker for the start and end
+  // positions in the range
+  let startStr = _jsonStringify(json, range.start, options);
+  let endStr = _jsonStringify(json, range.end, options);
+
+  // Determine the indices of the (start/end) markers in the
+  // start string
+  let startIndex = startStr.indexOf(options.marker) + options.marker.length;
+  let endIndex = endStr.indexOf(options.marker) + options.marker.length;
+
+  // Slice to return only the part of the json string between the
+  // markers
+  return startStr.slice(startIndex, endIndex);
+}
+
+function _jsonStringify(json, pos, options, path = ROOT, depth = 0) {
   if (isPrimitive(json)) {
-    return formatPrimitive(json, locs, path + "@");
+    return formatPrimitive(json, pos, options, path + "@");
   }
 
   let delims = isObject(json)
@@ -80,71 +125,51 @@ function _jsonStringify(
     ? [...ARRAY_DELIMS]
     : null;
 
-  if (locs.from.path === path + "<") {
+  if (pos.path === path + "<") {
     delims[0] =
-      delims[0].slice(0, locs.from.index) +
-      FROM_MARKER +
-      delims[0].slice(locs.from.index);
-  } else if (locs.from.path === path + ">") {
+      delims[0].slice(0, pos.index) +
+      options.marker +
+      delims[0].slice(pos.index);
+  } else if (pos.path === path + ">") {
     delims[1] =
-      delims[1].slice(0, locs.from.index) +
-      FROM_MARKER +
-      delims[1].slice(locs.from.index);
-  }
-
-  if (locs.to.path === path + "<") {
-    delims[0] =
-      delims[0].slice(0, locs.to.index) +
-      TO_MARKER +
-      delims[0].slice(locs.to.index);
-  } else if (locs.to.path === path + ">") {
-    delims[1] =
-      delims[1].slice(0, locs.to.index) +
-      TO_MARKER +
-      delims[1].slice(locs.to.index);
+      delims[1].slice(0, pos.index) +
+      options.marker +
+      delims[1].slice(pos.index);
   }
 
   return (
     delims[0] +
     "\n" +
-    stringifyEntries(json, locs, path, depth + 1) +
+    stringifyEntries(json, pos, options, path, depth + 1) +
     "\n" +
     padding(depth) +
     delims[1]
   );
 }
 
-function formatPrimitive(v, locs, path) {
-  console.log(`path ${path}, format primitive`, v);
+function formatPrimitive(v, pos, options, path) {
   let formatted = "";
   if (typeof v === "string") {
     formatted = `"${v}"`;
   } else {
     formatted = `${v}`;
   }
-  if (locs.from.path === path) {
+  if (pos.path === path) {
     formatted =
-      formatted.slice(0, locs.from.index) +
-      FROM_MARKER +
-      formatted.slice(locs.from.index);
-  }
-  if (locs.to.path === path) {
-    formatted =
-      formatted.slice(0, locs.to.index) +
-      TO_MARKER +
-      formatted.slice(locs.to.index);
+      formatted.slice(0, pos.index) +
+      options.marker +
+      formatted.slice(pos.index);
   }
   return formatted;
 }
 
-function stringifyEntries(objOrArr, locs, path, depth) {
-  console.log(`path ${path}, stringify entries for `, objOrArr);
+function stringifyEntries(objOrArr, pos, options, path, depth) {
   return isObject(objOrArr)
-    ? stringifyObjectEntries(objOrArr, locs, path, depth)
-    : stringifyArrayEntries(objOrArr, locs, path, depth);
+    ? stringifyObjectEntries(objOrArr, pos, options, path, depth)
+    : stringifyArrayEntries(objOrArr, pos, options, path, depth);
 }
 
-function stringifyObjectEntries(object, locs, path, depth) {
+function stringifyObjectEntries(object, pos, options, path, depth) {
   let str = "";
   let keys = Object.keys(object);
   let lastKey = keys[keys.length - 1];
@@ -154,32 +179,25 @@ function stringifyObjectEntries(object, locs, path, depth) {
     let v = object[key];
     let keyPath = path + "." + key;
     key = `"${key}": `;
-    if (locs.from.path === keyPath) {
-      key =
-        key.slice(0, locs.from.index) +
-        FROM_MARKER +
-        key.slice(locs.from.index);
+    if (pos.path === keyPath) {
+      key = key.slice(0, pos.index) + options.marker + key.slice(pos.index);
     }
-    if (locs.to.path === keyPath) {
-      key = key.slice(0, locs.to.index) + TO_MARKER + key.slice(locs.to.index);
-    }
-    str += `${padding(depth)}${key}${_jsonStringify(v, locs, keyPath, depth)}`;
+    str += `${padding(depth)}${key}${_jsonStringify(
+      v,
+      pos,
+      options,
+      keyPath,
+      depth
+    )}`;
 
     if (!isLast) {
       let entryDelimiter = ",";
       let entryDelimiterPath = keyPath + "@" + ",";
-      console.log("EDP", entryDelimiterPath);
-      if (locs.from.path === entryDelimiterPath) {
+      if (pos.path === entryDelimiterPath) {
         entryDelimiter =
-          entryDelimiter.slice(0, locs.from.index) +
-          FROM_MARKER +
-          entryDelimiter.slice(locs.from.index);
-      }
-      if (locs.to.path === entryDelimiterPath) {
-        entryDelimiter =
-          entryDelimiter.slice(0, locs.to.index) +
-          TO_MARKER +
-          entryDelimiter.slice(locs.to.index);
+          entryDelimiter.slice(0, pos.index) +
+          MARKER +
+          entryDelimiter.slice(pos.index);
       }
 
       str += entryDelimiter + "\n";
@@ -188,36 +206,31 @@ function stringifyObjectEntries(object, locs, path, depth) {
   return str;
 }
 
-function stringifyArrayEntries(arr, locs, path, depth) {
+function stringifyArrayEntries(arr, pos, options, path, depth) {
   let str = "";
   let lastIndex = `${arr.length - 1}`;
   for (let [index, v] of Object.entries(arr)) {
     let isLast = index === lastIndex;
     let keyPath = path + "[" + index + "]";
-    if (locs.from.path === keyPath) {
-      v = v + "<FROM|";
+    if (pos.path === keyPath) {
+      v = v + options.marker;
     }
-    if (locs.to.path === keyPath) {
-      v = v + "|TO>";
-    }
-    str += `${padding(depth)}${_jsonStringify(v, locs, keyPath, depth)}`;
+    str += `${padding(depth)}${_jsonStringify(
+      v,
+      pos,
+      options,
+      keyPath,
+      depth
+    )}`;
     if (!isLast) {
       let entryDelimiter = ",";
       let entryDelimiterPath = keyPath + "@" + ",";
-      console.log("EDP", entryDelimiterPath);
-      if (locs.from.path === entryDelimiterPath) {
+      if (pos.path === entryDelimiterPath) {
         entryDelimiter =
-          entryDelimiter.slice(0, locs.from.index) +
-          FROM_MARKER +
-          entryDelimiter.slice(locs.from.index);
+          entryDelimiter.slice(0, pos.index) +
+          options.marker +
+          entryDelimiter.slice(pos.index);
       }
-      if (locs.to.path === entryDelimiterPath) {
-        entryDelimiter =
-          entryDelimiter.slice(0, locs.to.index) +
-          TO_MARKER +
-          entryDelimiter.slice(locs.to.index);
-      }
-
       str += entryDelimiter + "\n";
     }
   }
