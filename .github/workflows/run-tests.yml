@@ -1,0 +1,35 @@
+name: Run-Tests
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  test:
+    # Name the Job
+    name: Run Ember Tests
+    # Set the type of machine to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Node Modules Cache
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Run Tests
+        run: ./node_modules/.bin/ember test
