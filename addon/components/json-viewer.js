@@ -69,8 +69,8 @@ export default Component.extend({
       let startPath = getPath(startNode);
       let endPath = getPath(endNode);
       let range = {
-        from: { path: startPath, index: startOffset },
-        to: { path: endPath, index: endOffset },
+        start: { path: startPath, index: startOffset },
+        end: { path: endPath, index: endOffset },
       };
       let str = jsonStringify(this.get("json"), range);
       evt.clipboardData.setData("text/plain", str);

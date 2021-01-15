@@ -1,14 +1,8 @@
-function isArray(v) {
-  return Array.isArray(v);
-}
-
-function isPrimitive(v) {
-  return ["number", "boolean", "string"].includes(typeof v);
-}
-
-function isObject(v) {
-  return !isArray(v) && typeof v === "object";
-}
+import {
+  isArray,
+  isPrimitive,
+  isObject,
+} from "ember-json-viewer/utils/value-types";
 
 /**
  * Paths:

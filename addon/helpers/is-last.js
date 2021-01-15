@@ -1,13 +1,6 @@
 import { helper } from "@ember/component/helper";
 import { assert } from "@ember/debug";
-
-function isArray(v) {
-  return Array.isArray(v);
-}
-
-function isObject(v) {
-  return !isArray(v) && typeof v === "object";
-}
+import { isArray, isObject } from "ember-json-viewer/utils/value-types";
 
 /**
  * Checks whether the given second argument (a key name or index)

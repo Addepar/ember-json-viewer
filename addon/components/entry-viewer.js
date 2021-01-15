@@ -2,14 +2,7 @@ import Component from "@ember/component";
 import { computed } from "@ember/object";
 import layout from "../templates/components/entry-viewer";
 import { readOnly } from "@ember/object/computed";
-
-function isArray(v) {
-  return Array.isArray(v);
-}
-
-function isPrimitive(v) {
-  return ["number", "boolean", "string"].includes(typeof v);
-}
+import { isPrimitive } from "../utils/value-types";
 
 export default Component.extend({
   tagName: "",
@@ -39,8 +32,7 @@ export default Component.extend({
   }),
 
   isToggleable: computed("value", function () {
-    // array or object is "typeof object"
-    return typeof this.get("value") === "object";
+    return !isPrimitive(this.get("value"));
   }),
 
   actions: {
