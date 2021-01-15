@@ -58,10 +58,7 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    let el = this.element;
-    el.addEventListener("copy", (evt) => {
-      console.log("new selection", window.getSelection());
-
+    this._copyHandler = (evt) => {
       let [startNode, startOffset, endNode, endOffset] = getOrderedSelection();
 
       let startPath = getPath(startNode);
@@ -72,8 +69,14 @@ export default Component.extend({
       };
       let str = jsonStringify(this.get("json"), range);
       evt.clipboardData.setData("text/plain", str);
-      console.log({ startPath, startOffset, endPath, endOffset });
       evt.preventDefault();
-    });
+    };
+    this.element.addEventListener("copy", this._copyHandler);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.element.removeEventListener("copy", this._copyHandler);
+    this._copyHandler = null;
   },
 });
