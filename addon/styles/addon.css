@@ -7,6 +7,11 @@
   font-size: 16px;
   overflow: scroll;
   height: 100%;
+  user-select: none;
+}
+
+.json-viewer [data-path] {
+  user-select: text;
 }
 
 .entries {
@@ -15,21 +20,8 @@
   margin: 0;
 }
 
-.entries.entries-inline,
-.entries.entries-inline li {
-  padding-inline-start: 0;
-  display: inline-block;
-}
-
 .entry-delimiter {
   margin-left: -8px;
-}
-
-/* Hide the delimiter after the last item. It is
-   vald to have a trailing comma in a JavaScript object/array,
-   but not in JSON. */
-.entries > .entry:last-child > .entry-delimiter {
-  display: none;
 }
 
 .entries-summary {

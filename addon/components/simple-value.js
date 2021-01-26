@@ -23,7 +23,7 @@ export default Component.extend({
       : "unknown";
   }),
 
-  formattedValue: computed("value", function () {
+  formattedValue: computed("value", "type", function () {
     let v = this.get("value");
     if (this.get("type") === "string") {
       return `"${v}"`;
