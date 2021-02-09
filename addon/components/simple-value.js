@@ -15,11 +15,13 @@ export default Component.extend({
   type: computed("value", function () {
     let v = this.get("value");
     return [true, false].includes(v)
-      ? "literal"
+      ? "boolean"
       : Number.isFinite(v)
       ? "number"
       : typeof v === "string"
       ? "string"
+      : v === null
+      ? "null"
       : "unknown";
   }),
 
@@ -27,6 +29,8 @@ export default Component.extend({
     let v = this.get("value");
     if (this.get("type") === "string") {
       return `"${v}"`;
+    } else if (this.get("type") === "null") {
+      return `null`;
     } else {
       return v;
     }

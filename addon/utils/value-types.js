@@ -3,7 +3,7 @@ export function isArray(v) {
 }
 
 export function isPrimitive(v) {
-  return ["number", "boolean", "string"].includes(typeof v);
+  return v === null || ["number", "boolean", "string"].includes(typeof v);
 }
 
 export function isObject(v) {

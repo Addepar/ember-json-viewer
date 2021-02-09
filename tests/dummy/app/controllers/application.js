@@ -6,6 +6,7 @@ const DEFAULT_JSON = {
   stringKey: "stringValue",
   numberKey: 123,
   numArrayKey: [1, 2, 3],
+  includeNull: [1, null, "two", false],
   mixedKey: ["one", 2.1234, "three point four five 6", 7.891],
   stringArrayKey: [
     "one",
@@ -60,16 +61,16 @@ export default class ApplicationController extends Controller {
   json = DEFAULT_JSON;
 
   @tracked
-  isJSONVAlid = true;
+  isJSONValid = true;
 
   @action updateJSON(evt) {
     try {
       let v = JSON.parse(evt.target.value);
       this.json = v;
-      this.isJSONVAlid = true;
+      this.isJSONValid = true;
     } catch (e) {
       // ignore unparseable json
-      this.isJSONVAlid = false;
+      this.isJSONValid = false;
     }
   }
 }

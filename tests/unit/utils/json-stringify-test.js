@@ -32,6 +32,10 @@ const JSONS = {
       },
     },
   },
+  has_null: {
+    x: null,
+    y: [null, null],
+  },
 };
 
 function nativeJsonStringify(json) {
@@ -755,6 +759,80 @@ module("Unit | Utility | json-stringify", function () {
       jsonStringify(json, range),
       format(expected),
       `when JSON includes MARKER constant`
+    );
+  });
+
+  test("serializes `null` correctly", function (assert) {
+    let expected = `{
+    ->«"x": n»ull,
+    ->"y": [
+    ->->null,
+    ->->null,
+    ->]
+    }`;
+    let range = {
+      start: { path: "$.x", index: 0 },
+      end: { path: "$.x@", index: 1 },
+    };
+
+    assert.equal(
+      jsonStringify(JSONS.has_null, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"x": nu»ll,
+    ->"y": [
+    ->->null,
+    ->->null,
+    ->]
+    }`;
+    range = {
+      start: { path: "$.x", index: 0 },
+      end: { path: "$.x@", index: 2 },
+    };
+
+    assert.equal(
+      jsonStringify(JSONS.has_null, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"x": null»,
+    ->"y": [
+    ->->null,
+    ->->null,
+    ->]
+    }`;
+    range = {
+      start: { path: "$.x", index: 0 },
+      end: { path: "$.x@", index: 4 },
+    };
+
+    assert.equal(
+      jsonStringify(JSONS.has_null, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
+    );
+
+    expected = `{
+    ->«"x": null,»
+    ->"y": [
+    ->->null,
+    ->->null,
+    ->]
+    }`;
+    range = {
+      start: { path: "$.x", index: 0 },
+      end: { path: "$.x@,", index: 1 },
+    };
+
+    assert.equal(
+      jsonStringify(JSONS.has_null, range),
+      format(expected),
+      `with range ${JSON.stringify(range)}`
     );
   });
 });
