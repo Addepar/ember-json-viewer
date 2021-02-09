@@ -46,7 +46,11 @@
   color: green;
 }
 
-.syntax-literal {
+.syntax-boolean {
+  color: #32aaee;
+}
+
+.syntax-null {
   color: #32aaee;
 }
 
