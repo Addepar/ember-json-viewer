@@ -4158,8 +4158,8 @@ t.clipboardData.setData("text/plain",p),t.preventDefault()},this.element.addEven
 e.default=s})),define("ember-json-viewer/components/simple-value",["exports","ember-json-viewer/templates/components/simple-value"],(function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var n=Ember.Component.extend({tagName:"",layout:t.default,value:null,syntaxClass:Ember.computed("type",(function(){return"syntax-".concat(this.get("type"))})),type:Ember.computed("value",(function(){var e=this.get("value")
-return[!0,!1].includes(e)?"literal":Number.isFinite(e)?"number":"string"==typeof e?"string":"unknown"})),formattedValue:Ember.computed("value","type",(function(){var e=this.get("value")
-return"string"===this.get("type")?'"'.concat(e,'"'):e}))})
+return[!0,!1].includes(e)?"boolean":Number.isFinite(e)?"number":"string"==typeof e?"string":null===e?"null":"unknown"})),formattedValue:Ember.computed("value","type",(function(){var e=this.get("value")
+return"string"===this.get("type")?'"'.concat(e,'"'):"null"===this.get("type")?"null":e}))})
 e.default=n})),define("ember-json-viewer/components/value-viewer",["exports","ember-json-viewer/templates/components/value-viewer","ember-json-viewer/utils/value-types"],(function(e,t,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=Ember.Component.extend({tagName:"",layout:t.default,value:null,showSummary:!1,isPrimitive:Ember.computed("value",(function(){return(0,n.isPrimitive)(this.get("value"))})),prefix:Ember.computed("value",(function(){return(0,n.isArray)(this.get("value"))?"[":"{"})),suffix:Ember.computed("value",(function(){return(0,n.isArray)(this.get("value"))?"]":"}"})),isObj:Ember.computed("value",(function(){return(0,n.isObject)(this.get("value"))})),valueSummary:Ember.computed("value",(function(){var e=this.get("value")
@@ -4241,7 +4241,7 @@ if(h='"'.concat(h,'": '),t.path===v&&(h=h.slice(0,t.index)+n.marker+h.slice(t.in
 t.path===y&&(g=g.slice(0,t.index)+o+g.slice(t.index)),s+=g+"\n"}}return s}(e,r,i,s,u):function(e,t,r,i,o){for(var s="",u="".concat(e.length-1),l=0,c=Object.entries(e);l<c.length;l++){var p=n(c[l],2),h=p[0],d=p[1],m=h===u,v=i+"["+h+"]"
 if(t.path===v&&(d+=r.marker),s+="".concat(a(o)).concat(f(d,t,r,v,o)),!m){var g=",",y=v+"@,"
 t.path===y&&(g=g.slice(0,t.index)+r.marker+g.slice(t.index)),s+=g+"\n"}}return s}(e,r,i,s,u)}})),define("ember-json-viewer/utils/value-types",["exports"],(function(e){"use strict"
-function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function n(e){return Array.isArray(e)}Object.defineProperty(e,"__esModule",{value:!0}),e.isArray=n,e.isPrimitive=function(e){return["number","boolean","string"].includes(t(e))},e.isObject=function(e){return!n(e)&&"object"===t(e)}})),define("ember-load-initializers/index",["exports","require"],(function(e,t){"use strict"
+function t(e){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function n(e){return Array.isArray(e)}Object.defineProperty(e,"__esModule",{value:!0}),e.isArray=n,e.isPrimitive=function(e){return null===e||["number","boolean","string"].includes(t(e))},e.isObject=function(e){return!n(e)&&"object"===t(e)}})),define("ember-load-initializers/index",["exports","require"],(function(e,t){"use strict"
 function n(e){var n=(0,t.default)(e,null,null,!0)
 if(!n)throw new Error(e+" must export an initializer.")
 var r=n.default
