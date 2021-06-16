@@ -1,3 +1,5 @@
+## [0.6.3](https://github.com/Addepar/ember-json-viewer/compare/v0.6.2...v0.6.3) (2021-06-16)
+
 ## [0.6.2](https://github.com/Addepar/ember-json-viewer/compare/v0.6.0...v0.6.2) (2021-06-16)
 
 # [0.6.0](https://github.com/Addepar/ember-json-viewer/compare/v0.5.0...v0.6.0) (2021-02-09)
