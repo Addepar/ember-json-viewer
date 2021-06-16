@@ -7,20 +7,17 @@ import { isPrimitive } from "../utils/value-types";
 export default Component.extend({
   tagName: "",
   layout,
-  isExpanded: computed("depth", "collapseDepth",  {
-    get() {
-      let depth = this.get("depth");
-      let collapseDepth = this.get("collapseDepth");
-      if (Number.isInteger(collapseDepth)) {
-        this._isExpanded = depth < collapseDepth;
-        return this._isExpanded;
-      } else {
-        this._isExpanded = true;
-        return this._isExpanded;
-      }
-    },
-    set(key, value) {
-      return this._isExpanded = value;
+  _isExpanded: null,
+  isExpanded: computed("depth", "collapseDepth", "_isExpanded", function () {
+    if (this.get("_isExpanded") !== null) {
+      return this.get("_isExpanded");
+    }
+    let depth = this.get("depth");
+    let collapseDepth = this.get("collapseDepth");
+    if (Number.isInteger(collapseDepth)) {
+      return depth < collapseDepth;
+    } else {
+      return true;
     }
   }),
 
@@ -47,7 +44,7 @@ export default Component.extend({
       if (!this.get("isToggleable")) {
         return;
       }
-      this.set("isExpanded", !this.get("isExpanded"));
+      this.set("_isExpanded", !this.get("isExpanded"));
     },
   },
 });
