@@ -1,6 +1,6 @@
 {{#if this.isPrimitive}}
   <span class="value primitive">
-    {{simple-value value=this.value path=(concat this.path "@")}}
+    <SimpleValue @value={{this.value}} @path={{concat this.path "@"}} />
   </span>
 {{else}}
   <span class="prefix" data-path={{concat this.path "<"}}>
@@ -15,24 +15,24 @@
     <ul class="entries depth-{{this.depth}}">
       {{#if this.isObj}}
         {{#each-in this.value as |key innerValue|}}
-          {{entry-viewer
-            key=key
-            value=innerValue
-            depth=this.depth
-            path=(concat this.path "." key)
-            displayOptions=this.displayOptions
-            isLast=(is-last this.value key)
-          }}
+          <EntryViewer
+            @key={{key}}
+            @value={{innerValue}}
+            @depth={{this.depth}}
+            @path={{concat this.path "." key}}
+            @displayOptions={{this.displayOptions}}
+            @isLast={{is-last this.value key}}
+          />
         {{/each-in}}
       {{else}}
         {{#each this.value as |innerValue index|}}
           <li class="entry">
-            {{value-viewer
-              value=innerValue
-              depth=this.depth
-              path=(concat this.path "[" index "]")
-              displayOptions=this.displayOptions
-            }}
+            <ValueViewer
+              @value={{innerValue}}
+              @depth={{this.depth}}
+              @path={{concat this.path "[" index "]"}}
+              @displayOptions={{this.displayOptions}}
+            />
             {{#if (not (is-last this.value index))}}
               {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
               <span class="entry-delimiter" data-path={{concat this.path "[" index "]" "@" ","}}>,</span>
