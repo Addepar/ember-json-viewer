@@ -5,6 +5,5 @@ module.exports = {
   rules: {
     "no-invalid-interactive": "off",
     "no-triple-curlies": "off",
-    "require-input-label": "off",
   },
 };
