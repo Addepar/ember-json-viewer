@@ -17,23 +17,23 @@ export default Component.extend({
   showSummary: false,
 
   isPrimitive: computed("value", function () {
-    return isPrimitive(this.get("value"));
+    return isPrimitive(this.value);
   }),
 
   prefix: computed("value", function () {
-    return isArray(this.get("value")) ? "[" : "{";
+    return isArray(this.value) ? "[" : "{";
   }),
 
   suffix: computed("value", function () {
-    return isArray(this.get("value")) ? "]" : "}";
+    return isArray(this.value) ? "]" : "}";
   }),
 
   isObj: computed("value", function () {
-    return isObject(this.get("value"));
+    return isObject(this.value);
   }),
 
   valueSummary: computed("value", function () {
-    let v = this.get("value");
+    let v = this.value;
     assert(
       `valueSummary only possible for non-primitive, got ${v}`,
       !isPrimitive(v)
