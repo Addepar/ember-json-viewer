@@ -8,6 +8,5 @@ module.exports = {
     "no-invalid-interactive": "off",
     "no-triple-curlies": "off",
     "require-input-label": "off",
-    "simple-unless": "off",
   },
 };
