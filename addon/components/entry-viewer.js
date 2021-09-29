@@ -1,5 +1,5 @@
 import Component from "@ember/component";
-import { computed } from "@ember/object";
+import { action, computed } from "@ember/object";
 import layout from "../templates/components/entry-viewer";
 import { readOnly } from "@ember/object/computed";
 import { isPrimitive } from "../utils/value-types";
@@ -39,12 +39,10 @@ export default Component.extend({
     return !isPrimitive(this.get("value"));
   }),
 
-  actions: {
-    toggleExpanded() {
-      if (!this.get("isToggleable")) {
-        return;
-      }
-      this.set("_isExpanded", !this.get("isExpanded"));
-    },
-  },
+  toggleExpanded: action(function () {
+    if (!this.get("isToggleable")) {
+      return;
+    }
+    this.set("_isExpanded", !this.get("isExpanded"));
+  }),
 });

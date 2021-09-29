@@ -1,6 +1,6 @@
 <li class="entry">
   {{#if this.isToggleable}}
-    <span class="key is-toggleable" {{action "toggleExpanded"}} data-test-toggle={{this.path}}>
+    <span class="key is-toggleable" {{on "click" this.toggleExpanded}} data-test-toggle={{this.path}}>
       <span class="key-expansion-state">
         {{#if this.isExpanded}}
           {{{this.expandedIcon}}}

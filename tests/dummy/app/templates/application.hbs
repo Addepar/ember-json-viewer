@@ -6,6 +6,6 @@
   </div>
   <div class="input-wrapper {{if this.isJSONValid "valid" "invalid"}}">
     <h2>Paste JSON below:</h2>
-    <Textarea oninput={{action this.updateJSON}} @value={{json-stringify this.json}} />
+    <Textarea {{on "input" this.updateJSON}} @value={{json-stringify this.json}} />
   </div>
 </main>
