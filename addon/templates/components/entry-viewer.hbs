@@ -12,7 +12,7 @@
         {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
           must be a single text node
         }}
-        {{quotedKey}}
+        {{this.quotedKey}}
       </span>
     </span>
   {{else}}
@@ -20,7 +20,7 @@
       {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
         must be a single text node
       }}
-      {{quotedKey}}
+      {{this.quotedKey}}
     </span>
   {{/if}}
   {{value-viewer

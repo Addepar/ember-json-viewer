@@ -9,7 +9,7 @@ module("Integration | Helper | inc", function (hooks) {
   test("it increments by 1", async function (assert) {
     this.set("inputValue", 1234);
 
-    await render(hbs`{{inc inputValue}}`);
+    await render(hbs`{{inc this.inputValue}}`);
 
     assert.equal(this.element.textContent.trim(), "1235");
   });
