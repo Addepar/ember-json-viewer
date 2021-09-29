@@ -1,1 +1,1 @@
-export { default } from 'ember-json-viewer/components/value-viewer';
+export { default } from "ember-json-viewer/components/value-viewer";

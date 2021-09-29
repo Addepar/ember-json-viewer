@@ -15,8 +15,8 @@ module("Unit | Utility | value-types", function () {
     assert.ok(isObject({}));
     assert.ok(isObject({ foo: "bar" }));
 
-    assert.ok(!isObject([]));
-    assert.ok(!isObject([1]));
+    assert.notOk(isObject([]));
+    assert.notOk(isObject([1]));
   });
 
   test("isPrimitive", function (assert) {

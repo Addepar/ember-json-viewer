@@ -1,1 +1,1 @@
-export { default, not } from 'ember-json-viewer/helpers/not';
+export { default, not } from "ember-json-viewer/helpers/not";
