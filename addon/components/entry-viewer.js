@@ -1,5 +1,6 @@
 import Component from "@ember/component";
 import { action, computed } from "@ember/object";
+import { htmlSafe } from "@ember/template";
 import layout from "../templates/components/entry-viewer";
 import { readOnly } from "@ember/object/computed";
 import { isPrimitive } from "../utils/value-types";
@@ -26,8 +27,14 @@ export default Component.extend({
   depth: 0,
 
   collapseDepth: readOnly("displayOptions.collapseDepth"),
-  expandedIcon: readOnly("displayOptions.expandedIcon"),
-  collapsedIcon: readOnly("displayOptions.collapsedIcon"),
+
+  expandedIcon: computed("displayOptions.expandedIcon", function () {
+    return htmlSafe(this.displayOptions.expandedIcon);
+  }),
+
+  collapsedIcon: computed("displayOptions.collapsedIcon", function () {
+    return htmlSafe(this.displayOptions.collapsedIcon);
+  }),
 
   // It is important that this be a single text node so that the
   // selection offset is correct for copy/paste

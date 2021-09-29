@@ -3,9 +3,9 @@
     <span class="key is-toggleable" {{on "click" this.toggleExpanded}} data-test-toggle={{this.path}} role="button">
       <span class="key-expansion-state">
         {{#if this.isExpanded}}
-          {{{this.expandedIcon}}}
+          {{this.expandedIcon}}
         {{else}}
-          {{{this.collapsedIcon}}}
+          {{this.collapsedIcon}}
         {{/if}}
       </span>
       <span data-path={{this.path}}>
