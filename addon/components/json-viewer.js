@@ -39,23 +39,24 @@ function getPath(node) {
   }
 }
 
-export default Component.extend({
-  classNames: ["json-viewer"],
+export default class JsonViewer extends Component {
+  classNames = ["json-viewer"];
 
   // passed-in
-  json: null,
+  json = null;
 
-  displayOptions: computed("options", function () {
+  @computed('options')
+  get displayOptions() {
     let options = this.get("options") || {};
     assert(
       `Only allowed options are: ${ALLOWED_OPTIONS}`,
       Object.keys(options).every((key) => ALLOWED_OPTIONS.includes(key))
     );
     return options;
-  }),
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this._copyHandler = (evt) => {
       let [startNode, startOffset, endNode, endOffset] = getOrderedSelection();
 
@@ -70,11 +71,11 @@ export default Component.extend({
       evt.preventDefault();
     };
     this.element.addEventListener("copy", this._copyHandler);
-  },
+  }
 
   willDestroyElement() {
-    this._super(...arguments);
+    super.willDestroyElement(...arguments);
     this.element.removeEventListener("copy", this._copyHandler);
     this._copyHandler = null;
-  },
-});
+  }
+}

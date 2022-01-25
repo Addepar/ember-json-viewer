@@ -1,16 +1,18 @@
 import Component from "@ember/component";
 import { computed } from "@ember/object";
 
-export default Component.extend({
-  tagName: "",
+export default class SimpleValue extends Component {
+  tagName = "";
   // passed-in
-  value: null,
+  value = null;
 
-  syntaxClass: computed("type", function () {
+  @computed('type')
+  get syntaxClass() {
     return `syntax-${this.get("type")}`;
-  }),
+  }
 
-  type: computed("value", function () {
+@computed('value')
+  get type(){
     let v = this.get("value");
     return [true, false].includes(v)
       ? "boolean"
@@ -21,9 +23,10 @@ export default Component.extend({
       : v === null
       ? "null"
       : "unknown";
-  }),
+  }
 
-  formattedValue: computed("value", "type", function () {
+  @computed('value', 'type')
+  get formattedValue() {
     let v = this.get("value");
     if (this.get("type") === "string") {
       return `"${v}"`;
@@ -32,5 +35,5 @@ export default Component.extend({
     } else {
       return v;
     }
-  }),
-});
+  }
+}

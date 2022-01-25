@@ -9,7 +9,7 @@ module("Integration | Helper | not", function (hooks) {
   test("it renders", async function (assert) {
     this.set("inputValue", "truthy");
 
-    await render(hbs`{{if (not inputValue) "YES" "NO"}}`);
+    await render(hbs`{{if (not this.inputValue) "YES" "NO"}}`);
     assert.equal(this.element.textContent.trim(), "NO");
 
     this.set("inputValue", "0");
