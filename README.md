@@ -9,9 +9,9 @@ Demo: http://addepar.github.io/ember-json-viewer
 
 ## Compatibility
 
-- Ember.js v2.4 or above
-- Ember CLI v2.13 or above
-- Node.js v10 or above
+- Ember.js v3.8 or above
+- Ember CLI v2.13 or above (unconfirmed)
+- Node.js v10 or above (unconfirmed)
 
 ## Installation
 
