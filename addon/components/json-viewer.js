@@ -1,4 +1,4 @@
-import Component from "@ember/component";
+import Component from "@glimmer/component";
 import layout from "../templates/components/json-viewer";
 import { assert } from "@ember/debug";
 import jsonStringify from "../utils/json-stringify";
@@ -56,6 +56,7 @@ export default Component.extend({
     return options;
   }),
 
+  // eslint-disable-next-line ember/no-component-lifecycle-hooks
   didInsertElement() {
     this._super(...arguments);
     this._copyHandler = (evt) => {
@@ -74,6 +75,7 @@ export default Component.extend({
     this.element.addEventListener("copy", this._copyHandler);
   },
 
+  // eslint-disable-next-line ember/no-component-lifecycle-hooks
   willDestroyElement() {
     this._super(...arguments);
     this.element.removeEventListener("copy", this._copyHandler);

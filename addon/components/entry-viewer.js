@@ -1,50 +1,58 @@
-import Component from "@ember/component";
-import { computed } from "@ember/object";
+import Component from "@glimmer/component";
+// eslint-disable-next-line ember/no-computed-properties-in-native-classes
+import { action, computed } from '@ember/object';
 import layout from "../templates/components/entry-viewer";
-import { readOnly } from "@ember/object/computed";
 import { isPrimitive } from "../utils/value-types";
+import { tracked } from '@glimmer/tracking';
 
-export default Component.extend({
-  tagName: "",
-  layout,
-  _isExpanded: null,
-  isExpanded: computed("depth", "collapseDepth", "_isExpanded", function () {
-    if (this.get("_isExpanded") !== null) {
-      return this.get("_isExpanded");
+export default class extends Component {
+  tagName = "";
+  layout = layout;
+  _isExpanded = null;
+
+  @tracked("depth", "collapseDepth", "_isExpanded")
+  get isExpanded () {
+    if (this._isExpanded !== null) {
+      return this._isExpanded;
     }
-    let depth = this.get("depth");
-    let collapseDepth = this.get("collapseDepth");
+    let depth = this.depth;
+    let collapseDepth = this.collapseDepth;
     if (Number.isInteger(collapseDepth)) {
       return depth < collapseDepth;
     } else {
       return true;
     }
-  }),
+  }
 
   // passed-in
-  value: null,
-  depth: 0,
+  value = null;
+  depth = 0;
 
-  collapseDepth: readOnly("displayOptions.collapseDepth"),
-  expandedIcon: readOnly("displayOptions.expandedIcon"),
-  collapsedIcon: readOnly("displayOptions.collapsedIcon"),
+  get collapseDepth () {
+    return this.displayOptions.collapseDepth;
+  }
+  get expandedIcon () {
+    return this.displayOptions.expandedIcon;
+  }
+  get collapsedIcon () {
+    return this.displayOptions.collapsedIcon;
+  }
 
   // It is important that this be a single text node so that the
   // selection offset is correct for copy/paste
-  quotedKey: computed("key", function () {
-    return `"${this.get("key")}": `;
-  }),
+  quotedKey = computed("key", function () {
+    return `"${this.key}": `;
+  })
 
-  isToggleable: computed("value", function () {
-    return !isPrimitive(this.get("value"));
-  }),
+  isToggleable = computed("value", function () {
+    return !isPrimitive(this.value);
+  })
 
-  actions: {
-    toggleExpanded() {
-      if (!this.get("isToggleable")) {
-        return;
-      }
-      this.set("_isExpanded", !this.get("isExpanded"));
-    },
-  },
-});
+  @action()
+  toggleExpanded() {
+    if (!this.isToggleable) {
+      return;
+    }
+    this._isExpanded = !this.isExpanded;
+  }
+}
