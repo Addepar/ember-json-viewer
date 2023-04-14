@@ -1,6 +1,6 @@
 {
   "name": "ember-json-viewer",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A JSON-viewer addon for Ember apps",
   "keywords": [
     "ember-addon"
@@ -27,7 +27,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "ember-cli-babel": "^7.22.1",
+    "ember-cli-babel": "^7.26.11",
     "ember-cli-htmlbars": "^6.0.0",
     "ember-test-selectors": "^6.0.0"
   },
