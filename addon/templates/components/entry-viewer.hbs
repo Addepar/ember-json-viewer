@@ -12,7 +12,7 @@
         {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
           must be a single text node
         }}
-        {{quotedKey}}
+        {{this.quotedKey}}
       </span>
     </span>
   {{else}}
@@ -20,16 +20,16 @@
       {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
         must be a single text node
       }}
-      {{quotedKey}}
+      {{this.quotedKey}}
     </span>
   {{/if}}
-  {{value-viewer
-    value=this.value
-    showSummary=(not this.isExpanded)
-    depth=(inc this.depth)
-    displayOptions=this.displayOptions
-    path=this.path
-  }}
+  <ValueViewer
+    @value={{this.value}}
+    @showSummary={{not this.isExpanded}}
+    @depth={{inc this.depth}}
+    @displayOptions={{this.displayOptions}}
+    @path={{this.path}}
+  />
   {{#unless this.isLast}}
     {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
     <span class="entry-delimiter" data-path={{concat this.path "@" ","}}>,</span>

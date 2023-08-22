@@ -9,11 +9,11 @@ export default Component.extend({
   value: null,
 
   syntaxClass: computed("type", function () {
-    return `syntax-${this.get("type")}`;
+    return `syntax-${this.type}`;
   }),
 
   type: computed("value", function () {
-    let v = this.get("value");
+    let v = this.value;
     return [true, false].includes(v)
       ? "boolean"
       : Number.isFinite(v)
@@ -26,10 +26,10 @@ export default Component.extend({
   }),
 
   formattedValue: computed("value", "type", function () {
-    let v = this.get("value");
-    if (this.get("type") === "string") {
+    let v = this.value;
+    if (this.type === "string") {
       return `"${v}"`;
-    } else if (this.get("type") === "null") {
+    } else if (this.type === "null") {
       return `null`;
     } else {
       return v;
