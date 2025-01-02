@@ -2,8 +2,8 @@ name: Run-Tests
 
 # Run this workflow every time a new commit pushed to your repository
 on:
- - push
- - pull_request
+  - push
+  - pull_request
 
 jobs:
   # Set the job key. The key is displayed as the job name
@@ -17,15 +17,15 @@ jobs:
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install Node 14
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "14"
 
       - name: Node Modules Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
