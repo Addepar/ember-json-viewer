@@ -75,5 +75,8 @@
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "http://addepar.github.io/ember-json-viewer"
+  },
+  "volta": {
+    "node": "14.21.3"
   }
 }
