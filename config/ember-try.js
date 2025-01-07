@@ -9,6 +9,8 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~3.28.0',
+            'ember-qunit': '^5.0.0',
+            '@ember/test-helpers': '^2.4.0',
           },
         },
       },
@@ -33,19 +35,6 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~4.12.0',
-          },
-        },
-      },
-      {
-        name: 'ember-default-with-jquery',
-        env: {
-          EMBER_OPTIONAL_FEATURES: JSON.stringify({
-            'jquery-integration': true,
-          }),
-        },
-        npm: {
-          devDependencies: {
-            '@ember/jquery': '^1.1.0',
           },
         },
       },
