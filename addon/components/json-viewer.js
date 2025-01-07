@@ -48,7 +48,7 @@ export default Component.extend({
   json: null,
 
   displayOptions: computed('options', function () {
-    let options = this.get('options') || {};
+    let options = this.options || {};
     assert(
       `Only allowed options are: ${ALLOWED_OPTIONS}`,
       Object.keys(options).every((key) => ALLOWED_OPTIONS.includes(key)),
@@ -67,7 +67,7 @@ export default Component.extend({
         start: { path: startPath, index: startOffset },
         end: { path: endPath, index: endOffset },
       };
-      let str = jsonStringify(this.get('json'), range);
+      let str = jsonStringify(this.json, range);
       evt.clipboardData.setData('text/plain', str);
       evt.preventDefault();
     };

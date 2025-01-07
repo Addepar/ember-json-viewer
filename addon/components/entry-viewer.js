@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { action, computed } from '@ember/object';
 import layout from '../templates/components/entry-viewer';
 import { readOnly } from '@ember/object/computed';
 import { isPrimitive } from '../utils/value-types';
@@ -9,11 +9,11 @@ export default Component.extend({
   layout,
   _isExpanded: null,
   isExpanded: computed('depth', 'collapseDepth', '_isExpanded', function () {
-    if (this.get('_isExpanded') !== null) {
-      return this.get('_isExpanded');
+    if (this._isExpanded !== null) {
+      return this._isExpanded;
     }
-    let depth = this.get('depth');
-    let collapseDepth = this.get('collapseDepth');
+    let depth = this.depth;
+    let collapseDepth = this.collapseDepth;
     if (Number.isInteger(collapseDepth)) {
       return depth < collapseDepth;
     } else {
@@ -32,19 +32,17 @@ export default Component.extend({
   // It is important that this be a single text node so that the
   // selection offset is correct for copy/paste
   quotedKey: computed('key', function () {
-    return `"${this.get('key')}": `;
+    return `"${this.key}": `;
   }),
 
   isToggleable: computed('value', function () {
-    return !isPrimitive(this.get('value'));
+    return !isPrimitive(this.value);
   }),
 
-  actions: {
-    toggleExpanded() {
-      if (!this.get('isToggleable')) {
-        return;
-      }
-      this.set('_isExpanded', !this.get('isExpanded'));
-    },
-  },
+  toggleExpanded: action(function () {
+    if (!this.isToggleable) {
+      return;
+    }
+    this.set('_isExpanded', !this.isExpanded);
+  }),
 });
