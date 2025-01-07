@@ -34,6 +34,7 @@ jobs:
     name: Run Ember Tests
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         ember-version: [
           ember-lts-3.28,
