@@ -1,12 +1,10 @@
 import Component from '@ember/component';
 import { action, computed } from '@ember/object';
-import layout from '../templates/components/entry-viewer';
 import { readOnly } from '@ember/object/computed';
 import { isPrimitive } from '../utils/value-types';
 
 export default Component.extend({
   tagName: '',
-  layout,
   _isExpanded: null,
   isExpanded: computed('depth', 'collapseDepth', '_isExpanded', function () {
     if (this._isExpanded !== null) {
