@@ -3,9 +3,9 @@ export function isArray(v) {
 }
 
 export function isPrimitive(v) {
-  return v === null || ["number", "boolean", "string"].includes(typeof v);
+  return v === null || ['number', 'boolean', 'string'].includes(typeof v);
 }
 
 export function isObject(v) {
-  return !isArray(v) && typeof v === "object";
+  return !isArray(v) && typeof v === 'object';
 }
