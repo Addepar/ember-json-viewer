@@ -1115,6 +1115,14 @@
     semver "^7.3.5"
     typescript-memoize "^1.0.1"
 
+"@embroider/test-setup@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@embroider/test-setup/-/test-setup-4.0.0.tgz#080dd40314a53cc6f6fcffed41cd24ee0cb48b3d"
+  integrity sha512-1S3Ebk0CEh3XDqD93AWSwQZBCk+oGv03gtkaGgdgyXGIR7jrVyDgEnEuslN/hJ0cuU8TqhiXrzHMw7bJwIGhWw==
+  dependencies:
+    lodash "^4.17.21"
+    resolve "^1.20.0"
+
 "@eslint-community/eslint-utils@^4.1.2", "@eslint-community/eslint-utils@^4.2.0", "@eslint-community/eslint-utils@^4.4.1":
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.4.1.tgz#d1145bf2c20132d6400495d6df4bf59362fd9d56"
