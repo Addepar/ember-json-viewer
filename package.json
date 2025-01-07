@@ -78,7 +78,7 @@
     "webpack": "^5.97.1"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "ember": {
     "edition": "octane"
@@ -88,7 +88,7 @@
     "demoURL": "http://addepar.github.io/ember-json-viewer"
   },
   "volta": {
-    "node": "18.20.5",
+    "node": "20.18.1",
     "yarn": "1.22.22"
   }
 }
