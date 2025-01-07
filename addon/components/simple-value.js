@@ -1,22 +1,12 @@
-import classic from 'ember-classic-decorator';
-import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
-@classic
-@tagName('')
 export default class SimpleValue extends Component {
-  // passed-in
-  value = null;
-
-  @computed('type')
   get syntaxClass() {
     return `syntax-${this.type}`;
   }
 
-  @computed('value')
   get type() {
-    let v = this.value;
+    let v = this.args.value;
     return [true, false].includes(v)
       ? 'boolean'
       : Number.isFinite(v)
@@ -28,9 +18,8 @@ export default class SimpleValue extends Component {
             : 'unknown';
   }
 
-  @computed('value', 'type')
   get formattedValue() {
-    let v = this.value;
+    let v = this.args.value;
     if (this.type === 'string') {
       return `"${v}"`;
     } else if (this.type === 'null') {
