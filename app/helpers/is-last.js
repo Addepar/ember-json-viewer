@@ -1,1 +1,1 @@
-export { default, isLast } from 'ember-json-viewer/helpers/is-last';
+export { default } from 'ember-json-viewer/helpers/is-last';
