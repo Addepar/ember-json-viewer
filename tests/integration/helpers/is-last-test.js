@@ -10,7 +10,9 @@ module('Integration | Helper | is-last', function (hooks) {
     this.set('objOrArray', [1, 2, 3]);
     this.set('keyOrIndex', -1);
 
-    await render(hbs`{{if (is-last objOrArray keyOrIndex) "YES" "NO"}}`);
+    await render(
+      hbs`{{if (is-last this.objOrArray this.keyOrIndex) "YES" "NO"}}`,
+    );
     assert.equal(this.element.textContent.trim(), 'NO');
 
     this.set('keyOrIndex', 0);
@@ -24,7 +26,9 @@ module('Integration | Helper | is-last', function (hooks) {
     this.set('objOrArray', { foo: 1, bar: 2, baz: 3 });
     this.set('keyOrIndex', 'foo');
 
-    await render(hbs`{{if (is-last objOrArray keyOrIndex) "YES" "NO"}}`);
+    await render(
+      hbs`{{if (is-last this.objOrArray this.keyOrIndex) "YES" "NO"}}`,
+    );
     assert.equal(this.element.textContent.trim(), 'NO');
 
     this.set('keyOrIndex', 'bar');
