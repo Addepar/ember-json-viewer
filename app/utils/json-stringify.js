@@ -1,1 +1,1 @@
-export { default } from "ember-json-viewer/utils/json-stringify";
+export { default } from 'ember-json-viewer/utils/json-stringify';

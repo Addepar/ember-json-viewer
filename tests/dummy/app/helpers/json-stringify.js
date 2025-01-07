@@ -1,5 +1,5 @@
-import { helper } from "@ember/component/helper";
+import { helper } from '@ember/component/helper';
 
 export default helper(function jsonStringify([json] /*, hash*/) {
-  return JSON.stringify(json, null, " ");
+  return JSON.stringify(json, null, ' ');
 });

@@ -2,7 +2,7 @@ import {
   isArray,
   isPrimitive,
   isObject,
-} from "ember-json-viewer/utils/value-types";
+} from 'ember-json-viewer/utils/value-types';
 
 /**
  * Paths:
@@ -35,12 +35,12 @@ import {
  * 9: $.arr@,
  */
 
-const ROOT = "$";
-const PAD = "  ";
+const ROOT = '$';
+const PAD = '  ';
 
 // Used to mark the place in the stringified JSON that matches
 // the target position
-export const MARKER = "<MARKER>";
+export const MARKER = '<MARKER>';
 
 /**
  * Creates a string by concat-ing the `pad` `depth` times
@@ -49,17 +49,17 @@ export const MARKER = "<MARKER>";
  * @returns {string}
  */
 function padding(depth, pad = PAD) {
-  return new Array(depth).fill(pad).join("");
+  return new Array(depth).fill(pad).join('');
 }
 
 // Start-end delimiters for objects and arrays
-const OBJECT_DELIMS = ["{", "}"];
-const ARRAY_DELIMS = ["[", "]"];
+const OBJECT_DELIMS = ['{', '}'];
+const ARRAY_DELIMS = ['[', ']'];
 
 // Default range is from the very start to very end
 const FULL_RANGE = {
-  start: { path: ROOT + "<", index: 0 },
-  end: { path: ROOT + ">", index: 1 },
+  start: { path: ROOT + '<', index: 0 },
+  end: { path: ROOT + '>', index: 1 },
 };
 
 /**
@@ -110,21 +110,21 @@ export default function jsonStringify(json, range = FULL_RANGE) {
 
 function _jsonStringify(json, pos, options, path = ROOT, depth = 0) {
   if (isPrimitive(json)) {
-    return formatPrimitive(json, pos, options, path + "@");
+    return formatPrimitive(json, pos, options, path + '@');
   }
 
   let delims = isObject(json)
     ? [...OBJECT_DELIMS]
     : isArray(json)
-    ? [...ARRAY_DELIMS]
-    : null;
+      ? [...ARRAY_DELIMS]
+      : null;
 
-  if (pos.path === path + "<") {
+  if (pos.path === path + '<') {
     delims[0] =
       delims[0].slice(0, pos.index) +
       options.marker +
       delims[0].slice(pos.index);
-  } else if (pos.path === path + ">") {
+  } else if (pos.path === path + '>') {
     delims[1] =
       delims[1].slice(0, pos.index) +
       options.marker +
@@ -133,17 +133,17 @@ function _jsonStringify(json, pos, options, path = ROOT, depth = 0) {
 
   return (
     delims[0] +
-    "\n" +
+    '\n' +
     stringifyEntries(json, pos, options, path, depth + 1) +
-    "\n" +
+    '\n' +
     padding(depth) +
     delims[1]
   );
 }
 
 function formatPrimitive(v, pos, options, path) {
-  let formatted = "";
-  if (typeof v === "string") {
+  let formatted = '';
+  if (typeof v === 'string') {
     formatted = `"${v}"`;
   } else {
     formatted = `${v}`;
@@ -164,14 +164,14 @@ function stringifyEntries(objOrArr, pos, options, path, depth) {
 }
 
 function stringifyObjectEntries(object, pos, options, path, depth) {
-  let str = "";
+  let str = '';
   let keys = Object.keys(object);
   let lastKey = keys[keys.length - 1];
 
   for (let key of keys) {
     let isLast = key === lastKey;
     let v = object[key];
-    let keyPath = path + "." + key;
+    let keyPath = path + '.' + key;
     key = `"${key}": `;
     if (pos.path === keyPath) {
       key = key.slice(0, pos.index) + options.marker + key.slice(pos.index);
@@ -181,12 +181,12 @@ function stringifyObjectEntries(object, pos, options, path, depth) {
       pos,
       options,
       keyPath,
-      depth
+      depth,
     )}`;
 
     if (!isLast) {
-      let entryDelimiter = ",";
-      let entryDelimiterPath = keyPath + "@" + ",";
+      let entryDelimiter = ',';
+      let entryDelimiterPath = keyPath + '@' + ',';
       if (pos.path === entryDelimiterPath) {
         entryDelimiter =
           entryDelimiter.slice(0, pos.index) +
@@ -194,18 +194,18 @@ function stringifyObjectEntries(object, pos, options, path, depth) {
           entryDelimiter.slice(pos.index);
       }
 
-      str += entryDelimiter + "\n";
+      str += entryDelimiter + '\n';
     }
   }
   return str;
 }
 
 function stringifyArrayEntries(arr, pos, options, path, depth) {
-  let str = "";
+  let str = '';
   let lastIndex = `${arr.length - 1}`;
   for (let [index, v] of Object.entries(arr)) {
     let isLast = index === lastIndex;
-    let keyPath = path + "[" + index + "]";
+    let keyPath = path + '[' + index + ']';
     if (pos.path === keyPath) {
       v = v + options.marker;
     }
@@ -214,18 +214,18 @@ function stringifyArrayEntries(arr, pos, options, path, depth) {
       pos,
       options,
       keyPath,
-      depth
+      depth,
     )}`;
     if (!isLast) {
-      let entryDelimiter = ",";
-      let entryDelimiterPath = keyPath + "@" + ",";
+      let entryDelimiter = ',';
+      let entryDelimiterPath = keyPath + '@' + ',';
       if (pos.path === entryDelimiterPath) {
         entryDelimiter =
           entryDelimiter.slice(0, pos.index) +
           options.marker +
           entryDelimiter.slice(pos.index);
       }
-      str += entryDelimiter + "\n";
+      str += entryDelimiter + '\n';
     }
   }
   return str;

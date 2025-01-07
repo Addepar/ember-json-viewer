@@ -1,6 +1,6 @@
-import { helper } from "@ember/component/helper";
-import { assert } from "@ember/debug";
-import { isArray, isObject } from "ember-json-viewer/utils/value-types";
+import { helper } from '@ember/component/helper';
+import { assert } from '@ember/debug';
+import { isArray, isObject } from 'ember-json-viewer/utils/value-types';
 
 /**
  * Checks whether the given second argument (a key name or index)

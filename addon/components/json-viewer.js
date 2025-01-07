@@ -1,10 +1,10 @@
-import Component from "@ember/component";
-import layout from "../templates/components/json-viewer";
-import { assert } from "@ember/debug";
-import jsonStringify from "../utils/json-stringify";
-import { computed } from "@ember/object";
+import Component from '@ember/component';
+import layout from '../templates/components/json-viewer';
+import { assert } from '@ember/debug';
+import jsonStringify from '../utils/json-stringify';
+import { computed } from '@ember/object';
 
-const ALLOWED_OPTIONS = ["expandedIcon", "collapsedIcon", "collapseDepth"];
+const ALLOWED_OPTIONS = ['expandedIcon', 'collapsedIcon', 'collapseDepth'];
 
 // Returns [startNode, startOffset, endNode, endOffset]
 // Reverses the window selection if the anchor node is after the
@@ -32,8 +32,8 @@ function getPath(node) {
   let path = null;
   while (!path && node) {
     if (node.nodeType === Node.ELEMENT_NODE) {
-      if (node.hasAttribute("data-path")) {
-        return node.getAttribute("data-path");
+      if (node.hasAttribute('data-path')) {
+        return node.getAttribute('data-path');
       }
     }
     node = node.parentNode;
@@ -41,17 +41,17 @@ function getPath(node) {
 }
 
 export default Component.extend({
-  classNames: ["json-viewer"],
+  classNames: ['json-viewer'],
   layout,
 
   // passed-in
   json: null,
 
-  displayOptions: computed("options", function () {
-    let options = this.get("options") || {};
+  displayOptions: computed('options', function () {
+    let options = this.get('options') || {};
     assert(
       `Only allowed options are: ${ALLOWED_OPTIONS}`,
-      Object.keys(options).every((key) => ALLOWED_OPTIONS.includes(key))
+      Object.keys(options).every((key) => ALLOWED_OPTIONS.includes(key)),
     );
     return options;
   }),
@@ -67,16 +67,16 @@ export default Component.extend({
         start: { path: startPath, index: startOffset },
         end: { path: endPath, index: endOffset },
       };
-      let str = jsonStringify(this.get("json"), range);
-      evt.clipboardData.setData("text/plain", str);
+      let str = jsonStringify(this.get('json'), range);
+      evt.clipboardData.setData('text/plain', str);
       evt.preventDefault();
     };
-    this.element.addEventListener("copy", this._copyHandler);
+    this.element.addEventListener('copy', this._copyHandler);
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    this.element.removeEventListener("copy", this._copyHandler);
+    this.element.removeEventListener('copy', this._copyHandler);
     this._copyHandler = null;
   },
 });
