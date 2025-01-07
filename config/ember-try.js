@@ -19,6 +19,7 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~4.4.0',
+            '@glimmer/component': '^1.0.0',
           },
         },
       },
