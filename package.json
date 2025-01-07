@@ -53,7 +53,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-qunit": "^4.6.0",
     "ember-resolver": "^8.0.2",
-    "ember-source": "~3.22.0",
+    "ember-source": "~3.28.12",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^2.14.0",
     "ember-try": "^1.4.0",
@@ -67,7 +67,7 @@
     "webpack": "^5.97.1"
   },
   "engines": {
-    "node": "10.* || >= 12"
+    "node": ">= 18"
   },
   "ember": {
     "edition": "octane"
@@ -75,5 +75,9 @@
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "http://addepar.github.io/ember-json-viewer"
+  },
+  "volta": {
+    "node": "18.20.5",
+    "yarn": "1.22.22"
   }
 }
