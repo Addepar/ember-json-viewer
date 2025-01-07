@@ -8,9 +8,27 @@ on:
   pull_request:
 
 jobs:
+  lint:
+    name: Run Ember Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: volta-cli/action@v4
+      - uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+      - run: yarn run lint
+
   test:
     name: Run Ember Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ember-version: [ember-lts-3.28, ember-default-with-jquery]
 
     steps:
       - name: Checkout code
@@ -20,10 +38,12 @@ jobs:
         uses: actions/cache@v4
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-${{ matrix.ember-version }}
+          restore-keys: |
+            ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
 
       - name: Install Dependencies
         run: yarn --frozen-lockfile
 
       - name: Run Tests
-        run: yarn run test
+        run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup
