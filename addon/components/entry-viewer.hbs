@@ -1,6 +1,6 @@
 <li class="entry">
   {{#if this.isToggleable}}
-    <span class="key is-toggleable" {{on "click" this.toggleExpanded}} data-test-toggle={{this.path}}>
+    <span class="key is-toggleable" {{on "click" this.toggleExpanded}} data-test-toggle={{@path}}>
       <span class="key-expansion-state">
         {{#if this.isExpanded}}
           {{{this.expandedIcon}}}
@@ -8,7 +8,7 @@
           {{{this.collapsedIcon}}}
         {{/if}}
       </span>
-      <span data-path={{this.path}}>
+      <span data-path={{@path}}>
         {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
           must be a single text node
         }}
@@ -16,7 +16,7 @@
       </span>
     </span>
   {{else}}
-    <span class="key" data-path={{this.path}}>
+    <span class="key" data-path={{@path}}>
       {{! In order for copy/paste to work, the quoted key (e.g. '"foo": ')
         must be a single text node
       }}
@@ -24,14 +24,14 @@
     </span>
   {{/if}}
   <ValueViewer
-    @value={{this.value}}
+    @value={{@value}}
     @showSummary={{not this.isExpanded}}
-    @depth={{inc this.depth}}
-    @displayOptions={{this.displayOptions}}
-    @path={{this.path}}
+    @depth={{inc @depth}}
+    @displayOptions={{@displayOptions}}
+    @path={{@path}}
   />
   {{#unless this.isLast}}
     {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
-    <span class="entry-delimiter" data-path={{concat this.path "@" ","}}>,</span>
+    <span class="entry-delimiter" data-path={{concat @path "@" ","}}>,</span>
   {{/unless}}
 </li>

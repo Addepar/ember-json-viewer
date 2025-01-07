@@ -1,20 +1,17 @@
-import classic from 'ember-classic-decorator';
-import { tagName } from '@ember-decorators/component';
-import Component from '@ember/component';
-import { action, computed } from '@ember/object';
-import { readOnly } from '@ember/object/computed';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { isPrimitive } from '../utils/value-types';
 
-@classic
-@tagName('')
 export default class EntryViewer extends Component {
+  @tracked
   _isExpanded = null;
-  @computed('depth', 'collapseDepth', '_isExpanded')
+
   get isExpanded() {
     if (this._isExpanded !== null) {
       return this._isExpanded;
     }
-    let depth = this.depth;
+    let depth = this.args.depth;
     let collapseDepth = this.collapseDepth;
     if (Number.isInteger(collapseDepth)) {
       return depth < collapseDepth;
@@ -23,24 +20,26 @@ export default class EntryViewer extends Component {
     }
   }
 
-  // passed-in
-  value = null;
-  depth = 0;
+  get collapseDepth() {
+    return this.args.displayOptions?.collapseDepth;
+  }
 
-  @readOnly('displayOptions.collapseDepth') collapseDepth;
-  @readOnly('displayOptions.expandedIcon') expandedIcon;
-  @readOnly('displayOptions.collapsedIcon') collapsedIcon;
+  get expandedIcon() {
+    return this.args.displayOptions?.expandedIcon;
+  }
+
+  get collapsedIcon() {
+    return this.args.displayOptions?.collapsedIcon;
+  }
 
   // It is important that this be a single text node so that the
   // selection offset is correct for copy/paste
-  @computed('key')
   get quotedKey() {
-    return `"${this.key}": `;
+    return `"${this.args.key}": `;
   }
 
-  @computed('value')
   get isToggleable() {
-    return !isPrimitive(this.value);
+    return !isPrimitive(this.args.value);
   }
 
   @action
@@ -48,6 +47,6 @@ export default class EntryViewer extends Component {
     if (!this.isToggleable) {
       return;
     }
-    this.set('_isExpanded', !this.isExpanded);
+    this._isExpanded = !this.isExpanded;
   }
 }
