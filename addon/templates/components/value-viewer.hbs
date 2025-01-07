@@ -12,20 +12,20 @@
       {{this.valueSummary}}
     </span>
   {{else}}
-    <ul class="entries depth-{{depth}}">
+    <ul class="entries depth-{{this.depth}}">
       {{#if this.isObj}}
-        {{#each-in value as |key innerValue|}}
+        {{#each-in this.value as |key innerValue|}}
           {{entry-viewer
             key=key
             value=innerValue
             depth=this.depth
             path=(concat this.path "." key)
             displayOptions=this.displayOptions
-            isLast=(is-last value key)
+            isLast=(is-last this.value key)
           }}
         {{/each-in}}
       {{else}}
-        {{#each value as |innerValue index|}}
+        {{#each this.value as |innerValue index|}}
           <li class="entry">
             {{value-viewer
               value=innerValue
@@ -33,7 +33,7 @@
               path=(concat this.path "[" index "]")
               displayOptions=this.displayOptions
             }}
-            {{#unless (is-last value index)}}
+            {{#unless (is-last this.value index)}}
               {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
               <span class="entry-delimiter" data-path={{concat this.path "[" index "]" "@" ","}}>,</span>
             {{/unless}}
