@@ -1,29 +1,21 @@
 name: Run-Tests
 
-# Run this workflow every time a new commit pushed to your repository
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
 
 jobs:
-  # Set the job key. The key is displayed as the job name
-  # when a job name is not provided
   test:
-    # Name the Job
     name: Run Ember Tests
-    # Set the type of machine to run on
     runs-on: ubuntu-latest
 
     steps:
-      # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install Node 14
-        uses: actions/setup-node@v4
-        with:
-          node-version: "14"
-
+      - uses: volta-cli/action@v4
       - name: Node Modules Cache
         uses: actions/cache@v4
         with:
