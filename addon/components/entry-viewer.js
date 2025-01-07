@@ -1,12 +1,16 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import { action, computed } from '@ember/object';
 import { readOnly } from '@ember/object/computed';
 import { isPrimitive } from '../utils/value-types';
 
-export default Component.extend({
-  tagName: '',
-  _isExpanded: null,
-  isExpanded: computed('depth', 'collapseDepth', '_isExpanded', function () {
+@classic
+@tagName('')
+export default class EntryViewer extends Component {
+  _isExpanded = null;
+  @computed('depth', 'collapseDepth', '_isExpanded')
+  get isExpanded() {
     if (this._isExpanded !== null) {
       return this._isExpanded;
     }
@@ -17,30 +21,33 @@ export default Component.extend({
     } else {
       return true;
     }
-  }),
+  }
 
   // passed-in
-  value: null,
-  depth: 0,
+  value = null;
+  depth = 0;
 
-  collapseDepth: readOnly('displayOptions.collapseDepth'),
-  expandedIcon: readOnly('displayOptions.expandedIcon'),
-  collapsedIcon: readOnly('displayOptions.collapsedIcon'),
+  @readOnly('displayOptions.collapseDepth') collapseDepth;
+  @readOnly('displayOptions.expandedIcon') expandedIcon;
+  @readOnly('displayOptions.collapsedIcon') collapsedIcon;
 
   // It is important that this be a single text node so that the
   // selection offset is correct for copy/paste
-  quotedKey: computed('key', function () {
+  @computed('key')
+  get quotedKey() {
     return `"${this.key}": `;
-  }),
+  }
 
-  isToggleable: computed('value', function () {
+  @computed('value')
+  get isToggleable() {
     return !isPrimitive(this.value);
-  }),
+  }
 
-  toggleExpanded: action(function () {
+  @action
+  toggleExpanded() {
     if (!this.isToggleable) {
       return;
     }
     this.set('_isExpanded', !this.isExpanded);
-  }),
-});
+  }
+}

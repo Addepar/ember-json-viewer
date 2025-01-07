@@ -1,5 +1,7 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
+import Component from '@ember/component';
 import {
   isArray,
   isPrimitive,
@@ -7,35 +9,41 @@ import {
 } from 'ember-json-viewer/utils/value-types';
 import { assert } from '@ember/debug';
 
-export default Component.extend({
-  tagName: '',
-
+@classic
+@tagName('')
+export default class ValueViewer extends Component {
   // passed-in
-  value: null,
-  showSummary: false,
+  value = null;
 
-  isPrimitive: computed('value', function () {
+  showSummary = false;
+
+  @computed('value')
+  get isPrimitive() {
     return isPrimitive(this.value);
-  }),
+  }
 
-  prefix: computed('value', function () {
+  @computed('value')
+  get prefix() {
     return isArray(this.value) ? '[' : '{';
-  }),
+  }
 
-  suffix: computed('value', function () {
+  @computed('value')
+  get suffix() {
     return isArray(this.value) ? ']' : '}';
-  }),
+  }
 
-  isObj: computed('value', function () {
+  @computed('value')
+  get isObj() {
     return isObject(this.value);
-  }),
+  }
 
-  valueSummary: computed('value', function () {
+  @computed('value')
+  get valueSummary() {
     let v = this.value;
     assert(
       `valueSummary only possible for non-primitive, got ${v}`,
       !isPrimitive(v),
     );
     return isArray(v) ? v.length : Object.keys(v).length;
-  }),
-});
+  }
+}

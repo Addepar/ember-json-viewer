@@ -1,16 +1,21 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import { computed } from '@ember/object';
+import Component from '@ember/component';
 
-export default Component.extend({
-  tagName: '',
+@classic
+@tagName('')
+export default class SimpleValue extends Component {
   // passed-in
-  value: null,
+  value = null;
 
-  syntaxClass: computed('type', function () {
+  @computed('type')
+  get syntaxClass() {
     return `syntax-${this.type}`;
-  }),
+  }
 
-  type: computed('value', function () {
+  @computed('value')
+  get type() {
     let v = this.value;
     return [true, false].includes(v)
       ? 'boolean'
@@ -21,9 +26,10 @@ export default Component.extend({
           : v === null
             ? 'null'
             : 'unknown';
-  }),
+  }
 
-  formattedValue: computed('value', 'type', function () {
+  @computed('value', 'type')
+  get formattedValue() {
     let v = this.value;
     if (this.type === 'string') {
       return `"${v}"`;
@@ -32,5 +38,5 @@ export default Component.extend({
     } else {
       return v;
     }
-  }),
-});
+  }
+}
