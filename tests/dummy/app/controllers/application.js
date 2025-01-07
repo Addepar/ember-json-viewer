@@ -56,21 +56,36 @@ const DEFAULT_JSON = {
   },
 };
 
+function isParseable(json) {
+  try {
+    JSON.parse(json);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export default class ApplicationController extends Controller {
   @tracked
-  json = DEFAULT_JSON;
+  sourceJSONStr = JSON.stringify(DEFAULT_JSON, null, 2);
+
+  @tracked
+  viewJSON = DEFAULT_JSON;
 
   @tracked
   isJSONValid = true;
 
-  @action updateJSON(evt) {
-    try {
-      let v = JSON.parse(evt.target.value);
-      this.json = v;
-      this.isJSONValid = true;
-    } catch (e) {
-      // ignore unparseable json
-      this.isJSONValid = false;
+  @action
+  updateJSON(evt) {
+    this.sourceJSONStr = evt.target.value;
+    this.isJSONValid = isParseable(this.sourceJSONStr);
+    if (this.isJSONValid) {
+      this.viewJSON = JSON.parse(this.sourceJSONStr);
     }
+  }
+
+  @action
+  formatSourceJSONStr() {
+    this.sourceJSONStr = JSON.stringify(this.viewJSON, null, 2);
   }
 }
