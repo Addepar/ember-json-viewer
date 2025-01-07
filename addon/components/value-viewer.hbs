@@ -1,41 +1,41 @@
 {{#if this.isPrimitive}}
   <span class="value primitive">
-    <SimpleValue @value={{this.value}} @path={{concat this.path "@"}} />
+    <SimpleValue @value={{@value}} @path={{concat @path "@"}} />
   </span>
 {{else}}
-  <span class="prefix" data-path={{concat this.path "<"}}>
+  <span class="prefix" data-path={{concat @path "<"}}>
     {{this.prefix}}
   </span>
 
-  {{#if this.showSummary}}
-    <span class="entries-summary" data-test-entry-summary={{this.path}}>
+  {{#if @showSummary}}
+    <span class="entries-summary" data-test-entry-summary={{@path}}>
       {{this.valueSummary}}
     </span>
   {{else}}
-    <ul class="entries depth-{{this.depth}}">
+    <ul class="entries depth-{{@depth}}">
       {{#if this.isObj}}
-        {{#each-in this.value as |key innerValue|}}
+        {{#each-in @value as |key innerValue|}}
           <EntryViewer
             @key={{key}}
             @value={{innerValue}}
-            @depth={{this.depth}}
-            @path={{concat this.path "." key}}
-            @displayOptions={{this.displayOptions}}
-            @isLast={{is-last this.value key}}
+            @depth={{@depth}}
+            @path={{concat @path "." key}}
+            @displayOptions={{@displayOptions}}
+            @isLast={{is-last @value key}}
           />
         {{/each-in}}
       {{else}}
-        {{#each this.value as |innerValue index|}}
+        {{#each @value as |innerValue index|}}
           <li class="entry">
             <ValueViewer
               @value={{innerValue}}
-              @depth={{this.depth}}
-              @path={{concat this.path "[" index "]"}}
-              @displayOptions={{this.displayOptions}}
+              @depth={{@depth}}
+              @path={{concat @path "[" index "]"}}
+              @displayOptions={{@displayOptions}}
             />
-            {{#if (not (is-last this.value index))}}
+            {{#if (not (is-last @value index))}}
               {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
-              <span class="entry-delimiter" data-path={{concat this.path "[" index "]" "@" ","}}>,</span>
+              <span class="entry-delimiter" data-path={{concat @path "[" index "]" "@" ","}}>,</span>
             {{/if}}
           </li>
         {{/each}}
@@ -43,7 +43,7 @@
     </ul>
   {{/if}}
 
-  <span class="suffix" data-path={{concat this.path ">"}}>
+  <span class="suffix" data-path={{concat @path ">"}}>
     {{this.suffix}}
   </span>
 {{/if}}

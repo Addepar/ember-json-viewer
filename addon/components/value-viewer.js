@@ -1,7 +1,4 @@
-import classic from 'ember-classic-decorator';
-import { tagName } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import {
   isArray,
   isPrimitive,
@@ -9,37 +6,25 @@ import {
 } from 'ember-json-viewer/utils/value-types';
 import { assert } from '@ember/debug';
 
-@classic
-@tagName('')
 export default class ValueViewer extends Component {
-  // passed-in
-  value = null;
-
-  showSummary = false;
-
-  @computed('value')
   get isPrimitive() {
-    return isPrimitive(this.value);
+    return isPrimitive(this.args.value);
   }
 
-  @computed('value')
   get prefix() {
-    return isArray(this.value) ? '[' : '{';
+    return isArray(this.args.value) ? '[' : '{';
   }
 
-  @computed('value')
   get suffix() {
-    return isArray(this.value) ? ']' : '}';
+    return isArray(this.args.value) ? ']' : '}';
   }
 
-  @computed('value')
   get isObj() {
-    return isObject(this.value);
+    return isObject(this.args.value);
   }
 
-  @computed('value')
   get valueSummary() {
-    let v = this.value;
+    let v = this.args.value;
     assert(
       `valueSummary only possible for non-primitive, got ${v}`,
       !isPrimitive(v),
