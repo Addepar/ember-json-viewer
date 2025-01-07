@@ -33,13 +33,14 @@
     "ember-test-selectors": "^7.0.0"
   },
   "devDependencies": {
+    "@ember/test-helpers": "^2.6.0",
     "@ember/optional-features": "^2.2.0",
     "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
     "@release-it/conventional-changelog": "^2.0.1",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
-    "ember-cli": "~3.22.0",
+    "ember-cli": "~3.28.6",
     "ember-cli-dependency-checker": "^3.3.3",
     "ember-cli-deploy": "^1.0.2",
     "ember-cli-deploy-build": "^2.0.0",
@@ -51,7 +52,7 @@
     "ember-export-application-global": "^2.0.1",
     "ember-load-initializers": "^2.1.2",
     "ember-maybe-import-regenerator": "^1.0.0",
-    "ember-qunit": "^4.6.0",
+    "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.2",
     "ember-source": "~3.28.12",
     "ember-source-channel-url": "^3.0.0",
@@ -62,6 +63,7 @@
     "eslint-plugin-node": "^11.1.0",
     "loader.js": "^4.7.0",
     "npm-run-all": "^4.1.5",
+    "qunit": "^2.23.1",
     "qunit-dom": "^1.6.0",
     "release-it": "^14.2.2",
     "webpack": "^5.97.1"
