@@ -1,6 +1,11 @@
-<ValueViewer
-  @value={{this.json}}
-  @depth={{0}}
-  @displayOptions={{this.displayOptions}}
-  @path={{"$"}}
-/>
+<div class="json-viewer"
+  {{did-insert this.addCopyListener}}
+  {{will-destroy this.removeCopyListener}}
+  ...attributes>
+  <ValueViewer
+    @value={{@json}}
+    @depth={{0}}
+    @displayOptions={{this.displayOptions}}
+    @path={{"$"}}
+  />
+</div>
