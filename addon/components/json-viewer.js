@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import layout from '../templates/components/json-viewer';
 import { assert } from '@ember/debug';
 import jsonStringify from '../utils/json-stringify';
 import { computed } from '@ember/object';
@@ -42,7 +41,6 @@ function getPath(node) {
 
 export default Component.extend({
   classNames: ['json-viewer'],
-  layout,
 
   // passed-in
   json: null,
