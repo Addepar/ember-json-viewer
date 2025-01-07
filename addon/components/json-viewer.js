@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
-import { classNames } from '@ember-decorators/component';
-import { computed } from '@ember/object';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
 import jsonStringify from '../utils/json-stringify';
+import { action } from '@ember/object';
 
 const ALLOWED_OPTIONS = ['expandedIcon', 'collapsedIcon', 'collapseDepth'];
 
@@ -41,15 +39,9 @@ function getPath(node) {
   }
 }
 
-@classic
-@classNames('json-viewer')
 export default class JsonViewer extends Component {
-  // passed-in
-  json = null;
-
-  @computed('options')
   get displayOptions() {
-    let options = this.options || {};
+    let options = this.args.options || {};
     assert(
       `Only allowed options are: ${ALLOWED_OPTIONS}`,
       Object.keys(options).every((key) => ALLOWED_OPTIONS.includes(key)),
@@ -57,27 +49,27 @@ export default class JsonViewer extends Component {
     return options;
   }
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
-    this._copyHandler = (evt) => {
-      let [startNode, startOffset, endNode, endOffset] = getOrderedSelection();
+  @action copyListener(evt) {
+    let [startNode, startOffset, endNode, endOffset] = getOrderedSelection();
 
-      let startPath = getPath(startNode);
-      let endPath = getPath(endNode);
-      let range = {
-        start: { path: startPath, index: startOffset },
-        end: { path: endPath, index: endOffset },
-      };
-      let str = jsonStringify(this.json, range);
-      evt.clipboardData.setData('text/plain', str);
-      evt.preventDefault();
+    let startPath = getPath(startNode);
+    let endPath = getPath(endNode);
+    let range = {
+      start: { path: startPath, index: startOffset },
+      end: { path: endPath, index: endOffset },
     };
-    this.element.addEventListener('copy', this._copyHandler);
+    let str = jsonStringify(this.args.json, range);
+    evt.clipboardData.setData('text/plain', str);
+    evt.preventDefault();
   }
 
-  willDestroyElement() {
-    super.willDestroyElement(...arguments);
-    this.element.removeEventListener('copy', this._copyHandler);
-    this._copyHandler = null;
+  @action
+  addCopyListener(element) {
+    element.addEventListener('copy', this.copyListener);
+  }
+
+  @action
+  removeCopyListener(element) {
+    element.removeEventListener('copy', this.copyListener);
   }
 }
