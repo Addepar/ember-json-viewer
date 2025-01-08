@@ -1,16 +1,17 @@
 'use strict';
 
+const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 module.exports = async function () {
   return {
     useYarn: true,
     scenarios: [
+      embroiderSafe(),
+      embroiderOptimized(),
       {
         name: 'ember-lts-3.28',
         npm: {
           devDependencies: {
             'ember-source': '~3.28.0',
-            'ember-qunit': '^5.0.0',
-            '@ember/test-helpers': '^2.4.0',
             '@glimmer/component': '^1.0.0',
           },
         },

@@ -37,6 +37,8 @@ jobs:
       fail-fast: false
       matrix:
         ember-version: [
+          embroider-safe,
+          embroider-optimized,
           ember-lts-3.28,
           ember-lts-4.4,
           ember-lts-4.8,
