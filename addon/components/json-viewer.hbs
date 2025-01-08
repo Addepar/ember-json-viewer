@@ -1,6 +1,5 @@
 <div class="json-viewer"
-  {{did-insert this.addCopyListener}}
-  {{will-destroy this.removeCopyListener}}
+  {{on "copy" this.copyListener}}
   ...attributes>
   <ValueViewer
     @value={{@json}}

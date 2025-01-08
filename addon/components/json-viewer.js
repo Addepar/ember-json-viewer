@@ -62,14 +62,4 @@ export default class JsonViewer extends Component {
     evt.clipboardData.setData('text/plain', str);
     evt.preventDefault();
   }
-
-  @action
-  addCopyListener(element) {
-    element.addEventListener('copy', this.copyListener);
-  }
-
-  @action
-  removeCopyListener(element) {
-    element.removeEventListener('copy', this.copyListener);
-  }
 }
