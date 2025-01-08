@@ -1,6 +1,4 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import layout from '../templates/components/value-viewer';
+import Component from '@glimmer/component';
 import {
   isArray,
   isPrimitive,
@@ -8,36 +6,29 @@ import {
 } from 'ember-json-viewer/utils/value-types';
 import { assert } from '@ember/debug';
 
-export default Component.extend({
-  tagName: '',
-  layout,
+export default class ValueViewer extends Component {
+  get isPrimitive() {
+    return isPrimitive(this.args.value);
+  }
 
-  // passed-in
-  value: null,
-  showSummary: false,
+  get prefix() {
+    return isArray(this.args.value) ? '[' : '{';
+  }
 
-  isPrimitive: computed('value', function () {
-    return isPrimitive(this.value);
-  }),
+  get suffix() {
+    return isArray(this.args.value) ? ']' : '}';
+  }
 
-  prefix: computed('value', function () {
-    return isArray(this.value) ? '[' : '{';
-  }),
+  get isObj() {
+    return isObject(this.args.value);
+  }
 
-  suffix: computed('value', function () {
-    return isArray(this.value) ? ']' : '}';
-  }),
-
-  isObj: computed('value', function () {
-    return isObject(this.value);
-  }),
-
-  valueSummary: computed('value', function () {
-    let v = this.value;
+  get valueSummary() {
+    let v = this.args.value;
     assert(
       `valueSummary only possible for non-primitive, got ${v}`,
       !isPrimitive(v),
     );
     return isArray(v) ? v.length : Object.keys(v).length;
-  }),
-});
+  }
+}

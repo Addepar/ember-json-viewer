@@ -1,19 +1,12 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import layout from '../templates/components/simple-value';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  tagName: '',
-  layout,
-  // passed-in
-  value: null,
-
-  syntaxClass: computed('type', function () {
+export default class SimpleValue extends Component {
+  get syntaxClass() {
     return `syntax-${this.type}`;
-  }),
+  }
 
-  type: computed('value', function () {
-    let v = this.value;
+  get type() {
+    let v = this.args.value;
     return [true, false].includes(v)
       ? 'boolean'
       : Number.isFinite(v)
@@ -23,10 +16,10 @@ export default Component.extend({
           : v === null
             ? 'null'
             : 'unknown';
-  }),
+  }
 
-  formattedValue: computed('value', 'type', function () {
-    let v = this.value;
+  get formattedValue() {
+    let v = this.args.value;
     if (this.type === 'string') {
       return `"${v}"`;
     } else if (this.type === 'null') {
@@ -34,5 +27,5 @@ export default Component.extend({
     } else {
       return v;
     }
-  }),
-});
+  }
+}

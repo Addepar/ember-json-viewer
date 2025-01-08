@@ -1,8 +1,7 @@
-import Component from '@ember/component';
-import layout from '../templates/components/json-viewer';
+import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
 import jsonStringify from '../utils/json-stringify';
-import { computed } from '@ember/object';
+import { action } from '@ember/object';
 
 const ALLOWED_OPTIONS = ['expandedIcon', 'collapsedIcon', 'collapseDepth'];
 
@@ -40,43 +39,27 @@ function getPath(node) {
   }
 }
 
-export default Component.extend({
-  classNames: ['json-viewer'],
-  layout,
-
-  // passed-in
-  json: null,
-
-  displayOptions: computed('options', function () {
-    let options = this.options || {};
+export default class JsonViewer extends Component {
+  get displayOptions() {
+    let options = this.args.options || {};
     assert(
       `Only allowed options are: ${ALLOWED_OPTIONS}`,
       Object.keys(options).every((key) => ALLOWED_OPTIONS.includes(key)),
     );
     return options;
-  }),
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-    this._copyHandler = (evt) => {
-      let [startNode, startOffset, endNode, endOffset] = getOrderedSelection();
+  @action copyListener(evt) {
+    let [startNode, startOffset, endNode, endOffset] = getOrderedSelection();
 
-      let startPath = getPath(startNode);
-      let endPath = getPath(endNode);
-      let range = {
-        start: { path: startPath, index: startOffset },
-        end: { path: endPath, index: endOffset },
-      };
-      let str = jsonStringify(this.json, range);
-      evt.clipboardData.setData('text/plain', str);
-      evt.preventDefault();
+    let startPath = getPath(startNode);
+    let endPath = getPath(endNode);
+    let range = {
+      start: { path: startPath, index: startOffset },
+      end: { path: endPath, index: endOffset },
     };
-    this.element.addEventListener('copy', this._copyHandler);
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-    this.element.removeEventListener('copy', this._copyHandler);
-    this._copyHandler = null;
-  },
-});
+    let str = jsonStringify(this.args.json, range);
+    evt.clipboardData.setData('text/plain', str);
+    evt.preventDefault();
+  }
+}

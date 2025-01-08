@@ -1,48 +1,52 @@
-import Component from '@ember/component';
-import { action, computed } from '@ember/object';
-import layout from '../templates/components/entry-viewer';
-import { readOnly } from '@ember/object/computed';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { isPrimitive } from '../utils/value-types';
 
-export default Component.extend({
-  tagName: '',
-  layout,
-  _isExpanded: null,
-  isExpanded: computed('depth', 'collapseDepth', '_isExpanded', function () {
+export default class EntryViewer extends Component {
+  @tracked
+  _isExpanded = null;
+
+  get isExpanded() {
     if (this._isExpanded !== null) {
       return this._isExpanded;
     }
-    let depth = this.depth;
+    let depth = this.args.depth;
     let collapseDepth = this.collapseDepth;
     if (Number.isInteger(collapseDepth)) {
       return depth < collapseDepth;
     } else {
       return true;
     }
-  }),
+  }
 
-  // passed-in
-  value: null,
-  depth: 0,
+  get collapseDepth() {
+    return this.args.displayOptions?.collapseDepth;
+  }
 
-  collapseDepth: readOnly('displayOptions.collapseDepth'),
-  expandedIcon: readOnly('displayOptions.expandedIcon'),
-  collapsedIcon: readOnly('displayOptions.collapsedIcon'),
+  get expandedIcon() {
+    return this.args.displayOptions?.expandedIcon;
+  }
+
+  get collapsedIcon() {
+    return this.args.displayOptions?.collapsedIcon;
+  }
 
   // It is important that this be a single text node so that the
   // selection offset is correct for copy/paste
-  quotedKey: computed('key', function () {
-    return `"${this.key}": `;
-  }),
+  get quotedKey() {
+    return `"${this.args.key}": `;
+  }
 
-  isToggleable: computed('value', function () {
-    return !isPrimitive(this.value);
-  }),
+  get isToggleable() {
+    return !isPrimitive(this.args.value);
+  }
 
-  toggleExpanded: action(function () {
+  @action
+  toggleExpanded() {
     if (!this.isToggleable) {
       return;
     }
-    this.set('_isExpanded', !this.isExpanded);
-  }),
-});
+    this._isExpanded = !this.isExpanded;
+  }
+}

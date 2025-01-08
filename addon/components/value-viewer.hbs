@@ -1,0 +1,49 @@
+{{#if this.isPrimitive}}
+  <span class="value primitive">
+    <SimpleValue @value={{@value}} @path={{concat @path "@"}} />
+  </span>
+{{else}}
+  <span class="prefix" data-path={{concat @path "<"}}>
+    {{this.prefix}}
+  </span>
+
+  {{#if @showSummary}}
+    <span class="entries-summary" data-test-entry-summary={{@path}}>
+      {{this.valueSummary}}
+    </span>
+  {{else}}
+    <ul class="entries depth-{{@depth}}">
+      {{#if this.isObj}}
+        {{#each-in @value as |key innerValue|}}
+          <EntryViewer
+            @key={{key}}
+            @value={{innerValue}}
+            @depth={{@depth}}
+            @path={{concat @path "." key}}
+            @displayOptions={{@displayOptions}}
+            @isLast={{is-last @value key}}
+          />
+        {{/each-in}}
+      {{else}}
+        {{#each @value as |innerValue index|}}
+          <li class="entry">
+            <ValueViewer
+              @value={{innerValue}}
+              @depth={{@depth}}
+              @path={{concat @path "[" index "]"}}
+              @displayOptions={{@displayOptions}}
+            />
+            {{#if (not (is-last @value index))}}
+              {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
+              <span class="entry-delimiter" data-path={{concat @path "[" index "]" "@" ","}}>,</span>
+            {{/if}}
+          </li>
+        {{/each}}
+      {{/if}}
+    </ul>
+  {{/if}}
+
+  <span class="suffix" data-path={{concat @path ">"}}>
+    {{this.suffix}}
+  </span>
+{{/if}}
