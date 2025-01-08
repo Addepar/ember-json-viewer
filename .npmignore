@@ -14,6 +14,9 @@
 /.eslintrc.js
 /.git/
 /.gitignore
+/.github/
+/.prettierignore
+/.prettierrc.js
 /.template-lintrc.js
 /.travis.yml
 /.watchmanconfig
@@ -30,3 +33,6 @@
 /.node_modules.ember-try/
 /bower.json.ember-try
 /package.json.ember-try
+
+/.release-it.json
+/demo.gif
