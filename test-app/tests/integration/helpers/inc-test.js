@@ -11,6 +11,6 @@ module('Integration | Helper | inc', function (hooks) {
 
     await render(hbs`{{inc this.inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), '1235');
+    assert.strictEqual(this.element.textContent.trim(), '1235');
   });
 });
