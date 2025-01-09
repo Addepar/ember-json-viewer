@@ -52,7 +52,7 @@ function format(expected) {
 module('Unit | Utility | json-stringify', function () {
   test('it returns full JSON by default, mostly-matches native JSON.stringify', function (assert) {
     for (let [name, json] of Object.entries(JSONS)) {
-      assert.equal(
+      assert.strictEqual(
         jsonStringify(json),
         nativeJsonStringify(json),
         `correct for ${name}`,
@@ -69,7 +69,7 @@ module('Unit | Utility | json-stringify', function () {
       end: { path: '$.foo@', index: 4 },
     };
 
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -79,7 +79,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"«foo": true»
     }`;
     range.start.index = 1;
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -89,7 +89,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"foo«": true»
     }`;
     range.start.index = 4;
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -99,7 +99,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"foo"«: true»
     }`;
     range.start.index = 5;
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -109,7 +109,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"foo":« true»
     }`;
     range.start.index = 6;
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -119,7 +119,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"foo": «true»
     }`;
     range.start = { path: '$.foo@', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -129,7 +129,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"foo": t«rue»
     }`;
     range.start = { path: '$.foo@', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -142,7 +142,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.foo', index: 2 },
       end: { path: '$.foo', index: 3 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -155,7 +155,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.foo', index: 5 },
       end: { path: '$.foo', index: 6 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.simple, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -174,7 +174,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.foo', index: 0 },
       end: { path: '$.foo@,', index: 0 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -187,7 +187,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end.index = 1;
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -200,7 +200,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end = { path: '$.bar', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -213,7 +213,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end = { path: '$.bar', index: 4 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -226,7 +226,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end = { path: '$.bar', index: 5 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -239,7 +239,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end = { path: '$.bar@', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -252,7 +252,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end = { path: '$.bar@,', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -265,7 +265,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end = { path: '$.bar@,', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -278,7 +278,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }`;
     range.end = { path: '$.one@', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -291,7 +291,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "»string"
     }`;
     range.end = { path: '$.str@', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -304,7 +304,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string»"
     }`;
     range.end = { path: '$.str@', index: 7 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -317,7 +317,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"»
     }`;
     range.end = { path: '$.str@', index: 8 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -330,7 +330,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     »}`;
     range.end = { path: '$>', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -343,7 +343,7 @@ module('Unit | Utility | json-stringify', function () {
     ->"str": "string"
     }»`;
     range.end = { path: '$>', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_prims, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -364,7 +364,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.foo<', index: 0 },
       end: { path: '$.foo[0]@', index: 0 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -379,7 +379,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo[0]@', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -394,7 +394,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo[0]@,', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -413,7 +413,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo[1]@', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -432,7 +432,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo[1]@', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -451,7 +451,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo[1]@,', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -470,7 +470,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo[2]@', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -489,7 +489,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo>', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -508,7 +508,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo>', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -527,7 +527,7 @@ module('Unit | Utility | json-stringify', function () {
     ->]
     }`;
     range.end = { path: '$.foo@,', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.no_nesting_array, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -547,7 +547,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$<', index: 0 },
       end: { path: '$>', index: 1 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -565,7 +565,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.foo<', index: 0 },
       end: { path: '$.foo<', index: 1 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -580,7 +580,7 @@ module('Unit | Utility | json-stringify', function () {
     }`;
 
     range.end = { path: '$.foo.bar<', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -595,7 +595,7 @@ module('Unit | Utility | json-stringify', function () {
     }`;
 
     range.end = { path: '$.foo.bar<', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -610,7 +610,7 @@ module('Unit | Utility | json-stringify', function () {
     }`;
 
     range.end = { path: '$.foo.bar.baz', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -625,7 +625,7 @@ module('Unit | Utility | json-stringify', function () {
     }`;
 
     range.end = { path: '$.foo.bar>', index: 0 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -640,7 +640,7 @@ module('Unit | Utility | json-stringify', function () {
     }`;
 
     range.end = { path: '$.foo.bar>', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -662,7 +662,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$<', index: 0 },
       end: { path: '$>', index: 1 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested_two, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -682,7 +682,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.foo.one', index: 3 },
       end: { path: '$.foo.one@,', index: 0 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested_two, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -702,7 +702,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.foo.one', index: 3 },
       end: { path: '$.foo.one@,', index: 1 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested_two, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -719,7 +719,7 @@ module('Unit | Utility | json-stringify', function () {
     }`;
 
     range.end = { path: '$.foo>', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested_two, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -736,7 +736,7 @@ module('Unit | Utility | json-stringify', function () {
     }`;
 
     range.end = { path: '$.foo@,', index: 1 };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.nested_two, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -754,7 +754,7 @@ module('Unit | Utility | json-stringify', function () {
       start: { path: '$.bar', index: 0 },
       end: { path: '$.bar@', index: 1 },
     };
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(json, range),
       format(expected),
       `when JSON includes MARKER constant`,
@@ -774,7 +774,7 @@ module('Unit | Utility | json-stringify', function () {
       end: { path: '$.x@', index: 1 },
     };
 
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.has_null, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -792,7 +792,7 @@ module('Unit | Utility | json-stringify', function () {
       end: { path: '$.x@', index: 2 },
     };
 
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.has_null, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -810,7 +810,7 @@ module('Unit | Utility | json-stringify', function () {
       end: { path: '$.x@', index: 4 },
     };
 
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.has_null, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,
@@ -828,7 +828,7 @@ module('Unit | Utility | json-stringify', function () {
       end: { path: '$.x@,', index: 1 },
     };
 
-    assert.equal(
+    assert.strictEqual(
       jsonStringify(JSONS.has_null, range),
       format(expected),
       `with range ${JSON.stringify(range)}`,

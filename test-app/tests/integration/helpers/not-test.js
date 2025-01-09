@@ -12,15 +12,15 @@ module('Integration | Helper | not', function (hooks) {
     await render(
       hbs`{{!-- template-lint-disable no-negated-condition --}}{{if (not this.inputValue) "YES" "NO"}}`,
     );
-    assert.equal(this.element.textContent.trim(), 'NO');
+    assert.strictEqual(this.element.textContent.trim(), 'NO');
 
     this.set('inputValue', '0');
-    assert.equal(this.element.textContent.trim(), 'NO');
+    assert.strictEqual(this.element.textContent.trim(), 'NO');
 
     this.set('inputValue', 0);
-    assert.equal(this.element.textContent.trim(), 'YES');
+    assert.strictEqual(this.element.textContent.trim(), 'YES');
 
     this.set('inputValue', false);
-    assert.equal(this.element.textContent.trim(), 'YES');
+    assert.strictEqual(this.element.textContent.trim(), 'YES');
   });
 });

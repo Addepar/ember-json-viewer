@@ -75,7 +75,6 @@ export default [
     },
     rules: {
       ...qunit.configs.recommended.rules,
-      "qunit/no-assert-equal": "off",
     },
   },
   /**
