@@ -81,7 +81,8 @@ jobs:
             ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
       - if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
-      - run: yarn workspace addon build
+      - working-directory: addon
+        run: yarn run build
       - name: Run Tests
         working-directory: test-app
         run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup
