@@ -60,7 +60,7 @@ function isParseable(json) {
   try {
     JSON.parse(json);
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 }
