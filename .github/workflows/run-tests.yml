@@ -44,13 +44,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
-      - id: node-cache
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
-      - if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn --frozen-lockfile
+      - run: yarn --frozen-lockfile
       - working-directory: addon
         run: yarn run build
       - name: Run Tests
@@ -76,15 +74,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
-      - id: node-cache
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-${{ matrix.ember-version }}
           restore-keys: |
             ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
-      - if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn --frozen-lockfile
+      - run: yarn --frozen-lockfile
       - working-directory: addon
         run: yarn run build
       - name: Run Tests
