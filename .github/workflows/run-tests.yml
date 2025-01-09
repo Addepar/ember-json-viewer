@@ -79,10 +79,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
       - run: yarn --frozen-lockfile
+      - run: yarn workspace addon build
       - name: Run Tests
         working-directory: test-app
-        run: |
-          # Install deps
-          ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup --- true
-          cd ../addon && yarn run build && cd ../test-app
-          yarn run test:ember
+        run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup
