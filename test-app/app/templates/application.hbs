@@ -1,15 +1,3 @@
 <main>
-  <h2 id="title">Ember-JSON-Viewer</h2>
-
-  <div class="viewer-wrapper">
-    <JsonViewer @json={{this.viewJSON}} @options={{hash expandedIcon=">" collapsedIcon="<" collapseDepth=1}} />
-  </div>
-  <div class="input-wrapper {{if this.isJSONValid "valid" "invalid"}}">
-    <h2>Paste JSON below:</h2>
-    <textarea aria-label="json"
-      {{on "keyup" this.updateJSON}}
-      {{on "blur" this.formatSourceJSONStr}}
-      value={{this.sourceJSONStr}}
-    />
-  </div>
+  <h2 id="title">Ember-JSON-Viewer Tests</h2>
 </main>
