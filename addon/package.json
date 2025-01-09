@@ -21,9 +21,7 @@
     "lint:hbs": "ember-template-lint ."
   },
   "dependencies": {
-    "ember-auto-import": "^2.10.0",
-    "ember-cli-babel": "^7.26.11",
-    "ember-cli-htmlbars": "^6.3.0",
+    "@embroider/addon-shim": "^1.9.0",
     "ember-test-selectors": "^7.0.0"
   },
   "devDependencies": {
