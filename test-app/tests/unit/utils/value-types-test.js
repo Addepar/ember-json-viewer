@@ -7,21 +7,21 @@ import { module, test } from 'qunit';
 
 module('Unit | Utility | value-types', function () {
   test('isArray', function (assert) {
-    assert.ok(isArray([]), 'isArray[]');
-    assert.ok(isArray([1]), 'isArray[1]');
+    assert.true(isArray([]), 'isArray[]');
+    assert.true(isArray([1]), 'isArray[1]');
   });
 
   test('isObject', function (assert) {
-    assert.ok(isObject({}));
-    assert.ok(isObject({ foo: 'bar' }));
+    assert.true(isObject({}));
+    assert.true(isObject({ foo: 'bar' }));
 
-    assert.ok(!isObject([]));
-    assert.ok(!isObject([1]));
+    assert.false(isObject([]));
+    assert.false(isObject([1]));
   });
 
   test('isPrimitive', function (assert) {
-    assert.ok(isPrimitive(1));
-    assert.ok(isPrimitive('string'));
-    assert.ok(isPrimitive(true));
+    assert.true(isPrimitive(1));
+    assert.true(isPrimitive('string'));
+    assert.true(isPrimitive(true));
   });
 });
