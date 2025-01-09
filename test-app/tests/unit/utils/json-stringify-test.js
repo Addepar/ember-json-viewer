@@ -744,7 +744,7 @@ module('Unit | Utility | json-stringify', function () {
   });
 
   test('use of special MARKER constant still works', function (assert) {
-    assert.ok(!!MARKER, 'marker is defined');
+    assert.true(!!MARKER, 'marker is defined');
     let json = { foo: `abc${MARKER}`, bar: 2 };
     let expected = `{
     ->"foo": "abc${MARKER}",
