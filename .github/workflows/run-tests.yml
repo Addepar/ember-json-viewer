@@ -81,4 +81,8 @@ jobs:
       - run: yarn --frozen-lockfile
       - name: Run Tests
         working-directory: test-app
-        run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup
+        run: |
+          # Install deps
+          ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup --- true
+          cd ../addon && yarn run build && cd ../test-app
+          yarn run test:ember
