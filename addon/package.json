@@ -26,9 +26,12 @@
     "dist"
   ],
   "scripts": {
-    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
-    "lint:js": "eslint .",
+    "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto",
     "lint:hbs": "ember-template-lint .",
+    "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
     "build": "rollup --config",
     "prepublishOnly": "rollup --config",
     "start": "rollup --config --watch"
@@ -44,6 +47,7 @@
     "@babel/plugin-transform-class-properties": "^7.25.9",
     "@embroider/addon-dev": "^7.1.1",
     "@rollup/plugin-babel": "^6.0.4",
+    "concurrently": "^9.1.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ember": "^12.3.3",
     "eslint-plugin-n": "^17.15.1",
