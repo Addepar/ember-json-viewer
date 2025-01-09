@@ -34,6 +34,9 @@ jobs:
       - name: Lint Test App
         working-directory: test-app
         run: yarn run lint
+      - name: Lint Docs App
+        working-directory: docs-app
+        run: yarn run lint
 
   test:
     name: Run Ember Tests
