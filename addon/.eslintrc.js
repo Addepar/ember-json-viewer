@@ -31,7 +31,7 @@ module.exports = {
         './.prettierrc.js',
         './.stylelintrc.js',
         './.template-lintrc.js',
-        './index.js',
+        './addon-main.js',
         './config/**/*.js',
       ],
       parserOptions: {
