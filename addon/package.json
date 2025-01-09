@@ -38,13 +38,19 @@
     "ember-test-selectors": "^7.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.25.9",
-    "eslint": "^8.0.0",
+    "@babel/plugin-proposal-decorators": "^7.25.9",
+    "@babel/plugin-transform-class-properties": "^7.25.9",
+    "@embroider/addon-dev": "^7.1.1",
+    "@rollup/plugin-babel": "^6.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ember": "^12.3.3",
     "eslint-plugin-n": "^17.15.1",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-qunit": "^8.1.2"
+    "eslint-plugin-qunit": "^8.1.2",
+    "eslint": "^8.0.0",
+    "rollup": "^4.30.1"
   },
   "engines": {
     "node": ">= 20"
@@ -71,13 +77,5 @@
   },
   "volta": {
     "extends": "../package.json"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/plugin-proposal-decorators": "^7.25.9",
-    "@babel/plugin-transform-class-properties": "^7.25.9",
-    "@embroider/addon-dev": "^7.1.1",
-    "@rollup/plugin-babel": "^6.0.4",
-    "rollup": "^4.30.1"
   }
 }
