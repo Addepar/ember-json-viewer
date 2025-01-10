@@ -1,4 +1,3 @@
-import { helper } from '@ember/component/helper';
 import { assert } from '@ember/debug';
 import { isArray, isObject } from '../utils/value-types';
 
@@ -11,7 +10,7 @@ import { isArray, isObject } from '../utils/value-types';
  * and number if first arg is an array
  * @returns {Boolean}
  */
-export default helper(function isLast([objOrArray, keyOrIndex] /*, hash*/) {
+export function isLast(objOrArray, keyOrIndex) {
   if (isObject(objOrArray)) {
     let keys = Object.keys(objOrArray);
     return keys.indexOf(keyOrIndex) === keys.length - 1;
@@ -20,4 +19,4 @@ export default helper(function isLast([objOrArray, keyOrIndex] /*, hash*/) {
   } else {
     assert(`Unexpected args to is-last ${objOrArray}, ${keyOrIndex}`, false);
   }
-});
+}

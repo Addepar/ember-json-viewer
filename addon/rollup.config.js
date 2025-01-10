@@ -16,7 +16,7 @@ export default {
     // addon. Anything not listed here may get optimized away.
     addon.publicEntrypoints([
       'components/**/*.js',
-      'helpers/**/*.js',
+      'helpers/is-last.js',
       'utils/**.js',
     ]),
 
@@ -25,8 +25,8 @@ export default {
     // not everything in publicEntrypoints necessarily needs to go here.
     addon.appReexports([
       'components/**/*.js',
-      'helpers/**/*.js',
-      'utils/**/*.js',
+      // 'helpers/**/*.js',
+      // 'utils/**/*.js',
     ]),
 
     // This babel config should *not* apply presets or compile away ES modules.

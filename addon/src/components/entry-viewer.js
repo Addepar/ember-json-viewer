@@ -20,6 +20,12 @@ export default class EntryViewer extends Component {
     }
   }
 
+  get isNotExpanded() {
+    return !this.isExpanded;
+  }
+
+  inc = (num) => num + 1;
+
   get collapseDepth() {
     return this.args.displayOptions?.collapseDepth;
   }
