@@ -73,6 +73,9 @@ export default [
     plugins: {
       qunit,
     },
+    rules: {
+      ...qunit.configs.recommended.rules,
+    },
   },
   /**
    * CJS node files
