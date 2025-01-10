@@ -2,7 +2,8 @@
   "private": true,
   "workspaces": [
     "addon",
-    "test-app"
+    "test-app",
+    "docs-app"
   ],
   "volta": {
     "node": "22.13.0",

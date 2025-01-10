@@ -34,6 +34,24 @@ jobs:
       - name: Lint Test App
         working-directory: test-app
         run: yarn run lint
+      - name: Lint Docs App
+        working-directory: docs-app
+        run: yarn run lint
+
+  test-docs:
+    name: Test Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: volta-cli/action@v4
+      - uses: actions/cache@v4
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
+      - run: yarn --frozen-lockfile
+      - name: Run Tests
+        working-directory: docs-app
+        run: yarn run test
 
   test:
     name: Run Ember Tests

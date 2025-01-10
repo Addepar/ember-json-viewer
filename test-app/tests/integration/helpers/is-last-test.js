@@ -13,13 +13,13 @@ module('Integration | Helper | is-last', function (hooks) {
     await render(
       hbs`{{if (is-last this.objOrArray this.keyOrIndex) "YES" "NO"}}`,
     );
-    assert.equal(this.element.textContent.trim(), 'NO');
+    assert.strictEqual(this.element.textContent.trim(), 'NO');
 
     this.set('keyOrIndex', 0);
-    assert.equal(this.element.textContent.trim(), 'NO');
+    assert.strictEqual(this.element.textContent.trim(), 'NO');
 
     this.set('keyOrIndex', 2);
-    assert.equal(this.element.textContent.trim(), 'YES');
+    assert.strictEqual(this.element.textContent.trim(), 'YES');
   });
 
   test('it works with objects', async function (assert) {
@@ -29,12 +29,12 @@ module('Integration | Helper | is-last', function (hooks) {
     await render(
       hbs`{{if (is-last this.objOrArray this.keyOrIndex) "YES" "NO"}}`,
     );
-    assert.equal(this.element.textContent.trim(), 'NO');
+    assert.strictEqual(this.element.textContent.trim(), 'NO');
 
     this.set('keyOrIndex', 'bar');
-    assert.equal(this.element.textContent.trim(), 'NO');
+    assert.strictEqual(this.element.textContent.trim(), 'NO');
 
     this.set('keyOrIndex', 'baz');
-    assert.equal(this.element.textContent.trim(), 'YES');
+    assert.strictEqual(this.element.textContent.trim(), 'YES');
   });
 });

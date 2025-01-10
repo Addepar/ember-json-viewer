@@ -11,8 +11,8 @@ module('Integration | Component | json-viewer', function (hooks) {
     this.set('json', json);
     await render(hbs`<JsonViewer @json={{this.json}} />`);
 
-    assert.ok(this.element.textContent.trim().includes('"foo"'));
-    assert.ok(this.element.textContent.trim().includes('"bar"'));
+    assert.true(this.element.textContent.trim().includes('"foo"'));
+    assert.true(this.element.textContent.trim().includes('"bar"'));
 
     let expectedPaths = {
       rootOpen: '$<',
@@ -141,11 +141,8 @@ module('Integration | Component | json-viewer', function (hooks) {
       let userSelectStyle = window
         .getComputedStyle(el)
         .getPropertyValue('user-select');
-      if (isSelectable) {
-        assert.equal(userSelectStyle, 'text');
-      } else {
-        assert.equal(userSelectStyle, 'none');
-      }
+      let expected = isSelectable ? 'text' : 'none';
+      assert.strictEqual(userSelectStyle, expected);
     }
   });
 });
