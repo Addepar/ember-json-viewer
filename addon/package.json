@@ -74,9 +74,7 @@
       "./components/value-viewer.js": "./dist/_app_/components/value-viewer.js",
       "./helpers/inc.js": "./dist/_app_/helpers/inc.js",
       "./helpers/is-last.js": "./dist/_app_/helpers/is-last.js",
-      "./helpers/not.js": "./dist/_app_/helpers/not.js",
-      "./utils/json-stringify.js": "./dist/_app_/utils/json-stringify.js",
-      "./utils/value-types.js": "./dist/_app_/utils/value-types.js"
+      "./helpers/not.js": "./dist/_app_/helpers/not.js"
     }
   },
   "volta": {
