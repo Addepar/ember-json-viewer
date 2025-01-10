@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   lint:
-    name: Run Ember Lint
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,12 @@ jobs:
       - name: Install Dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
-      - run: yarn run lint
+      - name: Lint Addon
+        working-directory: addon
+        run: yarn run lint
+      - name: Lint Test App
+        working-directory: test-app
+        run: yarn run lint
 
   test:
     name: Run Ember Tests
@@ -36,14 +41,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ember-version: [
-          embroider-safe,
-          embroider-optimized,
-          ember-lts-3.28,
-          ember-lts-4.4,
-          ember-lts-4.8,
-          ember-lts-4.12
-        ]
+        ember-version:
+          [
+            embroider-safe,
+            embroider-optimized,
+            ember-lts-3.28,
+            ember-lts-4.4,
+            ember-lts-4.8,
+            ember-lts-4.12,
+          ]
 
     steps:
       - uses: actions/checkout@v4
@@ -56,4 +62,5 @@ jobs:
             ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
       - run: yarn --frozen-lockfile
       - name: Run Tests
+        working-directory: test-app
         run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup

@@ -1,0 +1,41 @@
+{
+  "name": "ember-json-viewer",
+  "version": "0.8.1",
+  "description": "A JSON-viewer addon for Ember apps",
+  "keywords": [
+    "ember-addon"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": "https://github.com/Addepar/ember-json-viewer",
+  "license": "MIT",
+  "author": "",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
+    "lint:js": "eslint .",
+    "lint:hbs": "ember-template-lint ."
+  },
+  "dependencies": {
+    "ember-auto-import": "^2.10.0",
+    "ember-cli-babel": "^7.26.11",
+    "ember-cli-htmlbars": "^6.3.0",
+    "ember-test-selectors": "^7.0.0"
+  },
+  "engines": {
+    "node": ">= 20"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "demoURL": "http://addepar.github.io/ember-json-viewer"
+  },
+  "volta": {
+    "extends": "../package.json"
+  }
+}
