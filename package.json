@@ -1,10 +1,5 @@
 {
   "private": true,
-  "workspaces": [
-    "addon",
-    "test-app",
-    "docs-app"
-  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm"
   },
