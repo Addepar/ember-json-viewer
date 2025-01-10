@@ -46,6 +46,10 @@ export default class EntryViewer extends Component {
     return !isPrimitive(this.args.value);
   }
 
+  get incrementedDepth() {
+    return this.args.depth + 1;
+  }
+
   @action
   toggleExpanded() {
     if (!this.isToggleable) {
