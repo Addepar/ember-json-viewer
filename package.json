@@ -5,6 +5,9 @@
     "test-app",
     "docs-app"
   ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
   "volta": {
     "node": "22.13.0",
     "yarn": "1.22.22"
