@@ -1,8 +1,4 @@
-import {
-  isArray,
-  isPrimitive,
-  isObject,
-} from 'ember-json-viewer/utils/value-types';
+import { isArray, isPrimitive, isObject } from './value-types';
 
 /**
  * Paths:

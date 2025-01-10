@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
 import jsonStringify from '../utils/json-stringify';
 import { action } from '@ember/object';
+import './json-viewer.css';
 
 const ALLOWED_OPTIONS = ['expandedIcon', 'collapsedIcon', 'collapseDepth'];
 

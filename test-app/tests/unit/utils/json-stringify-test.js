@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import jsonStringify, { MARKER } from 'ember-json-viewer/utils/json-stringify';
+import { jsonStringify, MARKER } from 'ember-json-viewer';
 
 const JSONS = {
   simple: { foo: true },

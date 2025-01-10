@@ -49,6 +49,8 @@ jobs:
           path: "**/node_modules"
           key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
       - run: yarn --frozen-lockfile
+      - working-directory: addon
+        run: yarn run build
       - name: Run Tests
         working-directory: docs-app
         run: yarn run test
@@ -79,6 +81,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
       - run: yarn --frozen-lockfile
+      - working-directory: addon
+        run: yarn run build
       - name: Run Tests
         working-directory: test-app
         run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup

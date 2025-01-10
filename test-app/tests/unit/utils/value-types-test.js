@@ -1,8 +1,4 @@
-import {
-  isPrimitive,
-  isObject,
-  isArray,
-} from 'ember-json-viewer/utils/value-types';
+import { isPrimitive, isObject, isArray } from 'ember-json-viewer';
 import { module, test } from 'qunit';
 
 module('Unit | Utility | value-types', function () {

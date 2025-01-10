@@ -15,25 +15,46 @@
     "doc": "doc",
     "test": "tests"
   },
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*",
+    "./addon-main.js": "./addon-main.js"
+  },
+  "files": [
+    "addon-main.js",
+    "dist"
+  ],
   "scripts": {
-    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
-    "lint:js": "eslint .",
-    "lint:hbs": "ember-template-lint ."
+    "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto",
+    "lint:hbs": "ember-template-lint .",
+    "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "build": "rollup --config",
+    "prepublishOnly": "rollup --config",
+    "start": "rollup --config --watch"
   },
   "dependencies": {
-    "ember-auto-import": "^2.10.0",
-    "ember-cli-babel": "^7.26.11",
-    "ember-cli-htmlbars": "^6.3.0",
+    "@embroider/addon-shim": "^1.9.0",
     "ember-test-selectors": "^7.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.25.9",
+    "@babel/plugin-proposal-decorators": "^7.25.9",
+    "@babel/plugin-transform-class-properties": "^7.25.9",
+    "@embroider/addon-dev": "^7.1.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "concurrently": "^9.1.0",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ember": "^12.3.3",
     "eslint-plugin-n": "^17.15.1",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-qunit": "^8.1.2"
+    "eslint-plugin-qunit": "^8.1.2",
+    "prettier": "^3.4.2",
+    "rollup": "^4.30.1"
   },
   "engines": {
     "node": ">= 20"
@@ -42,7 +63,17 @@
     "edition": "octane"
   },
   "ember-addon": {
-    "demoURL": "http://addepar.github.io/ember-json-viewer"
+    "demoURL": "http://addepar.github.io/ember-json-viewer",
+    "main": "addon-main.js",
+    "type": "addon",
+    "version": 2,
+    "app-js": {
+      "./components/entry-viewer.js": "./dist/_app_/components/entry-viewer.js",
+      "./components/json-viewer.js": "./dist/_app_/components/json-viewer.js",
+      "./components/simple-value.js": "./dist/_app_/components/simple-value.js",
+      "./components/value-viewer.js": "./dist/_app_/components/value-viewer.js",
+      "./helpers/is-last.js": "./dist/_app_/helpers/is-last.js"
+    }
   },
   "volta": {
     "extends": "../package.json"

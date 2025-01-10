@@ -25,8 +25,8 @@
   {{/if}}
   <ValueViewer
     @value={{@value}}
-    @showSummary={{not this.isExpanded}}
-    @depth={{inc @depth}}
+    @showSummary={{this.isNotExpanded}}
+    @depth={{this.incrementedDepth}}
     @displayOptions={{@displayOptions}}
     @path={{@path}}
   />

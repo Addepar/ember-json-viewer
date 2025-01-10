@@ -20,6 +20,10 @@ export default class EntryViewer extends Component {
     }
   }
 
+  get isNotExpanded() {
+    return !this.isExpanded;
+  }
+
   get collapseDepth() {
     return this.args.displayOptions?.collapseDepth;
   }
@@ -40,6 +44,10 @@ export default class EntryViewer extends Component {
 
   get isToggleable() {
     return !isPrimitive(this.args.value);
+  }
+
+  get incrementedDepth() {
+    return this.args.depth + 1;
   }
 
   @action
