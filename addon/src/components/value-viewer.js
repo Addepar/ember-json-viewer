@@ -1,9 +1,5 @@
 import Component from '@glimmer/component';
-import {
-  isArray,
-  isPrimitive,
-  isObject,
-} from 'ember-json-viewer/utils/value-types';
+import { isArray, isPrimitive, isObject } from '../utils/value-types';
 import { assert } from '@ember/debug';
 
 export default class ValueViewer extends Component {
