@@ -34,16 +34,22 @@ const esmParserOptions = {
 };
 
 export default [
-  // js.configs.recommended,
-  // prettier,
-  // ember.configs.base,
-  // ember.configs.gjs,
+  js.configs.recommended,
+  prettier,
+  ember.configs.base,
+  ember.configs.gjs,
   /**
    * Ignores must be in their own object
    * https://eslint.org/docs/latest/use/configure/ignore
    */
   {
-    ignores: ["dist/", "node_modules/", "coverage/", "!**/.*"],
+    ignores: [
+      "dist/",
+      "node_modules/",
+      "coverage/",
+      "!**/.*",
+      ".node_modules.ember-try/",
+    ],
   },
   /**
    * https://eslint.org/docs/latest/use/configure/configuration-files#configuring-linter-options
