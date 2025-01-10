@@ -27,15 +27,12 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
       - name: Lint Addon
-        continue-on-error: true
         working-directory: addon
         run: pnpm run lint
       - name: Lint Test App
-        continue-on-error: true
         working-directory: test-app
         run: pnpm run lint
       - name: Lint Docs App
-        continue-on-error: true
         working-directory: docs-app
         run: pnpm run lint
 
