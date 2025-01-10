@@ -145,4 +145,23 @@ module('Integration | Component | json-viewer', function (hooks) {
       assert.strictEqual(userSelectStyle, expected);
     }
   });
+
+  test('no comma after final object', async function (assert) {
+    this.set('json', {
+      obj: { foo: 'bar' },
+    });
+    await render(
+      hbs`<JsonViewer data-test-json-viewer-outer @json={{this.json}} />`,
+    );
+
+    assert
+      .dom('[data-path="$.obj>"]')
+      .containsText('}', 'object closing brace is present');
+    assert
+      .dom('[data-path="$.obj@,"]')
+      .doesNotExist('no comma after final object');
+    assert
+      .dom('[data-test-json-viewer-outer]')
+      .doesNotContainText(',', 'No comma appears in the output');
+  });
 });
