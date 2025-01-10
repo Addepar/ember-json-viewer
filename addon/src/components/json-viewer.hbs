@@ -1,7 +1,7 @@
 <div class="json-viewer"
   {{on "copy" this.copyListener}}
   ...attributes>
-  <ValueViewer
+  <EmberJsonViewer::-Private::ValueViewer
     @value={{@json}}
     @depth={{0}}
     @displayOptions={{this.displayOptions}}

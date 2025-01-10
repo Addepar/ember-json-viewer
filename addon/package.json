@@ -68,10 +68,10 @@
     "type": "addon",
     "version": 2,
     "app-js": {
-      "./components/entry-viewer.js": "./dist/_app_/components/entry-viewer.js",
-      "./components/json-viewer.js": "./dist/_app_/components/json-viewer.js",
-      "./components/simple-value.js": "./dist/_app_/components/simple-value.js",
-      "./components/value-viewer.js": "./dist/_app_/components/value-viewer.js"
+      "./components/ember-json-viewer/-private/entry-viewer.js": "./dist/_app_/components/ember-json-viewer/-private/entry-viewer.js",
+      "./components/ember-json-viewer/-private/simple-value.js": "./dist/_app_/components/ember-json-viewer/-private/simple-value.js",
+      "./components/ember-json-viewer/-private/value-viewer.js": "./dist/_app_/components/ember-json-viewer/-private/value-viewer.js",
+      "./components/json-viewer.js": "./dist/_app_/components/json-viewer.js"
     }
   },
   "volta": {

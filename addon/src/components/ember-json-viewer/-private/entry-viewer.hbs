@@ -23,7 +23,7 @@
       {{this.quotedKey}}
     </span>
   {{/if}}
-  <ValueViewer
+  <EmberJsonViewer::-Private::ValueViewer
     @value={{@value}}
     @showSummary={{this.isNotExpanded}}
     @depth={{this.inc @depth}}

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
-import { isArray, isPrimitive, isObject } from '../utils/value-types';
+import { isArray, isPrimitive, isObject } from '../../../utils/value-types';
 import { assert } from '@ember/debug';
-import { isLast } from '../helpers/is-last';
+import { isLast } from '../../../helpers/is-last';
 
 export default class ValueViewer extends Component {
   isLast = isLast;

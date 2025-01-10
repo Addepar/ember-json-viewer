@@ -16,8 +16,11 @@ export default {
     // addon. Anything not listed here may get optimized away.
     addon.publicEntrypoints([
       'components/**/*.js',
+
+      // for testing:
       'helpers/is-last.js',
-      'utils/**.js',
+      'utils/json-stringify.js',
+      'utils/value-types.js',
     ]),
 
     // These are the modules that should get reexported into the traditional

@@ -1,6 +1,6 @@
 {{#if this.isPrimitive}}
   <span class="value primitive">
-    <SimpleValue @value={{@value}} @path={{concat @path "@"}} />
+    <EmberJsonViewer::-Private::SimpleValue @value={{@value}} @path={{concat @path "@"}} />
   </span>
 {{else}}
   <span class="prefix" data-path={{concat @path "<"}}>
@@ -15,7 +15,7 @@
     <ul class="entries depth-{{@depth}}">
       {{#if this.isObj}}
         {{#each-in @value as |key innerValue|}}
-          <EntryViewer
+          <EmberJsonViewer::-Private::EntryViewer
             @key={{key}}
             @value={{innerValue}}
             @depth={{@depth}}
@@ -27,7 +27,7 @@
       {{else}}
         {{#each @value as |innerValue index|}}
           <li class="entry">
-            <ValueViewer
+            <EmberJsonViewer::-Private::ValueViewer
               @value={{innerValue}}
               @depth={{@depth}}
               @path={{concat @path "[" index "]"}}
