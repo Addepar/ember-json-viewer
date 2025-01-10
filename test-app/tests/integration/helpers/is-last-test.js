@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { isLast } from 'ember-json-viewer/helpers/is-last';
+import { isLast } from 'ember-json-viewer';
 
 module('Integration | Helper | is-last', function (hooks) {
   setupRenderingTest(hooks);
