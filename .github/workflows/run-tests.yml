@@ -19,41 +19,40 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: volta-cli/action@v4
-      - uses: actions/cache@v4
-        id: node-cache
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
+          node-version: 22
+          cache: 'pnpm'
       - name: Install Dependencies
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn --frozen-lockfile
+        run: pnpm install
       - name: Lint Addon
         working-directory: addon
-        run: yarn run lint
+        run: pnpm run lint
       - name: Lint Test App
         working-directory: test-app
-        run: yarn run lint
+        run: pnpm run lint
       - name: Lint Docs App
         working-directory: docs-app
-        run: yarn run lint
+        run: pnpm run lint
 
   test-docs:
     name: Test Docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: volta-cli/action@v4
-      - uses: actions/cache@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn --frozen-lockfile
+          node-version: 22
+          cache: 'pnpm'
+      - name: Install Dependencies
+        run: pnpm install
       - working-directory: addon
-        run: yarn run build
+        run: pnpm run build
       - name: Run Tests
         working-directory: docs-app
-        run: yarn run test
+        run: pnpm run test
 
   test:
     name: Run Ember Tests
@@ -73,16 +72,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: volta-cli/action@v4
-      - uses: actions/cache@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-${{ matrix.ember-version }}
-          restore-keys: |
-            ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
-      - run: yarn --frozen-lockfile
+          node-version: 22
+          cache: 'pnpm'
+      - name: Install Dependencies
+        run: pnpm install
       - working-directory: addon
-        run: yarn run build
+        run: pnpm run build
       - name: Run Tests
         working-directory: test-app
         run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup

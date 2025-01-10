@@ -3,7 +3,8 @@
 const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 module.exports = async function () {
   return {
-    useYarn: true,
+    usePnpm: true,
+    packageManager: 'pnpm',
     scenarios: [
       embroiderSafe(),
       embroiderOptimized(),
