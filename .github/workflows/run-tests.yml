@@ -1,8 +1,5 @@
 name: Run-Tests
 
-env:
-  VOLTA_FEATURE_PNPM: 1
-
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
