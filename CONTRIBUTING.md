@@ -1,26 +1,51 @@
 # How To Contribute
 
+This repo is a monorepo, for additional instructions, refer to the package.json files in the workspaces,
+or refer to the Github Workflow that runs CI.
+
 ## Installation
 
-* `git clone <repository-url>`
-* `cd ember-json-viewer`
-* `npm install`
+- `git clone <repository-url>`
+- `cd ember-json-viewer`
+- `pnpm install`
 
 ## Linting
 
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+Each workspace has a `lint` run-script.
+You can run them all via:
+
+```
+pnpm --filter '*' lint
+```
 
 ## Running tests
 
-* `ember test` – Runs the test suite on the current Ember version
-* `ember test --server` – Runs the test suite in "watch mode"
-* `ember try:each` – Runs the test suite against multiple Ember versions
+In one terminal, start the addon build:
 
-## Running the dummy application
+```
+cd addon/ && pnpm start
+```
 
-* `ember serve`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
+In another terminal, start the test-app build:
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+```
+cd test-app/ && pnpm start
+```
+
+Visit the tests in the browser at localhost:4200/tests.
+
+Alternatively, run tests via CLI with: `pnpm test`
+
+## Running the docs application
+
+Start the addon build in another terminal window:
+
+```
+cd addon/ && pnpm start
+```
+
+Then start the docs app:
+
+```
+cd docs-app/ && pnpm start
+```
