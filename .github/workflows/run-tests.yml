@@ -1,5 +1,8 @@
 name: Run-Tests
 
+env:
+  VOLTA_FEATURE_PNPM: 1
+
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
@@ -16,8 +19,6 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    env:
-      VOLTA_FEATURE_PNPM: 1
 
     steps:
       - uses: actions/checkout@v4
@@ -43,8 +44,6 @@ jobs:
   test-docs:
     name: Test Docs
     runs-on: ubuntu-latest
-    env:
-      VOLTA_FEATURE_PNPM: 1
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
@@ -65,8 +64,6 @@ jobs:
   test:
     name: Run Ember Tests
     runs-on: ubuntu-latest
-    env:
-      VOLTA_FEATURE_PNPM: 1
     strategy:
       fail-fast: false
       matrix:
