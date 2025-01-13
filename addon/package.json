@@ -33,7 +33,8 @@
     "lint:js:fix": "eslint . --fix",
     "build": "rollup --config",
     "prepublishOnly": "rollup --config",
-    "start": "rollup --config --watch"
+    "start": "rollup --config --watch",
+    "test": "echo 'v2 addons do not have tests, run tests for the test-app instead'"
   },
   "dependencies": {
     "@embroider/addon-shim": "^1.9.0",
