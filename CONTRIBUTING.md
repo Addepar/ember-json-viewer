@@ -34,7 +34,7 @@ cd test-app/ && pnpm start
 
 Visit the tests in the browser at localhost:4200/tests.
 
-Alternatively, run tests via CLI with: `pnpm test`
+Alternatively, run tests via CLI with: `cd test-app/ && pnpm test`
 
 ## Running the docs application
 
