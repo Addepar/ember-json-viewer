@@ -11,7 +11,6 @@
   "license": "MIT",
   "author": "",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
@@ -24,8 +23,7 @@
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\" --prefixColors auto",
-    "test:ember": "ember test",
-    "test:ember-compatibility": "ember try:each"
+    "test:ember": "ember test"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -34,8 +32,12 @@
     "@ember/optional-features": "^2.2.0",
     "@ember/string": "^4.0.0",
     "@ember/test-helpers": "^4.0.4",
-    "@eslint/js": "^9.17.0",
+    "@embroider/broccoli-side-watch": "^1.0.1",
+    "@embroider/compat": "^3.4.8",
+    "@embroider/core": "^3.4.8",
     "@embroider/test-setup": "^4.0.0",
+    "@embroider/webpack": "^4.0.0",
+    "@eslint/js": "^9.17.0",
     "@glimmer/component": "^1.0.0",
     "@glimmer/tracking": "^1.1.2",
     "broccoli-asset-rev": "^3.0.0",

@@ -4,7 +4,15 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
+    // The below ensures the app is rebuilt when the addon source is rebuilt,
+    // from: https://github.com/embroider-build/embroider/issues/1892#issuecomment-2562911437
+    trees: {
+      app: (() => {
+        let sideWatch = require('@embroider/broccoli-side-watch');
+
+        return sideWatch('app', { watching: ['ember-json-viewer'] });
+      })(),
+    },
   });
 
   const { maybeEmbroider } = require('@embroider/test-setup');
