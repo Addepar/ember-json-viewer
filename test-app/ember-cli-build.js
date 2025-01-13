@@ -10,7 +10,9 @@ module.exports = function (defaults) {
       app: (() => {
         let sideWatch = require('@embroider/broccoli-side-watch');
 
-        return sideWatch('app', { watching: ['ember-json-viewer'] });
+        return sideWatch('app', {
+          watching: [require('../addon/package.json').name],
+        });
       })(),
     },
   });
