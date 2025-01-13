@@ -48,6 +48,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
+      - id: pnpm-cache-path
+        run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache-path.outputs.pnpm_cache_path }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install Dependencies
         run: pnpm install
       - working-directory: addon
@@ -77,6 +83,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
+      - id: pnpm-cache-path
+        run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache-path.outputs.pnpm_cache_path }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install Dependencies
         run: pnpm install
       - working-directory: addon
