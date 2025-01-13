@@ -16,14 +16,12 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    env:
+      VOLTA_FEATURE_PNPM: 1
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'pnpm'
+      - uses: volta-cli/action@v4
       - name: Install Dependencies
         run: pnpm install
       - name: Lint Addon
@@ -39,13 +37,13 @@ jobs:
   test-docs:
     name: Test Docs
     runs-on: ubuntu-latest
+    env:
+      VOLTA_FEATURE_PNPM: 1
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'pnpm'
+      - uses: volta-cli/action@v4
+      - run: node -v
+      - run: pnpm -v
       - name: Install Dependencies
         run: pnpm install
       - working-directory: addon
@@ -57,6 +55,8 @@ jobs:
   test:
     name: Run Ember Tests
     runs-on: ubuntu-latest
+    env:
+      VOLTA_FEATURE_PNPM: 1
     strategy:
       fail-fast: false
       matrix:
@@ -72,11 +72,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'pnpm'
+      - uses: volta-cli/action@v4
       - name: Install Dependencies
         run: pnpm install
       - working-directory: addon
