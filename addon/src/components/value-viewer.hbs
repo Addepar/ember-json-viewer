@@ -35,7 +35,10 @@
             />
             {{#unless (is-last @value index)}}
               {{! In order for copy/paste to work, there cannot be extra whitespace around the delimiter }}
-              <span class="entry-delimiter" data-path={{concat @path "[" index "]" "@" ","}}>,</span>
+              <span
+                class="entry-delimiter"
+                data-path={{concat @path "[" index "]" "@" ","}}
+              >,</span>
             {{/unless}}
           </li>
         {{/each}}

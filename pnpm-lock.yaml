@@ -44,6 +44,9 @@ importers:
       ember-template-lint:
         specifier: ^6.0.0
         version: 6.0.0
+      ember-template-lint-plugin-prettier:
+        specifier: ^5.0.0
+        version: 5.0.0(ember-template-lint@6.0.0)(prettier@3.4.2)
       eslint:
         specifier: ^9.17.0
         version: 9.17.0
@@ -1292,6 +1295,11 @@ packages:
   '@pnpm/find-workspace-dir@7.0.3':
     resolution: {integrity: sha512-eGjkyHSufkHyZ66WpygWnslcRePB0U1lJg1dF3rgWqTChpregYoDyNGDzK7l9Gk+CHVgGZZS5aWp7uKKVmAAEg==}
     engines: {node: '>=18.12'}
+
+  '@prettier/sync@0.2.1':
+    resolution: {integrity: sha512-7ls1R6//+GPYD9vof1XaL5psViv83CwpdwlS8oUkWldYgbPhzZ3WgxIQMWqGyBmWPmoBfQg8C7jj7KI/ZuDHhQ==}
+    peerDependencies:
+      prettier: ^3.0.0
 
   '@rollup/plugin-babel@6.0.4':
     resolution: {integrity: sha512-YF7Y52kFdFT/xVSuVdjkV5ZdX/3YtmX0QulG+x0taQOtJdHYzVU61aSSkAgVJ7NOv6qPkIYiJSgSWWN/DM5sGw==}
@@ -3242,6 +3250,13 @@ packages:
   ember-template-imports@3.4.2:
     resolution: {integrity: sha512-OS8TUVG2kQYYwP3netunLVfeijPoOKIs1SvPQRTNOQX4Pu8xGGBEZmrv0U1YTnQn12Eg+p6w/0UdGbUnITjyzw==}
     engines: {node: 12.* || >= 14}
+
+  ember-template-lint-plugin-prettier@5.0.0:
+    resolution: {integrity: sha512-aXUYM4yuIdPZ80+AsAU8QBwGSJJ/aAkRsNcQ5vI5HmXiBjzHlDc/ZhmP6iVcYuCmoA/3iKcssMAYwIDbuby4pg==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      ember-template-lint: '>= 4.0.0'
+      prettier: '>= 3.0.0'
 
   ember-template-lint@6.0.0:
     resolution: {integrity: sha512-TWWt/qCd4KoQ50T3We5nCoKcsrAT8Ip79Kmm9eyWjjyL+LAbRFu0z+GxcmW7MR+QCNW/1LQs3kwEdtIcaHEGiA==}
@@ -8056,6 +8071,10 @@ snapshots:
       '@pnpm/error': 6.0.3
       find-up: 5.0.0
 
+  '@prettier/sync@0.2.1(prettier@3.4.2)':
+    dependencies:
+      prettier: 3.4.2
+
   '@rollup/plugin-babel@6.0.4(@babel/core@7.26.0)(rollup@4.30.1)':
     dependencies:
       '@babel/core': 7.26.0(supports-color@8.1.1)
@@ -11031,6 +11050,13 @@ snapshots:
       validate-peer-dependencies: 1.2.0
     transitivePeerDependencies:
       - supports-color
+
+  ember-template-lint-plugin-prettier@5.0.0(ember-template-lint@6.0.0)(prettier@3.4.2):
+    dependencies:
+      '@prettier/sync': 0.2.1(prettier@3.4.2)
+      ember-template-lint: 6.0.0
+      prettier: 3.4.2
+      prettier-linter-helpers: 1.0.0
 
   ember-template-lint@6.0.0:
     dependencies:
