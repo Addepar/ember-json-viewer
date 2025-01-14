@@ -20,23 +20,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
+      - uses: pnpm/action-setup@v4
+      - id: pnpm-cache-path
+        run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
-        id: node-cache
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.pnpm-cache-path.outputs.pnpm_cache_path }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install Dependencies
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn --frozen-lockfile
+        run: pnpm install
       - name: Lint Addon
         working-directory: addon
-        run: yarn run lint
+        run: pnpm run lint
       - name: Lint Test App
         working-directory: test-app
-        run: yarn run lint
+        run: pnpm run lint
       - name: Lint Docs App
         working-directory: docs-app
-        run: yarn run lint
+        run: pnpm run lint
 
   test-docs:
     name: Test Docs
@@ -44,16 +45,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
+      - uses: pnpm/action-setup@v4
+      - id: pnpm-cache-path
+        run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn --frozen-lockfile
+          path: ${{ steps.pnpm-cache-path.outputs.pnpm_cache_path }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Dependencies
+        run: pnpm install
       - working-directory: addon
-        run: yarn run build
+        run: pnpm run build
       - name: Run Tests
         working-directory: docs-app
-        run: yarn run test
+        run: pnpm run test
 
   test:
     name: Run Ember Tests
@@ -74,15 +79,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: volta-cli/action@v4
+      - uses: pnpm/action-setup@v4
+      - id: pnpm-cache-path
+        run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v4
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-${{ matrix.ember-version }}
-          restore-keys: |
-            ${{ runner.os }}-ci-yarn-${{ hashFiles('**/yarn.lock') }}-
-      - run: yarn --frozen-lockfile
+          path: ${{ steps.pnpm-cache-path.outputs.pnpm_cache_path }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Dependencies
+        run: pnpm install
       - working-directory: addon
-        run: yarn run build
+        run: pnpm run build
       - name: Run Tests
         working-directory: test-app
         run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup
