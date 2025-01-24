@@ -1,0 +1,6 @@
+# Unlabeled Changes
+
+* [#75](https://github.com/Addepar/ember-json-viewer/pull/75) workflows: Update run-tests.yml to run on merge_group trigger ([@bantic](https://github.com/bantic))
+
+
+*Cannot plan release until the above changes are labeled*.
