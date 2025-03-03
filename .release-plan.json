@@ -1,25 +1,8 @@
 {
   "solution": {
     "ember-json-viewer": {
-      "impact": "major",
-      "oldVersion": "0.8.1",
-      "newVersion": "1.0.0",
-      "constraints": [
-        {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
-        }
-      ],
-      "pkgJSONPath": "./addon/package.json"
+      "oldVersion": "1.0.0"
     }
   },
-  "description": "## Release (2025-01-14)\n\nember-json-viewer 1.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-json-viewer`, `docs-app`, `test-app`\n  * [#63](https://github.com/Addepar/ember-json-viewer/pull/63) Embroider: Port to v2 format: fully convert to v2 native format ([@bantic](https://github.com/bantic))\n\n#### :bug: Bug Fix\n* `ember-json-viewer`, `test-app`\n  * [#65](https://github.com/Addepar/ember-json-viewer/pull/65) [fix] bug where an extra comma is added after final object ([@bantic](https://github.com/bantic))\n\n#### :house: Internal\n* Other\n  * [#73](https://github.com/Addepar/ember-json-viewer/pull/73) chore: use embroider/release-plan ([@bantic](https://github.com/bantic))\n* `ember-json-viewer`, `docs-app`, `test-app`\n  * [#66](https://github.com/Addepar/ember-json-viewer/pull/66) chore: Upgrade from yarn classic (v1.22) to pnpm v10 ([@bantic](https://github.com/bantic))\n  * [#62](https://github.com/Addepar/ember-json-viewer/pull/62) Embroider: Port to v2 format: part 2: separate docs-app ([@bantic](https://github.com/bantic))\n* `docs-app`, `test-app`\n  * [#68](https://github.com/Addepar/ember-json-viewer/pull/68) tests-app: Include dropped lint rules, avoid linting .node_modules.ember-try ([@bantic](https://github.com/bantic))\n* `ember-json-viewer`, `test-app`\n  * [#61](https://github.com/Addepar/ember-json-viewer/pull/61) Embroider: Port to v2 format: Part 1: separate test-app ([@bantic](https://github.com/bantic))\n\n#### Committers: 1\n- Cory Forsyth ([@bantic](https://github.com/bantic))\n"
+  "description": "## Release (2025-03-03)\n\n\n\n#### :house: Internal\n* [#77](https://github.com/Addepar/ember-json-viewer/pull/77) Create CODEOWNERS ([@mixonic](https://github.com/mixonic))\n* [#75](https://github.com/Addepar/ember-json-viewer/pull/75) workflows: Update run-tests.yml to run on merge_group trigger ([@bantic](https://github.com/bantic))\n\n#### Committers: 2\n- Cory Forsyth ([@bantic](https://github.com/bantic))\n- Matthew Beale ([@mixonic](https://github.com/mixonic))\n"
 }

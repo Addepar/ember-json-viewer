@@ -1,5 +1,17 @@
 # Changelog
 
+## Release (2025-03-03)
+
+
+
+#### :house: Internal
+* [#77](https://github.com/Addepar/ember-json-viewer/pull/77) Create CODEOWNERS ([@mixonic](https://github.com/mixonic))
+* [#75](https://github.com/Addepar/ember-json-viewer/pull/75) workflows: Update run-tests.yml to run on merge_group trigger ([@bantic](https://github.com/bantic))
+
+#### Committers: 2
+- Cory Forsyth ([@bantic](https://github.com/bantic))
+- Matthew Beale ([@mixonic](https://github.com/mixonic))
+
 ## Release (2025-01-14)
 
 ember-json-viewer 1.0.0 (major)
