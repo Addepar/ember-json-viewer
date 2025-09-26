@@ -1,5 +1,24 @@
 # Changelog
 
+## Release (2025-09-26)
+
+
+
+#### :house: Internal
+* `test-app`
+  * [#80](https://github.com/Addepar/ember-json-viewer/pull/80) Upgrade Node and pnpm ([@mixonic](https://github.com/mixonic))
+* Other
+  * [#79](https://github.com/Addepar/ember-json-viewer/pull/79) Prepare Release ([@github-actions[bot]](https://github.com/apps/github-actions))
+  * [#78](https://github.com/Addepar/ember-json-viewer/pull/78) [WEBCORE-3330] Disable pnpm upgrade notification ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))
+  * [#77](https://github.com/Addepar/ember-json-viewer/pull/77) Create CODEOWNERS ([@mixonic](https://github.com/mixonic))
+  * [#75](https://github.com/Addepar/ember-json-viewer/pull/75) workflows: Update run-tests.yml to run on merge_group trigger ([@bantic](https://github.com/bantic))
+
+#### Committers: 4
+- Cory Forsyth ([@bantic](https://github.com/bantic))
+- Elias Dawson ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))
+- Matthew Beale ([@mixonic](https://github.com/mixonic))
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+
 ## Release (2025-04-03)
 
 
