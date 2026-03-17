@@ -15,8 +15,8 @@ importers:
   addon:
     dependencies:
       '@embroider/addon-shim':
-        specifier: ^1.9.0
-        version: 1.10.0
+        specifier: ^1.10.2
+        version: 1.10.2
       ember-test-selectors:
         specifier: ^7.0.0
         version: 7.1.0
@@ -1305,10 +1305,6 @@ packages:
     peerDependenciesMeta:
       rollup:
         optional: true
-
-  '@embroider/addon-shim@1.10.0':
-    resolution: {integrity: sha512-gcJuHiXgnrzaU8NyU+2bMbtS6PNOr5v5B8OXBqaBvTCsMpXLvKo8OBOQFCoUN0rPX2J6VaFqrbi/371sMvzZug==}
-    engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/addon-shim@1.10.2':
     resolution: {integrity: sha512-EfI9cJ5/3QSUJtwm7x1MXrx3TEa2p7RNgSHefy7fvGm8/DP1xUFL25nST1NaHbHcqR1UhMlrTtv5iUIDoVzeQQ==}
@@ -7794,7 +7790,7 @@ snapshots:
       '@babel/core': 7.28.0(supports-color@8.1.1)
       '@babel/helper-compilation-targets': 7.28.6
       '@babel/helper-plugin-utils': 7.27.1
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@8.1.1)
       lodash.debounce: 4.0.8
       resolve: 1.22.11
     transitivePeerDependencies:
@@ -8911,7 +8907,7 @@ snapshots:
   '@ember/test-helpers@4.0.5(@babel/core@7.28.0)(ember-source@6.11.0(@glimmer/component@1.1.2(@babel/core@7.28.0))(rsvp@4.8.5))':
     dependencies:
       '@ember/test-waiters': 4.1.1
-      '@embroider/addon-shim': 1.10.0
+      '@embroider/addon-shim': 1.10.2
       '@embroider/macros': 1.18.0
       '@simple-dom/interface': 1.4.0
       decorator-transforms: 2.3.0(@babel/core@7.28.0)
@@ -8924,7 +8920,7 @@ snapshots:
 
   '@ember/test-waiters@4.1.1':
     dependencies:
-      '@embroider/addon-shim': 1.10.0
+      '@embroider/addon-shim': 1.10.2
       '@embroider/macros': 1.18.0
     transitivePeerDependencies:
       - '@glint/template'
@@ -8950,15 +8946,6 @@ snapshots:
       - canvas
       - supports-color
       - utf-8-validate
-
-  '@embroider/addon-shim@1.10.0':
-    dependencies:
-      '@embroider/shared-internals': 3.0.0
-      broccoli-funnel: 3.0.8
-      common-ancestor-path: 1.0.1
-      semver: 7.7.2
-    transitivePeerDependencies:
-      - supports-color
 
   '@embroider/addon-shim@1.10.2':
     dependencies:
@@ -9178,7 +9165,7 @@ snapshots:
   '@embroider/shared-internals@2.9.0':
     dependencies:
       babel-import-util: 2.1.1
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@8.1.1)
       ember-rfc176-data: 0.3.18
       fs-extra: 9.1.0
       is-subdir: 1.2.0
@@ -11229,10 +11216,10 @@ snapshots:
     dependencies:
       array-equal: 1.0.2
       broccoli-plugin: 4.0.7
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@8.1.1)
       fs-tree-diff: 2.0.1
       heimdalljs: 0.2.6
-      minimatch: 3.1.2
+      minimatch: 3.1.5
       walk-sync: 2.2.0
     transitivePeerDependencies:
       - supports-color
@@ -12756,7 +12743,7 @@ snapshots:
   ember-qunit@9.0.3(@ember/test-helpers@4.0.5(@babel/core@7.28.0)(ember-source@6.11.0(@glimmer/component@1.1.2(@babel/core@7.28.0))(rsvp@4.8.5)))(qunit@2.24.1):
     dependencies:
       '@ember/test-helpers': 4.0.5(@babel/core@7.28.0)(ember-source@6.11.0(@glimmer/component@1.1.2(@babel/core@7.28.0))(rsvp@4.8.5))
-      '@embroider/addon-shim': 1.10.0
+      '@embroider/addon-shim': 1.10.2
       '@embroider/macros': 1.18.0
       qunit: 2.24.1
       qunit-theme-ember: 1.0.0
@@ -14111,7 +14098,7 @@ snapshots:
   http-proxy-agent@7.0.2(supports-color@8.1.1):
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -14133,7 +14120,7 @@ snapshots:
   https-proxy-agent@7.0.6(supports-color@8.1.1):
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.1(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -14886,7 +14873,7 @@ snapshots:
   matcher-collection@2.0.1:
     dependencies:
       '@types/minimatch': 3.0.5
-      minimatch: 3.1.5
+      minimatch: 3.1.2
 
   math-intrinsics@1.1.0: {}
 
@@ -15219,7 +15206,7 @@ snapshots:
     dependencies:
       hosted-git-info: 8.1.0
       proc-log: 5.0.0
-      semver: 7.7.2
+      semver: 7.7.4
       validate-npm-package-name: 6.0.2
 
   npm-pick-manifest@9.1.0:
