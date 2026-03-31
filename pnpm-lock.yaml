@@ -160,8 +160,8 @@ importers:
         specifier: ^9.0.1
         version: 9.0.3(@ember/test-helpers@4.0.5(@babel/core@7.28.0)(ember-source@6.11.0(@glimmer/component@1.1.2(@babel/core@7.28.0))(rsvp@4.8.5)))(qunit@2.24.1)
       ember-resolver:
-        specifier: ^13.1.0
-        version: 13.1.1
+        specifier: ^13.2.0
+        version: 13.2.0
       ember-source:
         specifier: ~6.11.0
         version: 6.11.0(@glimmer/component@1.1.2(@babel/core@7.28.0))(rsvp@4.8.5)
@@ -304,8 +304,8 @@ importers:
         specifier: ^9.0.1
         version: 9.0.3(@ember/test-helpers@4.0.5(@babel/core@7.28.0)(ember-source@6.11.0(@glimmer/component@1.1.2(@babel/core@7.28.0))(rsvp@4.8.5)))(qunit@2.24.1)
       ember-resolver:
-        specifier: ^13.1.0
-        version: 13.1.1
+        specifier: ^13.2.0
+        version: 13.2.0
       ember-source:
         specifier: ~6.11.0
         version: 6.11.0(@glimmer/component@1.1.2(@babel/core@7.28.0))(rsvp@4.8.5)
@@ -2098,6 +2098,7 @@ packages:
   '@xmldom/xmldom@0.8.10':
     resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
     engines: {node: '>=10.0.0'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -3815,9 +3816,8 @@ packages:
       '@ember/test-helpers': '>=3.0.3'
       qunit: ^2.13.0
 
-  ember-resolver@13.1.1:
-    resolution: {integrity: sha512-rA4RDuTm/F9AzYX2+g7EY3QWU48kyF9+Ck8IE8VQipnlwv2Q42kdRWiw7hfeQbRxx6XoSZCak6nzAG9ePd/+Ug==}
-    engines: {node: 14.* || 16.* || >= 18}
+  ember-resolver@13.2.0:
+    resolution: {integrity: sha512-A+BffoSKC0ngiczbgaz/IOY66ovZVRRHHIDDi+d7so5i0By8xuB4nXgZZ6Dv3u/3WwoUyixgUvb0xTUO+MtupA==}
 
   ember-rfc176-data@0.3.18:
     resolution: {integrity: sha512-JtuLoYGSjay1W3MQAxt3eINWXNYYQliK90tLwtb8aeCuQK8zKGCRbBodVIrkcTqshULMnRuTOS6t1P7oQk3g6Q==}
@@ -12750,11 +12750,7 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  ember-resolver@13.1.1:
-    dependencies:
-      ember-cli-babel: 7.26.11
-    transitivePeerDependencies:
-      - supports-color
+  ember-resolver@13.2.0: {}
 
   ember-rfc176-data@0.3.18: {}
 
