@@ -37,8 +37,8 @@ importers:
         specifier: ^8.3.0
         version: 8.3.0(rollup@4.59.0)
       '@eslint/js':
-        specifier: ^9.17.0
-        version: 9.31.0
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.31.0)
       '@rollup/plugin-babel':
         specifier: ^6.1.0
         version: 6.1.0(@babel/core@7.28.0)(rollup@4.59.0)
@@ -97,8 +97,8 @@ importers:
         specifier: ^1.0.1
         version: 1.1.0
       '@eslint/js':
-        specifier: ^9.17.0
-        version: 9.31.0
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.31.0)
       '@glimmer/component':
         specifier: ^1.0.0
         version: 1.1.2(@babel/core@7.28.0)
@@ -247,8 +247,8 @@ importers:
         specifier: ^4.0.0
         version: 4.1.1(@embroider/core@3.5.7)(webpack@5.105.3)
       '@eslint/js':
-        specifier: ^9.17.0
-        version: 9.31.0
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.31.0)
       '@glimmer/component':
         specifier: ^1.0.0
         version: 1.1.2(@babel/core@7.28.0)
@@ -1448,6 +1448,15 @@ packages:
   '@eslint/eslintrc@3.3.1':
     resolution: {integrity: sha512-gtF186CXhIl1p4pJNGZw8Yc6RlshoePRvE0X91oPGb3vZ8pM3qOS9W9NGPat9LziaBV7XrJWGylNQXkGcnM3IQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@10.0.1':
+    resolution: {integrity: sha512-zeR9k5pd4gxjZ0abRoIaxdc7I3nDktoXZk2qOv9gCNWx3mVwEn32VRhyLaRsDiJjTs0xq/T8mfPtyuXu7GWBcA==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+    peerDependencies:
+      eslint: ^10.0.0
+    peerDependenciesMeta:
+      eslint:
+        optional: true
 
   '@eslint/js@9.31.0':
     resolution: {integrity: sha512-LOm5OVt7D4qiKCqoiPbA7LWmI+tbw1VbTUowBcUMgQSuM6poJufkFkYDcQpo5KfgD39TnNySV26QjOh7VFpSyw==}
@@ -9323,6 +9332,10 @@ snapshots:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+
+  '@eslint/js@10.0.1(eslint@9.31.0)':
+    optionalDependencies:
+      eslint: 9.31.0
 
   '@eslint/js@9.31.0': {}
 
