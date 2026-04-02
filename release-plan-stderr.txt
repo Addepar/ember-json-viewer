@@ -1,8 +1,0 @@
-Warning: unknown package "test-app"
-# Unlabeled Changes
-
-* [#109](https://github.com/Addepar/ember-json-viewer/pull/109) [WEBCORE-3182] Don't set auth tokens during publishing ([@yanglinz](https://github.com/yanglinz))
-* [#108](https://github.com/Addepar/ember-json-viewer/pull/108) Fix Release Plan ([@yanglinz](https://github.com/yanglinz))
-
-
-*Cannot plan release until the above changes are labeled*.
