@@ -25,4 +25,4 @@ updates:
       - "@Addepar/web-core"
     open-pull-requests-limit: 3
     labels:
-      - "dependencies"
+      - "internal"
