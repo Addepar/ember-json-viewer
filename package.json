@@ -16,9 +16,6 @@
   },
   "changelog": {
     "ignoreCommitters": [
-      "dependabot-bot",
-      "dependabot[bot]",
-      "dependabot-preview[bot]",
       "addepar-security[bot]"
     ]
   }
