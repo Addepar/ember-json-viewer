@@ -46,12 +46,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      - uses: volta-cli/action@v4
       - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 18
-          registry-url: "https://registry.npmjs.org"
-          cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: npm publish
         run: NPM_CONFIG_PROVENANCE=true pnpm release-plan publish
