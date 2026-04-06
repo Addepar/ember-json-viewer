@@ -1,0 +1,13 @@
+diff --git a/dist/publish.js b/dist/publish.js
+index ac9b484736308f6fcb5eb78713fb04ca1778cfe5..bd05f806343d7d7f4c7a7aead167171e53300273 100644
+--- a/dist/publish.js
++++ b/dist/publish.js
+@@ -189,7 +189,7 @@ export async function npmPublish(solution, reporter, options, packageManager) {
+             continue;
+         }
+         const preExisting = await doesVersionExist(pkgName, entry.newVersion, reporter);
+-        if (preExisting) {
++        if (preExisting && false) {
+             info(`${pkgName} has already been published @ version ${entry.newVersion}. Skipping publish;`);
+             continue;
+         }

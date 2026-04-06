@@ -1,4 +1,7 @@
 packages:
- - 'addon'
- - 'test-app'
- - 'docs-app'
+  - addon
+  - test-app
+  - docs-app
+
+patchedDependencies:
+  release-plan: patches/release-plan.patch

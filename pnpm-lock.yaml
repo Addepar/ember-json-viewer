@@ -4,13 +4,18 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  release-plan:
+    hash: 3a32029aa840972cfeb498cf7516dfe9e4838e1cdb3e5ae461d71b8369ed327c
+    path: patches/release-plan.patch
+
 importers:
 
   .:
     devDependencies:
       release-plan:
         specifier: ^0.11.0
-        version: 0.11.0(encoding@0.1.13)
+        version: 0.11.0(patch_hash=3a32029aa840972cfeb498cf7516dfe9e4838e1cdb3e5ae461d71b8369ed327c)(encoding@0.1.13)
 
   addon:
     dependencies:
@@ -15816,7 +15821,7 @@ snapshots:
     dependencies:
       jsesc: 3.1.0
 
-  release-plan@0.11.0(encoding@0.1.13):
+  release-plan@0.11.0(patch_hash=3a32029aa840972cfeb498cf7516dfe9e4838e1cdb3e5ae461d71b8369ed327c)(encoding@0.1.13):
     dependencies:
       '@manypkg/get-packages': 2.2.2
       '@npmcli/package-json': 5.2.1
