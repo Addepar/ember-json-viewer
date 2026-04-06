@@ -28,7 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       command: ${{ steps.check-release.outputs.command }}
-
     steps:
       - uses: actions/checkout@v6
         with:
@@ -43,11 +42,12 @@ jobs:
   publish:
     name: "NPM Publish"
     runs-on: ubuntu-latest
-    environment: release
-
     steps:
       - uses: actions/checkout@v6
-      - uses: volta-cli/action@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
       - uses: pnpm/action-setup@v5
       - run: pnpm install --frozen-lockfile
       - name: npm publish
