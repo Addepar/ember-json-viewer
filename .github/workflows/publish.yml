@@ -50,8 +50,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - uses: pnpm/action-setup@v5
       - run: pnpm install --frozen-lockfile
-      - run: cd addon && npm whoami
-      - run: cd addon && npm publish
+      - run: cd addon && npm publish --loglevel silly
       - name: npm publish
         run: pnpm release-plan publish --provenance
         env:
