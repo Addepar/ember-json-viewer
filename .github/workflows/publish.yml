@@ -49,7 +49,7 @@ jobs:
           node-version: "22"
           registry-url: "https://registry.npmjs.org"
       - run: cd /home/runner/ && npm --version
-      - run: cd /home/runner/ && npm install -g npm@latest
+      - run: cd /home/runner/ && npx npm@latest install -g npm@latest
       - run: cd /home/runner/ && npm --version
       - uses: pnpm/action-setup@v5
       - run: pnpm install --frozen-lockfile
