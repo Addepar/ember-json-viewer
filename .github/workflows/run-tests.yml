@@ -30,6 +30,9 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install Dependencies
         run: pnpm install
+      - name: Build Addon
+        working-directory: addon
+        run: pnpm run build
       - name: Lint Addon
         working-directory: addon
         run: pnpm run lint
@@ -91,6 +94,8 @@ jobs:
         run: pnpm install
       - working-directory: addon
         run: pnpm run build
+      - working-directory: addon
+        run: pnpm run prepublishOnly
       - name: Run Tests
         working-directory: test-app
         run: ./node_modules/.bin/ember try:one ${{ matrix.ember-version }} --skip-cleanup
