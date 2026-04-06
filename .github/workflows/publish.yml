@@ -47,11 +47,10 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
-          cache: "npm"
           registry-url: "https://registry.npmjs.org"
-      - run: npm --version
-      - run: npm install -g npm@latest
-      - run: npm --version
+      - run: cd /home/runner/ && npm --version
+      - run: cd /home/runner/ && npm install -g npm@latest
+      - run: cd /home/runner/ && npm --version
       - uses: pnpm/action-setup@v5
       - run: pnpm install --frozen-lockfile
       - run: cd addon && npm publish --loglevel silly --provenance --dry-run
