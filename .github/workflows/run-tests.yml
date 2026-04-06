@@ -58,7 +58,7 @@ jobs:
           path: ${{ steps.pnpm-cache-path.outputs.pnpm_cache_path }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install Dependencies
-      - run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - run: cd addon && pnpm build
 
   test-docs:
