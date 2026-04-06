@@ -51,6 +51,6 @@ jobs:
       - uses: pnpm/action-setup@v5
       - run: pnpm install --frozen-lockfile
       - name: npm publish
-        run: NPM_CONFIG_PROVENANCE=true pnpm release-plan publish
+        run: pnpm release-plan publish --provenance
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
