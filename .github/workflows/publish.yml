@@ -48,8 +48,10 @@ jobs:
         with:
           node-version: "22"
           registry-url: "https://registry.npmjs.org"
-      - uses: pnpm/action-setup@v5
       - run: npm --version
+      - run: npm install -g npm@latest
+      - run: npm --version
+      - uses: pnpm/action-setup@v5
       - run: pnpm install --frozen-lockfile
       - run: cd addon && npm publish --loglevel silly --provenance --dry-run
       - name: npm publish
