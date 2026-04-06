@@ -56,7 +56,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: cd addon && npm build
+      - run: cd addon && npm build
 
   test-docs:
     name: Test Docs
