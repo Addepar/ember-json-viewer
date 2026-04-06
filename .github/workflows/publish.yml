@@ -16,6 +16,12 @@ concurrency:
   group: publish-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write # Required for npm trusted publishing
+  attestations: write
+
 jobs:
   check-plan:
     name: "Check Release Plan"
@@ -38,11 +44,6 @@ jobs:
     name: "NPM Publish"
     runs-on: ubuntu-latest
     environment: release
-    permissions:
-      contents: write
-      pull-requests: write
-      id-token: write # Required for npm trusted publishing
-      attestations: write
 
     steps:
       - uses: actions/checkout@v6
