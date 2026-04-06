@@ -49,12 +49,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+      - uses: volta-cli/action@v4
       - uses: pnpm/action-setup@v5
-      - uses: actions/setup-node@v6
+      - id: pnpm-cache-path
+        run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v5
         with:
-          node-version: 18
-          registry-url: "https://registry.npmjs.org"
-          cache: pnpm
+          path: ${{ steps.pnpm-cache-path.outputs.pnpm_cache_path }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install Dependencies
       - run: pnpm install --frozen-lockfile
       - run: cd addon && pnpm build
 
