@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      # We're using setup-node instead of the volta/setup action like the other workflows
+      # We're using setup-node instead of the volta-cli/action like the other workflows
       # in order to set reasonable defaults for the .npmrc for trusted publishing.
       # https://docs.npmjs.com/trusted-publishers#github-actions-configuration
       - uses: actions/setup-node@v6
