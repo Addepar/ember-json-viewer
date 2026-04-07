@@ -1,7 +1,7 @@
 {
-  "name": "ember-json-viewer",
+  "name": "publish-testing-ejv",
   "version": "1.0.2",
-  "description": "A JSON-viewer addon for Ember apps",
+  "description": "Testing publish workflow for ember-json-viewer",
   "keywords": [
     "ember-addon"
   ],
