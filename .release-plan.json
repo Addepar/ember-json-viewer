@@ -1,17 +1,8 @@
 {
   "solution": {
-    "ember-json-viewer": {
-      "impact": "patch",
-      "oldVersion": "1.0.1",
-      "newVersion": "1.0.2",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
-        }
-      ],
-      "pkgJSONPath": "./addon/package.json"
+    "publish-testing-ejv": {
+      "oldVersion": "1.0.2"
     }
   },
-  "description": "## Release (2026-04-06)\n\nember-json-viewer 1.0.2 (patch)\n\n#### :house: Internal\n* Other\n  * [#117](https://github.com/Addepar/ember-json-viewer/pull/117) [WEBCORE-3182] Use volta instead of setup-node ([@yanglinz](https://github.com/yanglinz))\n  * [#113](https://github.com/Addepar/ember-json-viewer/pull/113) Bump volta-cli/action from 4 to 5 ([@dependabot[bot]](https://github.com/apps/dependabot))\n* `ember-json-viewer`, `docs-app`, `test-app`\n  * [#114](https://github.com/Addepar/ember-json-viewer/pull/114) Bump @babel/plugin-proposal-decorators from 7.28.0 to 7.29.0 ([@dependabot[bot]](https://github.com/apps/dependabot))\n\n#### Committers: 2\n- Yanglin Zhao ([@yanglinz](https://github.com/yanglinz))\n- [@dependabot[bot]](https://github.com/apps/dependabot)\n"
+  "description": "\n\n\n\n"
 }
