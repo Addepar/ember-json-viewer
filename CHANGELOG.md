@@ -5,6 +5,11 @@
 
 
 
+
+
+
+
+
 ## Release (2026-04-06)
 
 ember-json-viewer 1.0.2 (patch)
