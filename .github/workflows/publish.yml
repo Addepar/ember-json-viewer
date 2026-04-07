@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: volta-cli/action@v4
+      - uses: volta-cli/action@v5
       - uses: pnpm/action-setup@v5
       - run: pnpm install --frozen-lockfile
       - name: npm publish
