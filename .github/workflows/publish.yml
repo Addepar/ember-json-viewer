@@ -46,13 +46,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      # We're using setup-node instead of the volta-cli/action like the other workflows
-      # in order to set reasonable defaults for the .npmrc for trusted publishing.
-      # https://docs.npmjs.com/trusted-publishers#github-actions-configuration
-      - uses: actions/setup-node@v6
+      - uses: volta-cli/action@v5
         with:
-          # should match the version in package.json volta field
-          node-version: "22"
           registry-url: "https://registry.npmjs.org"
       - uses: pnpm/action-setup@v5
       # Both release-plan and pnpm uses `npm publish` under the hood to publish a release.
