@@ -1,6 +1,6 @@
 {
   "name": "ember-json-viewer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A JSON-viewer addon for Ember apps",
   "keywords": [
     "ember-addon"
