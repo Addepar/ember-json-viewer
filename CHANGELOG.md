@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-04-09)
+
+ember-json-viewer 1.0.3 (patch)
+
+#### :house: Internal
+* `ember-json-viewer`, `docs-app`, `test-app`
+  * [#122](https://github.com/Addepar/ember-json-viewer/pull/122) Bump eslint-plugin-prettier from 5.5.3 to 5.5.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* Other
+  * [#121](https://github.com/Addepar/ember-json-viewer/pull/121) [WEBCORE-3182] Upgrade npm version to be compatible with trusted publishing ([@yanglinz](https://github.com/yanglinz))
+  * [#118](https://github.com/Addepar/ember-json-viewer/pull/118) Upgrade volta action ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))
+
+#### Committers: 3
+- Elias Dawson ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))
+- Yanglin Zhao ([@yanglinz](https://github.com/yanglinz))
+- [@dependabot[bot]](https://github.com/apps/dependabot)
+
 ## Release (2026-04-06)
 
 ember-json-viewer 1.0.2 (patch)

@@ -2,8 +2,8 @@
   "solution": {
     "ember-json-viewer": {
       "impact": "patch",
-      "oldVersion": "1.0.1",
-      "newVersion": "1.0.2",
+      "oldVersion": "1.0.2",
+      "newVersion": "1.0.3",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./addon/package.json"
     }
   },
-  "description": "## Release (2026-04-06)\n\nember-json-viewer 1.0.2 (patch)\n\n#### :house: Internal\n* Other\n  * [#117](https://github.com/Addepar/ember-json-viewer/pull/117) [WEBCORE-3182] Use volta instead of setup-node ([@yanglinz](https://github.com/yanglinz))\n  * [#113](https://github.com/Addepar/ember-json-viewer/pull/113) Bump volta-cli/action from 4 to 5 ([@dependabot[bot]](https://github.com/apps/dependabot))\n* `ember-json-viewer`, `docs-app`, `test-app`\n  * [#114](https://github.com/Addepar/ember-json-viewer/pull/114) Bump @babel/plugin-proposal-decorators from 7.28.0 to 7.29.0 ([@dependabot[bot]](https://github.com/apps/dependabot))\n\n#### Committers: 2\n- Yanglin Zhao ([@yanglinz](https://github.com/yanglinz))\n- [@dependabot[bot]](https://github.com/apps/dependabot)\n"
+  "description": "## Release (2026-04-09)\n\nember-json-viewer 1.0.3 (patch)\n\n#### :house: Internal\n* `ember-json-viewer`, `docs-app`, `test-app`\n  * [#122](https://github.com/Addepar/ember-json-viewer/pull/122) Bump eslint-plugin-prettier from 5.5.3 to 5.5.5 ([@dependabot[bot]](https://github.com/apps/dependabot))\n* Other\n  * [#121](https://github.com/Addepar/ember-json-viewer/pull/121) [WEBCORE-3182] Upgrade npm version to be compatible with trusted publishing ([@yanglinz](https://github.com/yanglinz))\n  * [#118](https://github.com/Addepar/ember-json-viewer/pull/118) Upgrade volta action ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))\n\n#### Committers: 3\n- Elias Dawson ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))\n- Yanglin Zhao ([@yanglinz](https://github.com/yanglinz))\n- [@dependabot[bot]](https://github.com/apps/dependabot)\n"
 }
