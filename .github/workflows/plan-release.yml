@@ -52,7 +52,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: 'master'
-      - uses: pnpm/action-setup@v6
+      - uses: pnpm/action-setup@v6.0.1
       - uses: actions/setup-node@v6
         with:
           node-version: 18
