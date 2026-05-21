@@ -19,9 +19,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: "Install StepSecurity Action"
+        id: step_security
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v6
-      - uses: volta-cli/action@v5
-      - uses: pnpm/action-setup@v6.0.5
+      - uses: volta-cli/action@615a78f6c83e116339c53b94f3f82b4d6c0b7d18 # v5
+      - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d # v6.0.5
       - id: pnpm-cache-path
         run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v5
@@ -44,9 +50,15 @@ jobs:
     name: Test Docs
     runs-on: ubuntu-latest
     steps:
+      - name: "Install StepSecurity Action"
+        id: step_security
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v6
-      - uses: volta-cli/action@v5
-      - uses: pnpm/action-setup@v6.0.5
+      - uses: volta-cli/action@615a78f6c83e116339c53b94f3f82b4d6c0b7d18 # v5
+      - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d # v6.0.5
       - id: pnpm-cache-path
         run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v5
@@ -78,9 +90,15 @@ jobs:
           ]
 
     steps:
+      - name: "Install StepSecurity Action"
+        id: step_security
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v6
-      - uses: volta-cli/action@v5
-      - uses: pnpm/action-setup@v6.0.5
+      - uses: volta-cli/action@615a78f6c83e116339c53b94f3f82b4d6c0b7d18 # v5
+      - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d # v6.0.5
       - id: pnpm-cache-path
         run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v5

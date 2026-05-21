@@ -23,6 +23,12 @@ jobs:
       command: ${{ steps.check-release.outputs.command }}
 
     steps:
+      - name: "Install StepSecurity Action"
+        id: step_security
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -45,11 +51,17 @@ jobs:
       attestations: write
 
     steps:
+      - name: "Install StepSecurity Action"
+        id: step_security
+        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        with:
+          egress-policy: audit
+
       - uses: actions/checkout@v6
-      - uses: volta-cli/action@v5
+      - uses: volta-cli/action@615a78f6c83e116339c53b94f3f82b4d6c0b7d18 # v5
         with:
           registry-url: "https://registry.npmjs.org"
-      - uses: pnpm/action-setup@v6.0.5
+      - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d # v6.0.5
       # Both release-plan and pnpm uses `npm publish` under the hood to publish a release.
       # To be compatible with npm trusted publishing, npm v11 or later must be used.
       - run: |
