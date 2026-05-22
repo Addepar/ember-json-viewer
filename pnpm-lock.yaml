@@ -113,7 +113,7 @@ importers:
         version: 9.2.1
       ember-auto-import:
         specifier: ^2.12.1
-        version: 2.12.1(webpack@5.107.2(postcss@8.5.15))
+        version: 2.12.1(webpack@5.107.2)
       ember-cli:
         specifier: ~6.1.0
         version: 6.1.0(babel-core@6.26.3)(handlebars@4.7.9)(underscore@1.13.8)
@@ -209,7 +209,7 @@ importers:
         version: 3.4.0
       webpack:
         specifier: ^5.107.1
-        version: 5.107.2(postcss@8.5.15)
+        version: 5.107.2
 
   test-app:
     devDependencies:
@@ -242,10 +242,10 @@ importers:
         version: 3.5.9
       '@embroider/test-setup':
         specifier: ^4.0.0
-        version: 4.0.0(@embroider/compat@3.9.3(@embroider/core@3.5.9))(@embroider/core@3.5.9)(@embroider/webpack@4.1.2(@embroider/core@3.5.9)(webpack@5.107.2))
+        version: 4.0.0(@embroider/compat@3.9.3(@embroider/core@3.5.9))(@embroider/core@3.5.9)(@embroider/webpack@4.1.2(@embroider/core@3.5.9)(webpack@5.107.2(postcss@8.5.15)))
       '@embroider/webpack':
         specifier: ^4.1.2
-        version: 4.1.2(@embroider/core@3.5.9)(webpack@5.107.2)
+        version: 4.1.2(@embroider/core@3.5.9)(webpack@5.107.2(postcss@8.5.15))
       '@eslint/js':
         specifier: ^9.17.0
         version: 9.31.0
@@ -263,7 +263,7 @@ importers:
         version: 9.2.1
       ember-auto-import:
         specifier: ^2.12.1
-        version: 2.12.1(webpack@5.107.2)
+        version: 2.12.1(webpack@5.107.2(postcss@8.5.15))
       ember-cli:
         specifier: ~4.12.3
         version: 4.12.3(babel-core@6.26.3)(handlebars@4.7.9)(underscore@1.13.8)
@@ -359,7 +359,7 @@ importers:
         version: 3.4.0
       webpack:
         specifier: ^5.107.1
-        version: 5.107.2
+        version: 5.107.2(postcss@8.5.15)
 
 packages:
 
@@ -2640,11 +2640,11 @@ packages:
     resolution: {integrity: sha512-YWZHhWkPdXtIfH3VRu3QIV95sa75O9vrQWBOHjexWCLBCTy5qJvRr36LXTqFwTchSXVlzy5piYJOjzHr7qhsNg==}
     engines: {node: '>=0.8.0'}
 
-  brace-expansion@1.1.15:
-    resolution: {integrity: sha512-EwOCDEex4quD37XhqM3omwtMoJjr//isUZz1JopUNWms+4Z2ViyM/k1YIRePpoVNnQhENnxtFjLaxNHrT7xIUg==}
+  brace-expansion@1.1.14:
+    resolution: {integrity: sha512-MWPGfDxnyzKU7rNOW9SP/c50vi3xrmrua/+6hfPbCS2ABNWfx24vPidzvC7krjU/RTo235sV776ymlsMtGKj8g==}
 
-  brace-expansion@2.1.1:
-    resolution: {integrity: sha512-WR1cURNjuvBLMZBMbqM0UoE+WAfdUcEV1ccD8PVBVOI+Z3ND4+SZbN8RsfT2bMuG1qwz5RFvPukSZm5fF2D5eA==}
+  brace-expansion@2.1.0:
+    resolution: {integrity: sha512-TN1kCZAgdgweJhWWpgKYrQaMNHcDULHkWwQIspdtjV4Y5aurRdZpjAqn6yX3FPqTA9ngHCc4hJxMAMgGfve85w==}
 
   braces@2.3.2:
     resolution: {integrity: sha512-aNdbnj9P8PjdXU4ybaWLK2IF3jc/EoDYbC7AazW6to3TRsfXxscC9UXOB5iDiEQrkyIbWp2SLQda4+QAa7nc3w==}
@@ -8867,11 +8867,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/babel-loader-9@3.1.3(@embroider/core@3.5.9)(supports-color@8.1.1)(webpack@5.107.2)':
+  '@embroider/babel-loader-9@3.1.3(@embroider/core@3.5.9)(supports-color@8.1.1)(webpack@5.107.2(postcss@8.5.15))':
     dependencies:
       '@babel/core': 7.29.0(supports-color@8.1.1)
       '@embroider/core': 3.5.9
-      babel-loader: 9.2.1(@babel/core@7.29.0)(webpack@5.107.2)
+      babel-loader: 9.2.1(@babel/core@7.29.0)(webpack@5.107.2(postcss@8.5.15))
     transitivePeerDependencies:
       - supports-color
       - webpack
@@ -9009,10 +9009,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/hbs-loader@3.0.5(@embroider/core@3.5.9)(webpack@5.107.2)':
+  '@embroider/hbs-loader@3.0.5(@embroider/core@3.5.9)(webpack@5.107.2(postcss@8.5.15))':
     dependencies:
       '@embroider/core': 3.5.9
-      webpack: 5.107.2
+      webpack: 5.107.2(postcss@8.5.15)
 
   '@embroider/macros@1.18.0':
     dependencies:
@@ -9127,41 +9127,41 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/test-setup@4.0.0(@embroider/compat@3.9.3(@embroider/core@3.5.9))(@embroider/core@3.5.9)(@embroider/webpack@4.1.2(@embroider/core@3.5.9)(webpack@5.107.2))':
+  '@embroider/test-setup@4.0.0(@embroider/compat@3.9.3(@embroider/core@3.5.9))(@embroider/core@3.5.9)(@embroider/webpack@4.1.2(@embroider/core@3.5.9)(webpack@5.107.2(postcss@8.5.15)))':
     dependencies:
       lodash: 4.18.1
       resolve: 1.22.10
     optionalDependencies:
       '@embroider/compat': 3.9.3(@embroider/core@3.5.9)
       '@embroider/core': 3.5.9
-      '@embroider/webpack': 4.1.2(@embroider/core@3.5.9)(webpack@5.107.2)
+      '@embroider/webpack': 4.1.2(@embroider/core@3.5.9)(webpack@5.107.2(postcss@8.5.15))
 
-  '@embroider/webpack@4.1.2(@embroider/core@3.5.9)(webpack@5.107.2)':
+  '@embroider/webpack@4.1.2(@embroider/core@3.5.9)(webpack@5.107.2(postcss@8.5.15))':
     dependencies:
       '@babel/core': 7.29.0(supports-color@8.1.1)
       '@babel/preset-env': 7.29.2(@babel/core@7.29.0)(supports-color@8.1.1)
-      '@embroider/babel-loader-9': 3.1.3(@embroider/core@3.5.9)(supports-color@8.1.1)(webpack@5.107.2)
+      '@embroider/babel-loader-9': 3.1.3(@embroider/core@3.5.9)(supports-color@8.1.1)(webpack@5.107.2(postcss@8.5.15))
       '@embroider/core': 3.5.9
-      '@embroider/hbs-loader': 3.0.5(@embroider/core@3.5.9)(webpack@5.107.2)
+      '@embroider/hbs-loader': 3.0.5(@embroider/core@3.5.9)(webpack@5.107.2(postcss@8.5.15))
       '@embroider/shared-internals': 2.9.2(supports-color@8.1.1)
       '@types/supports-color': 8.1.3
       assert-never: 1.4.0
-      babel-loader: 8.4.1(@babel/core@7.29.0)(webpack@5.107.2)
-      css-loader: 5.2.7(webpack@5.107.2)
+      babel-loader: 8.4.1(@babel/core@7.29.0)(webpack@5.107.2(postcss@8.5.15))
+      css-loader: 5.2.7(webpack@5.107.2(postcss@8.5.15))
       csso: 4.2.0
       debug: 4.4.3(supports-color@8.1.1)
       escape-string-regexp: 4.0.0
       fs-extra: 9.1.0
       jsdom: 25.0.1(supports-color@8.1.1)
       lodash: 4.18.1
-      mini-css-extract-plugin: 2.10.2(webpack@5.107.2)
+      mini-css-extract-plugin: 2.10.2(webpack@5.107.2(postcss@8.5.15))
       semver: 7.7.4
       source-map-url: 0.4.1
-      style-loader: 2.0.0(webpack@5.107.2)
+      style-loader: 2.0.0(webpack@5.107.2(postcss@8.5.15))
       supports-color: 8.1.1
       terser: 5.46.2
-      thread-loader: 3.0.4(webpack@5.107.2)
-      webpack: 5.107.2
+      thread-loader: 3.0.4(webpack@5.107.2(postcss@8.5.15))
+      webpack: 5.107.2(postcss@8.5.15)
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -10373,12 +10373,12 @@ snapshots:
       schema-utils: 2.7.1
       webpack: 5.107.2
 
-  babel-loader@9.2.1(@babel/core@7.29.0)(webpack@5.107.2):
+  babel-loader@9.2.1(@babel/core@7.29.0)(webpack@5.107.2(postcss@8.5.15)):
     dependencies:
       '@babel/core': 7.29.0(supports-color@8.1.1)
       find-cache-dir: 4.0.0
       schema-utils: 4.3.3
-      webpack: 5.107.2
+      webpack: 5.107.2(postcss@8.5.15)
 
   babel-messages@6.23.0:
     dependencies:
@@ -10892,12 +10892,12 @@ snapshots:
 
   bower-endpoint-parser@0.2.2: {}
 
-  brace-expansion@1.1.15:
+  brace-expansion@1.1.14:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
 
-  brace-expansion@2.1.1:
+  brace-expansion@2.1.0:
     dependencies:
       balanced-match: 1.0.2
 
@@ -14935,31 +14935,31 @@ snapshots:
       tapable: 2.3.0
       webpack: 5.107.2
 
-  mini-css-extract-plugin@2.10.2(webpack@5.107.2):
+  mini-css-extract-plugin@2.10.2(webpack@5.107.2(postcss@8.5.15)):
     dependencies:
       schema-utils: 4.3.3
       tapable: 2.3.3
-      webpack: 5.107.2
+      webpack: 5.107.2(postcss@8.5.15)
 
   minimatch@3.1.5:
     dependencies:
-      brace-expansion: 1.1.15
+      brace-expansion: 1.1.14
 
   minimatch@5.1.9:
     dependencies:
-      brace-expansion: 2.1.1
+      brace-expansion: 2.1.0
 
   minimatch@7.4.9:
     dependencies:
-      brace-expansion: 2.1.1
+      brace-expansion: 2.1.0
 
   minimatch@8.0.7:
     dependencies:
-      brace-expansion: 2.1.1
+      brace-expansion: 2.1.0
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 2.1.1
+      brace-expansion: 2.1.0
 
   minimist@0.2.4: {}
 
@@ -16667,14 +16667,14 @@ snapshots:
     dependencies:
       any-promise: 1.3.0
 
-  thread-loader@3.0.4(webpack@5.107.2):
+  thread-loader@3.0.4(webpack@5.107.2(postcss@8.5.15)):
     dependencies:
       json-parse-better-errors: 1.0.2
       loader-runner: 4.3.2
       loader-utils: 2.0.4
       neo-async: 2.6.2
       schema-utils: 3.3.0
-      webpack: 5.107.2
+      webpack: 5.107.2(postcss@8.5.15)
 
   through2@3.0.2:
     dependencies:
