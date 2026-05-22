@@ -2,3 +2,7 @@ packages:
  - 'addon'
  - 'test-app'
  - 'docs-app'
+
+overrides:
+  'serialize-javascript@>=5.0.0 <7.0.5': '>=7.0.5'
+  'serialize-javascript@<=7.0.2': '>=7.0.3'
