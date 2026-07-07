@@ -78,8 +78,5 @@
       "./components/value-viewer.js": "./dist/_app_/components/value-viewer.js",
       "./helpers/is-last.js": "./dist/_app_/helpers/is-last.js"
     }
-  },
-  "volta": {
-    "extends": "../package.json"
   }
 }

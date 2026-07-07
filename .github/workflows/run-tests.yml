@@ -26,8 +26,13 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@v7.0.0
-      - uses: volta-cli/action@615a78f6c83e116339c53b94f3f82b4d6c0b7d18 # v5
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      - name: Install mise and tools
+        uses: jdx/mise-action@v4
+        with:
+          install: true
+          cache: true
+      - name: Enable corepack
+        run: corepack enable
       - id: pnpm-cache-path
         run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v6.1.0
@@ -57,8 +62,13 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@v7.0.0
-      - uses: volta-cli/action@615a78f6c83e116339c53b94f3f82b4d6c0b7d18 # v5
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      - name: Install mise and tools
+        uses: jdx/mise-action@v4
+        with:
+          install: true
+          cache: true
+      - name: Enable corepack
+        run: corepack enable
       - id: pnpm-cache-path
         run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v6.1.0
@@ -97,8 +107,13 @@ jobs:
           egress-policy: audit
 
       - uses: actions/checkout@v7.0.0
-      - uses: volta-cli/action@615a78f6c83e116339c53b94f3f82b4d6c0b7d18 # v5
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      - name: Install mise and tools
+        uses: jdx/mise-action@v4
+        with:
+          install: true
+          cache: true
+      - name: Enable corepack
+        run: corepack enable
       - id: pnpm-cache-path
         run: echo "pnpm_cache_path=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v6.1.0

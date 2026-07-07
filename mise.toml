@@ -1,0 +1,5 @@
+[tools]
+node = "22.17.1"
+
+[settings.node]
+corepack = true
