@@ -19,17 +19,11 @@ import ember from "eslint-plugin-ember/recommended";
 import prettier from "eslint-plugin-prettier/recommended";
 import n from "eslint-plugin-n";
 
-import babelParser from "@babel/eslint-parser";
+import tsParser from "@typescript-eslint/parser";
 
 const esmParserOptions = {
   ecmaFeatures: { modules: true },
   ecmaVersion: "latest",
-  requireConfigFile: false,
-  babelOptions: {
-    plugins: [
-      ["@babel/plugin-proposal-decorators", { decoratorsBeforeExport: true }],
-    ],
-  },
 };
 
 export default [
@@ -55,7 +49,7 @@ export default [
   {
     files: ["**/*.js"],
     languageOptions: {
-      parser: babelParser,
+      parser: tsParser,
     },
   },
   {
