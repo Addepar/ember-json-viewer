@@ -27,7 +27,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v7.0.0
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
           ref: 'master'
@@ -58,7 +58,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v7.0.0
+      - uses: actions/checkout@v7.0.1
         # We need to download lots of history so that
         # github-changelog can discover what's changed since the last release
         with:
