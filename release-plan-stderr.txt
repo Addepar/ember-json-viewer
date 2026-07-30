@@ -1,0 +1,19 @@
+# Unlabeled Changes
+
+* `ember-json-viewer`
+  * [#157](https://github.com/Addepar/ember-json-viewer/pull/157) chore: upgrade to ESLint 10 and eslint-plugin-ember 13 ([@kunal-addepar](https://github.com/kunal-addepar))
+  * [#147](https://github.com/Addepar/ember-json-viewer/pull/147) Bump the babel group across 1 directory with 4 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+  * [#128](https://github.com/Addepar/ember-json-viewer/pull/128) Bump the babel group across 1 directory with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+  * [#125](https://github.com/Addepar/ember-json-viewer/pull/125) Bump eslint-plugin-n from 17.21.0 to 17.24.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+  * [#124](https://github.com/Addepar/ember-json-viewer/pull/124) Bump @rollup/plugin-babel from 6.1.0 to 7.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* Other
+  * [#135](https://github.com/Addepar/ember-json-viewer/pull/135) Bump the embroider group across 1 directory with 2 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+  * [#145](https://github.com/Addepar/ember-json-viewer/pull/145) Upgrade uuid to address vulnerability ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))
+  * [#136](https://github.com/Addepar/ember-json-viewer/pull/136) Bump release-plan from 0.11.0 to 0.18.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+  * [#144](https://github.com/Addepar/ember-json-viewer/pull/144) Upgrade Webpack to remove serialize-javascript ([@eliasdawson-addepar](https://github.com/eliasdawson-addepar))
+  * [#137](https://github.com/Addepar/ember-json-viewer/pull/137) Install StepSecurity Hardening Agent & Pin 3rd Party Actions ([@pavelt-addepar](https://github.com/pavelt-addepar))
+  * [#129](https://github.com/Addepar/ember-json-viewer/pull/129) Bump the embroider group across 1 directory with 3 updates ([@dependabot[bot]](https://github.com/apps/dependabot))
+  * [#107](https://github.com/Addepar/ember-json-viewer/pull/107) Was: Bump @embroider/compat from 3.9.1 to 4.1.17 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+
+*Cannot plan release until the above changes are labeled*.
